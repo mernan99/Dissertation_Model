@@ -1,183 +1,158 @@
 import numpy as np
 from scipy.integrate import solve_ivp
-from scipy.stats import norm, uniform
+from scipy.stats import uniform
 import matplotlib.pyplot as plt
-import h5py
+import math
 
 # Valve function
-def Valve(R, deltaP):
-    if deltaP > 0:
-        return deltaP / R
-    else:
-        return 0
+def valve(R, deltaP):
+    q = 0.0
+    if deltaP > 0.0:
+        q = deltaP / R
+    return q
 
-# ShiElastance function
-def ShiElastance(t, E_min, E_max, tau, tau_es, tau_ep, Eshift, tr):
-    t_i = t - tr
-    E_p = (t_i <= tau_es) * (1 - np.cos(t_i / tau_es * np.pi)) / 2 + \
-          (t_i > tau_es) * (t_i <= tau_ep) * (1 + np.cos((t_i - tau_es) / (tau_ep - tau_es) * np.pi)) / 2
-    return E_min + (E_max - E_min) * E_p
+# ShiElastance function for elastance
+def shi_elastance(t, E_min, E_max, τ, τ_es, τ_ep, Eshift):
+    global tr
+    t_i = math.remainder(t + (1 - Eshift) * τ, τ)
+    E_p = (t_i <= τ_es) * (1 - np.cos(t_i / τ_es * np.pi)) / 2 + \
+          ((t_i > τ_es) & (t_i <= τ_ep)) * (1 + np.cos((t_i - τ_es) / (τ_ep - τ_es) * np.pi)) / 2
+    E = E_min + (E_max - E_min) * E_p
+    return E
 
 # Derivative of ShiElastance
-def DShiElastance(t, E_min, E_max, tau, tau_es, tau_ep, Eshift, tr):
-    t_i = t - tr
-    DE_p = (t_i <= tau_es) * (np.pi / tau_es * np.sin(t_i / tau_es * np.pi)) / 2 + \
-           (t_i > tau_es) * (t_i <= tau_ep) * (np.pi / (tau_ep - tau_es) * np.sin((tau_es - t_i) / (tau_ep - tau_es) * np.pi)) / 2
-    return (E_max - E_min) * DE_p
+def DShiElastance(t, E_min, E_max, τ, τ_es, τ_ep, Eshift):
+    global tr
+    t_i = math.remainder(t + (1 - Eshift) * τ, τ)
+    dE_p = (t_i <= τ_es) * np.pi / τ_es * np.sin(t_i / τ_es * np.pi) / 2 + \
+           ((t_i > τ_es) & (t_i <= τ_ep)) * -np.pi / (τ_ep - τ_es) * np.sin((t_i - τ_es) / (τ_ep - τ_es) * np.pi) / 2
+    dE = (E_max - E_min) * dE_p
+    return dE
 
-# Define the mass matrix M
+# Constants
+Eshift = 0.0
+E_min = 0.1     # Increased minimum elastance
+τ_es = 0.2      # Shortened systolic duration for faster pressure build-up
+τ_ep = 0.4      # Adjusted duration for realistic timing
+E_max = 2.0     # Increased maximum elastance for a stronger contraction
+Rmv = 0.06
+Zao = 0.033
+Rs = 1.11
+Csa = 1.13
+Csv = 11.0
+
+# Define the mass matrix (similar to Julia)
 M = np.array([
-    [1.0, 0, 0, 0, 0, 0, 0],
-    [0, 1.0, 0, 0, 0, 0, 0],
-    [0, 0, 1.0, 0, 0, 0, 0],
-    [0, 0, 0, 1.0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],  # Zero row indicating algebraic equation
-    [0, 0, 0, 0, 0, 0, 0],  # Zero row indicating algebraic equation
-    [0, 0, 0, 0, 0, 0, 1.0]
+    [1., 0, 0, 0, 0, 0, 0],
+    [0, 1., 0, 0, 0, 0, 0],
+    [0, 0, 1., 0, 0, 0, 0],
+    [0, 0, 0, 1., 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1.]
 ])
-
-# Inverse of the mass matrix M, but handle singular rows
-# Use pseudo-inverse or block-inversion approach here (depends on the nature of the mass matrix)
 M_inv = np.linalg.pinv(M)
 
-# Main ODE system, modified by applying the mass matrix
-def NIK(t, u, p, tr):
-    pLV, psa, psv, Vlv, Qav, Qmv, Qs = u 
-    tau_es, tau_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min = p
-    Eshift = 0.0
-    
+# Model differential equations (NIK function in Julia)
+def NIK(t, u, p):
+    pLV, psa, psv, Vlv, Qav, Qmv, Qs = u
+    τ_es, τ_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min = p
     du = np.zeros_like(u)
-    
-    # Left ventricle dynamics
-    du[0] = (Qmv - Qav) * ShiElastance(t, E_min, E_max, None, tau_es, tau_ep, Eshift, tr) + \
-            pLV / ShiElastance(t, E_min, E_max, None, tau_es, tau_ep, Eshift, tr) * \
-            DShiElastance(t, E_min, E_max, None, tau_es, tau_ep, Eshift, tr)
-
-    # Systemic arteries
+    E = shi_elastance(t, E_min, E_max, τ, τ_es, τ_ep, Eshift)
+    dE = DShiElastance(t, E_min, E_max, τ, τ_es, τ_ep, Eshift)
+    du[0] = (Qmv - Qav) * E + pLV / E * dE
     du[1] = (Qav - Qs) / Csa
-    
-    # Venous system
     du[2] = (Qs - Qmv) / Csv
-    
-    # Volume dynamics
     du[3] = Qmv - Qav
-    
-    # Aortic valve (AV)
-    du[4] = Valve(Zao, (pLV - psa)) - Qav
-    
-    # Mitral valve (MV)
-    du[5] = Valve(Rmv, (psv - pLV)) - Qmv
-    
-    # Systemic flow
+    du[4] = valve(Zao, pLV - psa) - Qav
+    du[5] = valve(Rmv, psv - pLV) - Qmv
     du[6] = (du[1] - du[2]) / Rs
-    
-    # Apply the mass matrix
     return M_inv @ du
 
 # Initial conditions and parameters
-u0 = [8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0]
-p = [0.3, 0.45, 0.06, 0.033, 1.11, 1.13, 11.0, 1.5, 0.03]
-c = 16  # Number of cycles
-n = 0  # Counter
-tr = 0.0  # Timing variable
+u0 = [70.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0]  # Increased initial pLV to 70 for higher starting pressure
+p = [τ_es, τ_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min]
 
-# HRV function
-def HRV(c):
-    t_tauL = np.zeros(c)
-    t_tauL[0] = uniform.rvs(0.8, 1.1)
-    for i in range(1, c):
-        t_tauL[i] = t_tauL[i-1] + uniform.rvs(0.8, 1.1)
-    return t_tauL
+# Define heart rate variability (HRV) function with reduced variability
+def HRV(cycles):
+    heartbeat_intervals = np.zeros(cycles)
+    heartbeat_intervals[0] = 1.0  # Start with a standard interval
+    for i in range(1, cycles):
+        heartbeat_intervals[i] = heartbeat_intervals[i - 1] + 1.0  # Use constant interval of 1 second
+    return heartbeat_intervals
 
-# Generate heart rate variability (HRV)
-t_tauL = HRV(c)
-tau = t_tauL[0]
+# Time-varying heart rate based on HRV
+heartbeat_intervals = HRV(16)
+τ = heartbeat_intervals[0]
+tr = 0.0
+n = 0  # cycle counter
 
-# Event condition for ODE solver (no additional args)
+# Event-based callback functions
 def condition(t, y):
-    global tr, tau
-    return t - tr - tau
+    return t - tr - τ
 
-# Ensure we declare the condition as an event in solve_ivp
 condition.terminal = True
 condition.direction = 1
 
-# Callback to adjust timing after each cycle
-def affect_callback():
-    global n, tr, tau
+def affect():
+    global n, τ, tr
     n += 1
-    if n < len(t_tauL) - 1:
-        tau_new = t_tauL[n+1] - t_tauL[n]
-        tau = tau_new
-        tr = t_tauL[n]
+    if n < len(heartbeat_intervals):
+        τ = heartbeat_intervals[n] - heartbeat_intervals[n - 1]
+        tr = heartbeat_intervals[n - 1]
+        print(f"Event at t = {tr:.2f}, cycle {n}, new τ = {τ:.2f}")
 
-# ODE solver function with an event to mimic callback behavior
-def solve_with_event():
-    global tr, tau, u0, p
-
-    # Solve the ODE with event handling
-    t_span = (0, 15)
-    sol = solve_ivp(lambda t, u: NIK(t, u, p, tr), t_span, u0, method='Radau', events=condition, max_step=0.002)
+def solve_with_callback():
+    global τ, tr, n
+    t_eval = np.linspace(0, 15, 15000)  # Increased resolution to capture pressure changes accurately
     
-    while sol.status == 1 and n < len(t_tauL) - 1:
-        # Adjust the event-based parameters
-        affect_callback()
+    # Define the event condition to include τ and tr, ignoring extra args
+    event_condition = lambda t, y, *args: t - tr - τ
+    
+    # Set the attributes for SciPy's event handling
+    event_condition.terminal = True
+    event_condition.direction = 1
+
+    # Run the initial solve_ivp with the event
+    sol = solve_ivp(NIK, [0, 15], u0, args=(p,), t_eval=t_eval, method='LSODA', events=event_condition, rtol=1e-8, atol=1e-8)
+
+    # Process each event and update intervals as needed
+    for i in range(len(sol.t_events[0])):  # Go through each event
+        affect()
         
-        # Continue solving from the last time point
-        u0_new = sol.y[:, -1]
-        t_span_new = (sol.t[-1], 15)
-        sol_new = solve_ivp(lambda t, u: NIK(t, u, p, tr), t_span_new, u0_new, method='Radau', events=condition, max_step=0.002)
+        # Find the index in `sol.t` closest to the event time
+        event_time = sol.t_events[0][i]
+        idx = np.argmin(np.abs(sol.t - event_time))
         
-        # Append new solution data
-        sol.t = np.hstack((sol.t, sol_new.t[1:]))
-        sol.y = np.hstack((sol.y, sol_new.y[:, 1:]))
-        sol.status = sol_new.status
+        # Limit t_eval to be within [event_time, 15]
+        t_eval_segment = t_eval[t_eval >= event_time]
+        
+        # Solve the next segment with updated τ and tr
+        sol_part = solve_ivp(NIK, [event_time, 15], sol.y[:, idx], args=(p,), t_eval=t_eval_segment, rtol=1e-8, atol=1e-8, events=event_condition)
+        
+        # Concatenate results
+        sol.t = np.concatenate((sol.t, sol_part.t[1:]))  # Skip first point to avoid duplication
+        sol.y = np.concatenate((sol.y, sol_part.y[:, 1:]), axis=1)
+        
+        if len(sol_part.t_events[0]) == 0:
+            break  # No more events
 
     return sol
 
-# Solve the system
-solution = solve_with_event()
+# Run the solver
+solution = solve_with_callback()
 
-# Create observations with noise
-N = len(solution.t)
-Obs = np.vstack([solution.y[0, :], solution.y[1, :], solution.y[3, :]]).T
-
-# Adding noise to observations
-ϵ = norm(0.0, 0.025)
-noise = np.random.normal(0, 0.025, size=Obs.shape)
-Nobs = Obs * (1 + noise)
-
-# Plot observations
-plt.figure(figsize=(10, 6))
-plt.plot(solution.t, solution.y[0, :], label='LV - P')
-plt.plot(solution.t, Nobs[:, 0], label='LV - P (Noisy)', linestyle='dashed')
+# Plot results
+plt.figure(figsize=(10, 8))
+plt.plot(solution.t, solution.y[0], label="P_LV")
+plt.plot(solution.t, solution.y[1], label="P_SA")
+plt.plot(solution.t, solution.y[2], label="P_SV")
+plt.plot(solution.t, solution.y[3], label="V_LV")
+plt.plot(solution.t, solution.y[4], label="Q_av")
+plt.plot(solution.t, solution.y[5], label="Q_mv")
+plt.plot(solution.t, solution.y[6], label="Q_s")
 plt.legend()
-plt.show()
-
-# Saving data to HDF5
-with h5py.File('Xa.h5', 'w') as f:
-    f.create_dataset('Xa', data=Nobs)
-
-# Loading data from HDF5
-with h5py.File('Xa.h5', 'r') as f:
-    Xa = f['Xa'][:]
-
-# RMSE function
-def rmse(x, y):
-    return np.sqrt(np.mean((x - y) ** 2))
-
-# Example RMSE calculations for different parameters
-rmse_tau_es = rmse(0.3, Xa[:, 0])
-rmse_tau_ep = rmse(0.45, Xa[:, 1])
-
-print(f"RMSE (tau_es): {rmse_tau_es}")
-print(f"RMSE (tau_ep): {rmse_tau_ep}")
-
-# Plot state variables
-plt.plot(solution.t, solution.y[0, :], label='P_LV')
-plt.plot(solution.t, solution.y[1, :], label='P_SA')
-plt.plot(solution.t, solution.y[2, :], label='P_SV')
-plt.legend()
-plt.xlabel('Time (s)')
-plt.ylabel('State Variables')
+plt.xlabel("Time")
+plt.ylabel("Values")
+plt.title("Cardiovascular Simulation with Heart Rate Variability")
 plt.show()
