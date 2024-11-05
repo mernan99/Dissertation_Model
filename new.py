@@ -1,125 +1,153 @@
 import numpy as np
-from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
+from assimulo.problem import Implicit_Problem
+from assimulo.solvers import IDA
 
-# Valve function
-def valve(R, deltaP):
-    return max(deltaP / R, 0) if deltaP > 0 else 0
+# Define the Valve function
+def Valve(R, deltaP):
+    if -deltaP < 0.0:
+        q = deltaP / R
+    else:
+        q = 0.0
+    return q
 
-# ShiElastance function for elastance
-def shi_elastance(t, E_min, E_max, τ, τ_es, τ_ep, Eshift):
-    global tr
-    t_i = (t - tr) % τ
-    E_p = (t_i <= τ_es) * (1 - np.cos(t_i / τ_es * np.pi)) / 2 + \
-          ((t_i > τ_es) & (t_i <= τ_ep)) * (1 + np.cos((t_i - τ_es) / (τ_ep - τ_es) * np.pi)) / 2
+# Define the ShiElastance function
+def ShiElastance(t, E_min, E_max, τ, τ_es, τ_ep, Eshift, tr):
+    t_i = t - tr
+    if t_i <= τ_es:
+        E_p = (1 - np.cos(t_i / τ_es * np.pi)) / 2
+    elif τ_es < t_i <= τ_ep:
+        E_p = (1 + np.cos((t_i - τ_es) / (τ_ep - τ_es) * np.pi)) / 2
+    else:
+        E_p = 0.0
     E = E_min + (E_max - E_min) * E_p
     return E
 
-# Derivative of ShiElastance
-def d_shi_elastance(t, E_min, E_max, τ, τ_es, τ_ep, Eshift):
-    global tr
-    t_i = (t - tr) % τ
-    dE_p = (t_i <= τ_es) * np.pi / τ_es * np.sin(t_i / τ_es * np.pi) / 2 + \
-           ((t_i > τ_es) & (t_i <= τ_ep)) * -np.pi / (τ_ep - τ_es) * np.sin((t_i - τ_es) / (τ_ep - τ_es) * np.pi) / 2
-    dE = (E_max - E_min) * dE_p
-    return dE
+# Define the derivative of ShiElastance function
+def DShiElastance(t, E_min, E_max, τ, τ_es, τ_ep, Eshift, tr):
+    t_i = t - tr
+    if t_i <= τ_es:
+        DE_p = (np.pi / τ_es) * np.sin(t_i / τ_es * np.pi) / 2
+    elif τ_es < t_i <= τ_ep:
+        DE_p = (np.pi / (τ_ep - τ_es)) * np.sin((τ_es - t_i) / (τ_ep - τ_es) * np.pi) / 2
+    else:
+        DE_p = 0.0
+    DE = (E_max - E_min) * DE_p
+    return DE
 
-# Reduced differential equation model with algebraic constraints substituted
-def cardiovascular_model(t, u, p, τ, tr):
-    pLV, psa, psv, Vlv, Qs = u  # State variables (ODE form without Qav and Qmv)
-    τ_es, τ_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min = p
+# Define the model class
+class CardiovascularModel:
+    def __init__(self, u0, udot0, p, t_τL):
+        self.p = p
+        self.t_τL = t_τL
+        self.τ = t_τL[0]
+        self.tr = 0.0
+        self.n = 0  # Counter for events
+        self.u0 = u0
+        self.udot0 = udot0
 
-    # Calculate elastance and its derivative
-    E = shi_elastance(t, E_min, E_max, τ, τ_es, τ_ep, 0)
-    dE = d_shi_elastance(t, E_min, E_max, τ, τ_es, τ_ep, 0)
+    # Residual function for IDA
+    def res(self, t, y, ydot):
+        pLV, psa, psv, Vlv, Qav, Qmv, Qs = y
+        τ_es, τ_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min = self.p
+        Eshift = 0.0
+        E_t = ShiElastance(t, E_min, E_max, self.τ, τ_es, τ_ep, Eshift, self.tr)
+        DE_t = DShiElastance(t, E_min, E_max, self.τ, τ_es, τ_ep, Eshift, self.tr)
 
-    # Algebraic constraints (substitute Qav and Qmv as functions of other variables)
-    Qav = valve(Zao, pLV - psa)
-    Qmv = valve(Rmv, psv - pLV)
+        res = np.zeros_like(y)
+        res[0] = ydot[0] - ((Qmv - Qav) * E_t + pLV / E_t * DE_t)
+        res[1] = ydot[1] - (Qav - Qs) / Csa
+        res[2] = ydot[2] - (Qs - Qmv) / Csv
+        res[3] = ydot[3] - (Qmv - Qav)
+        res[4] = Qav - Valve(Zao, pLV - psa)
+        res[5] = Qmv - Valve(Rmv, psv - pLV)
+        res[6] = ydot[6] - (ydot[1] - ydot[2]) / Rs
+        return res
 
-    # Differential equations
-    du = np.zeros(5)
-    du[0] = (Qmv - Qav) * E + pLV / E * dE            # Left ventricular pressure (pLV)
-    du[1] = (Qav - Qs) / Csa                          # Systemic arterial pressure (psa)
-    du[2] = (Qs - Qmv) / Csv                          # Systemic venous pressure (psv)
-    du[3] = Qmv - Qav                                 # Left ventricular volume (Vlv)
-    du[4] = (du[1] - du[2]) / Rs                      # Systemic flow (Qs)
-    return du
+    # Event function to update τ and tr
+    def handle_event(self, solver, event_info):
+        # Update parameters after event
+        self.n += 1
+        if self.n + 1 < len(self.t_τL):
+            self.τ = self.t_τL[self.n + 1] - self.t_τL[self.n]
+            self.tr = self.t_τL[self.n]
+        else:
+            pass  # No more τ values to update
 
-# Initial conditions and parameters
-u0 = [80.0, 80.0, 10.0, 120.0, 0.0]  # Initial states
-p = [0.3, 0.45, 0.05, 0.05, 1.0, 2.0, 30.0, 1.5, 0.06]  # Model parameters
-t_span = (0, 15)
+    # Define events
+    def root(self, t, y, ydot, args):
+        return t - self.tr - self.τ
 
-# Define heartbeat intervals (HRV) using fixed intervals
-heartbeat_intervals = np.cumsum(np.ones(16))  # Fixed 1-second intervals for simplicity
-τ = heartbeat_intervals[0]  # Initial cycle interval
-tr = 0.0  # Time reference
-n = 0  # Counter for events
+# Define the parameters
+p = np.array([0.3, 0.45, 0.06, 0.033, 1.11, 1.13, 11.0, 1.5, 0.03])
 
-# Define event and affect functions for heartbeats
-def heartbeat_event(t, y):
-    return t - tr - τ
+# Generate the heart rate variability times
+def HRV(c):
+    t_τL = np.zeros(c)
+    t_τL[0] = np.random.uniform(0.8, 1.1)
+    for i in range(c - 1):
+        t_τL[i + 1] = t_τL[i] + np.random.uniform(0.8, 1.1)
+    return t_τL
 
-heartbeat_event.terminal = True
-heartbeat_event.direction = 1
+c = 16
+t_τL = HRV(c)
 
-def affect():
-    global n, τ, tr
-    n += 1
-    if n < len(heartbeat_intervals):
-        τ = heartbeat_intervals[n] - heartbeat_intervals[n - 1]
-        tr = heartbeat_intervals[n - 1]
-        print(f"Event at t = {tr:.2f}, cycle {n}, new τ = {τ:.2f}")
+# Initial conditions
+u0 = np.array([8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0])
+udot0 = np.zeros(7)  # Initial derivatives (can be estimated if needed)
 
-# Solver with callback handling
-def solve_with_callback():
-    global τ, tr, n
-    t_eval = np.linspace(0, 15, 10000)
+# Initialize the model
+model = CardiovascularModel(u0, udot0, p, t_τL)
 
-    # Run the initial solve_ivp with the event
-    sol = solve_ivp(lambda t, u: cardiovascular_model(t, u, p, τ, tr), t_span, u0, method='Radau',
-                    t_eval=t_eval, events=heartbeat_event, rtol=1e-10, atol=1e-10)
+# Create the problem instance
+problem = Implicit_Problem(model.res, u0, udot0, 0.0)
+problem.name = 'Cardiovascular Model with Events'
 
-    # Process each event and apply the callback
-    for i in range(len(sol.t_events[0])):
-        affect()
-        
-        # Extract the time and state where the event occurred
-        event_time = sol.t_events[0][i]
-        
-        # Find the closest index to the event time
-        idx = np.argmin(np.abs(sol.t - event_time))
-        
-        # Slice t_eval to avoid values outside [event_time, 15]
-        t_eval_segment = t_eval[t_eval >= event_time]
-        
-        # Continue solving from the event time
-        sol_part = solve_ivp(lambda t, u: cardiovascular_model(t, u, p, τ, tr), [event_time, 15], sol.y[:, idx],
-                             method='Radau', t_eval=t_eval_segment, events=heartbeat_event,
-                             rtol=1e-10, atol=1e-10)
+# Define the root function for event detection
+problem.root = model.root
+problem.handle_event = model.handle_event
 
-        # Append the new solution segment
-        sol.t = np.concatenate((sol.t, sol_part.t[1:]))  # Skip duplicate point
-        sol.y = np.concatenate((sol.y, sol_part.y[:, 1:]), axis=1)
-        
-        if len(sol_part.t_events[0]) == 0:
-            break  # Stop if no further events
+# Set the number of roots
+problem.nroots = 1
 
-    return sol
+# Set up the solver
+solver = IDA(problem)
+solver.report_continuously = True
+solver.atol = 1e-8
+solver.rtol = 1e-8
+solver.maxord = 5
 
-# Run the solver with callbacks
-solution = solve_with_callback()
+# Simulate
+tfinal = t_τL[-1] + 0.1  # Add a small buffer to ensure simulation covers all events
+t, y, yd = solver.simulate(tfinal)
 
-# Plot results
-plt.figure(figsize=(10, 8))
-plt.plot(solution.t, solution.y[0], label="P_LV")
-plt.plot(solution.t, solution.y[1], label="P_SA")
-plt.plot(solution.t, solution.y[2], label="P_SV")
-plt.plot(solution.t, solution.y[3], label="V_LV")
-plt.plot(solution.t, solution.y[4], label="Q_s")
+# Extract variables
+pLV = y[:, 0]
+psa = y[:, 1]
+psv = y[:, 2]
+Vlv = y[:, 3]
+Qav = y[:, 4]
+Qmv = y[:, 5]
+Qs = y[:, 6]
+
+# Plot pressures
+plt.figure(figsize=(12, 6))
+plt.plot(t, pLV, label='P_LV')
+plt.plot(t, psa, label='P_SA')
+plt.plot(t, psv, label='P_SV')
+plt.xlabel('Time')
+plt.ylabel('Pressure')
+plt.title('Pressures Over Time')
 plt.legend()
-plt.xlabel("Time")
-plt.ylabel("Values")
-plt.title("Cardiovascular Simulation with Heart Rate Variability")
+plt.grid(True)
+plt.show()
+
+# Plot left ventricular volume
+plt.figure(figsize=(12, 6))
+plt.plot(t, Vlv, label='V_LV')
+plt.xlabel('Time')
+plt.ylabel('Volume')
+plt.title('Left Ventricular Volume Over Time')
+plt.legend()
+plt.grid(True)
 plt.show()

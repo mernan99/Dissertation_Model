@@ -4,6 +4,7 @@ from scipy.stats import uniform
 import matplotlib.pyplot as plt
 import math
 
+
 # Valve function
 def valve(R, deltaP):
     q = 0.0
