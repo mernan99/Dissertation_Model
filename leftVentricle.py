@@ -28,6 +28,7 @@ def DShiElastance(t, E_min, E_max, τ, τ_es, τ_ep, Eshift):
     t_i = math.remainder(t + (1 - Eshift) * τ, τ)
     dE_p = (t_i <= τ_es) * np.pi / τ_es * np.sin(t_i / τ_es * np.pi) / 2 + \
            ((t_i > τ_es) & (t_i <= τ_ep)) * -np.pi / (τ_ep - τ_es) * np.sin((t_i - τ_es) / (τ_ep - τ_es) * np.pi) / 2
+    (t_i <= τ_ep) * 0
     dE = (E_max - E_min) * dE_p
     return dE
 
