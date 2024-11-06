@@ -17,7 +17,8 @@ def shi_elastance(t, E_min, E_max, τ, τ_es, τ_ep, Eshift):
     global tr
     t_i = math.remainder(t + (1 - Eshift) * τ, τ)
     E_p = (t_i <= τ_es) * (1 - np.cos(t_i / τ_es * np.pi)) / 2 + \
-          ((t_i > τ_es) & (t_i <= τ_ep)) * (1 + np.cos((t_i - τ_es) / (τ_ep - τ_es) * np.pi)) / 2
+          ((t_i > τ_es) & (t_i <= τ_ep)) * (1 + np.cos((t_i - τ_es) / (τ_ep - τ_es) * np.pi)) / 2 \
+          + (t_i <= τ_ep)
     E = E_min + (E_max - E_min) * E_p
     return E
 

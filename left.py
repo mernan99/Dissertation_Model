@@ -1,16 +1,10 @@
 import numpy as np
-from assimulo.problem import Implicit_Problem
-from assimulo.solvers import IDA
-from assimulo.solvers.sundials import IDA
-from assimulo import solvers
 import matplotlib.pyplot as plt
-import random
+from assimulo.problem import Implicit_Problem
+from assimulo.solvers.sundials import IDA
+import math
 
-# Define global variables for event handling
-n = 0  # Cycle counter
-tr = 0.0  # Reference time for the current cycle
-
-# Valve function
+# Valve function remains the same
 def Valve(R, deltaP):
     if -deltaP < 0.0:
         q = deltaP / R
@@ -18,158 +12,169 @@ def Valve(R, deltaP):
         q = 0.0
     return q
 
-# ShiElastance function
-def ShiElastance(t, E_min, E_max, tau, tau_es, tau_ep, Eshift, tr):
-    t_i = t - tr
-    if t_i <= tau_es:
-        E_p = (1 - np.cos(t_i / tau_es * np.pi)) / 2
-    elif t_i <= tau_ep:
-        E_p = (1 + np.cos((t_i - tau_es) / (tau_ep - tau_es) * np.pi)) / 2
-    else:
-        E_p = 0.0
-    E = E_min + (E_max - E_min) * E_p
-    return E
+# Define the model class
+class CardiovascularModel:
+    def __init__(self, u0, udot0, p, t_τL):
+        self.p = p
+        self.t_τL = t_τL
+        self.τ = t_τL[0]
+        self.tr = 0.0
+        self.n = 0  # Counter for events
+        self.u0 = u0
+        self.udot0 = udot0
+        self.Eshift = 0.0
+        self.cycle_phase = "systole"  # Start with systole
 
-# DShiElastance function (Derivative of ShiElastance)
-def DShiElastance(t, E_min, E_max, tau, tau_es, tau_ep, Eshift, tr):
-    t_i = t - tr
-    if t_i <= tau_es:
-        DE_p = (np.pi / tau_es) * np.sin(t_i / tau_es * np.pi) / 2
-    elif t_i <= tau_ep:
-        DE_p = (np.pi / (tau_ep - tau_es)) * np.sin((tau_es - t_i) / (tau_ep - tau_es) * np.pi) / 2
-    else:
-        DE_p = 0.0
-    DE = (E_max - E_min) * DE_p
-    return DE
+    # Residual function for IDA
+    def res(self, t, y, ydot):
+        pLV, psa, psv, Vlv, Qav, Qmv, Qs = y
+        τ_es, τ_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min = self.p
+        E_t = self.ShiElastance(t, E_min, E_max, self.τ, τ_es, τ_ep, self.Eshift)
+        DE_t = self.DShiElastance(t, E_min, E_max, self.τ, τ_es, τ_ep, self.Eshift)
 
-# Heart Rate Variability function
+        res = np.zeros_like(y)
+        res[0] = ydot[0] - ((Qmv - Qav) * E_t + pLV / E_t * DE_t)
+        res[1] = ydot[1] - (Qav - Qs) / Csa
+        res[2] = ydot[2] - (Qs - Qmv) / Csv
+        res[3] = ydot[3] - (Qmv - Qav)
+        res[4] = Qav - Valve(Zao, pLV - psa)
+        res[5] = Qmv - Valve(Rmv, psv - pLV)
+        res[6] = ydot[6] - (ydot[1] - ydot[2]) / Rs
+        return res
+
+    # ShiElastance function as a method
+    def ShiElastance(self, t, E_min, E_max, τ, τ_es, τ_ep, Eshift):
+        t_i = (t - self.tr) % τ  # Modulus to keep t within the current cycle period
+        if t_i <= τ_es:
+            E_p = (1 - np.cos(t_i / τ_es * np.pi)) / 2
+        elif t_i <= τ_ep:
+            E_p = (1 + np.cos((t_i - τ_es) / (τ_ep - τ_es) * np.pi)) / 2
+        else:
+            E_p = 0.0
+        E = E_min + (E_max - E_min) * E_p
+        return E
+
+    # Derivative of ShiElastance as a method
+    def DShiElastance(self, t, E_min, E_max, τ, τ_es, τ_ep, Eshift):
+        t_i = (t - self.tr) % τ  # Modulus to keep t within the current cycle period
+        if t_i <= τ_es:
+            dE_p = (np.pi / τ_es) * np.sin(t_i / τ_es * np.pi) / 2
+        elif t_i <= τ_ep:
+            dE_p = - (np.pi / (τ_ep - τ_es)) * np.sin((t_i - τ_es) / (τ_ep - τ_es) * np.pi) / 2
+        else:
+            dE_p = 0.0
+        dE = (E_max - E_min) * dE_p
+        return dE
+
+    # Event function to update τ and tr
+    def handle_event(self, solver, event_info):
+        """
+        Handles events detected by the root function.
+        Updates the cardiac cycle phase, elastance parameters, and time reference.
+        """
+        self.n += 1
+
+        if self.cycle_phase == "systole":
+            # Switch to diastole
+            self.cycle_phase = "diastole"
+            # Update reference time for diastole
+            self.tr = solver.t
+            # Update parameters for relaxation (change elastance accordingly)
+        elif self.cycle_phase == "diastole":
+            # Switch to systole
+            self.cycle_phase = "systole"
+            if self.n + 1 < len(self.t_τL):
+                # Update tr and τ for next systolic event
+                self.τ = self.t_τL[self.n + 1] - self.t_τL[self.n]
+                self.tr = self.t_τL[self.n]
+            else:
+                # No more events, end the simulation
+                solver.terminate = True
+
+    def root(self, t, y, ydot):
+        """
+        Detects events that correspond to changes in the cardiac cycle.
+        Specifically detects when to switch between systole and diastole.
+        """
+        if self.cycle_phase == "systole":
+            # Event to detect the end of systole (e.g., when elastance reaches max)
+            return t - (self.tr + self.τ)
+        elif self.cycle_phase == "diastole":
+            # Event to detect the end of diastole (e.g., when filling ends)
+            return t - (self.tr + self.τ)
+        return 0.0  # This should return values that cross zero during the transitions
+
+
+# Define the parameters
+p = np.array([0.3, 0.45, 0.06, 0.033, 1.11, 1.13, 11.0, 1.5, 0.03])
+
+# Generate the heart rate variability times
 def HRV(c):
-    t_tauL = np.zeros(c)
-    t_tauL[0] = random.uniform(0.8, 1.1)
-    for i in range(1, c):
-        t_tauL[i] = t_tauL[i-1] + random.uniform(0.8, 1.1)
-    return t_tauL
+    t_τL = np.zeros(c)
+    t_τL[0] = np.random.uniform(0.8, 1.1)
+    for i in range(c - 1):
+        t_τL[i + 1] = t_τL[i] + np.random.uniform(0.8, 1.1)
+    return t_τL
 
-# NIK function (DAE system)
-def NIK(t, y, yd, p):
-    pLV, psa, psv, Vlv, Qav, Qmv, Qs = y
-    pLV_dot, psa_dot, psv_dot, Vlv_dot, Qav_dot, Qmv_dot, Qs_dot = yd
-    
-    tau_es, tau_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min, Eshift, tr, tau = p
-    
-    E = ShiElastance(t, E_min, E_max, tau, tau_es, tau_ep, Eshift, tr)
-    DE = DShiElastance(t, E_min, E_max, tau, tau_es, tau_ep, Eshift, tr)
-    
-    res = np.zeros(7)
-    # Differential equations
-    res[0] = pLV_dot - ((Qmv - Qav) * E + (pLV / E) * DE)
-    res[1] = psa_dot - ((Qav - Qs) / Csa)
-    res[2] = psv_dot - ((Qs - Qmv) / Csv)
-    res[3] = Vlv_dot - (Qmv - Qav)
-    # Algebraic equations (Valve flows)
-    res[4] = Qav - Valve(Zao, pLV - psa)
-    res[5] = Qmv - Valve(Rmv, psv - pLV)
-    # Additional differential equation
-    res[6] = Qs_dot - ((psa_dot - psv_dot) / Rs)
-    return res
+c = 16
+t_τL = HRV(c)
 
 # Initial conditions
-u0 = [8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0]
-udot0 = [0.0]*7  # Initial derivatives
+u0 = np.array([8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0])
+udot0 = np.zeros(7)  # Initial derivatives
 
-# Parameters
-tau_es = 0.3
-tau_ep = 0.45
-Rmv = 0.06
-Zao = 0.033
-Rs = 1.11
-Csa = 1.13
-Csv = 11.0
-E_max = 1.5
-E_min = 0.03
-Eshift = 0.0
-
-# Generate heart rate variability
-c = 16
-t_tauL = HRV(c)
-tau = t_tauL[0]
-
-# Event handling variables
-n = 0  # Cycle counter
-tr = 0.0  # Reference time
+# Initialize the model
+model = CardiovascularModel(u0, udot0, p, t_τL)
 
 # Create the problem instance
-p = [tau_es, tau_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min, Eshift, tr, tau]
-model = Implicit_Problem(NIK, u0, udot0, 0.0, p)
-model.name = 'Cardiovascular Model'
+problem = Implicit_Problem(model.res, u0, udot0, 0.0)
+problem.name = 'Cardiovascular Model with Events'
 
-# Specify the mass matrix
-M = np.diag([1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0])
-model.mass_matrix = M
+# Set the root function and event handler
+problem.root = model.root
+problem.handle_event = model.handle_event
+
+# Set the number of roots (events)
+problem.nroots = 1
 
 # Set up the solver
-sim = IDA(model)
-sim.atol = [1e-8]*7
-sim.rtol = 1e-8
-sim.suppress_alg = True  # Suppress algebraic variables in error control
-sim.algvar = [1, 1, 1, 1, 0, 0, 1]  # Specify algebraic variables
+solver = IDA(problem)
+solver.report_continuously = True
+solver.atol = 1e-8
+solver.rtol = 1e-8
+solver.maxord = 5
 
-# Event function
-def event_func(t, y, yd, switch):
-    return t - (tr + tau)
+# Simulate
+tfinal = t_τL[-1] + 0.1  # Ensure simulation covers all events
+t, y, yd = solver.simulate(tfinal)
 
-# Handle event function
-def handle_event(solver, event_info):
-    global n, tau, tr, p
-    n += 1
-    if n+1 < len(t_tauL):
-        tau_new = t_tauL[n] - t_tauL[n-1]
-        tau = tau_new
-        tr = t_tauL[n]
-        # Update parameters in the problem
-        solver.problem.p[-2] = tr  # Update tr in parameters
-        solver.problem.p[-1] = tau  # Update tau in parameters
-    else:
-        # No more cycles, stop integration
-        solver.terminate = True
-options = sim.get_options()
-options['terminate'] = False
-options['direction'] = 1  # Positive direction
-options['eventtol'] = 1e-8
-options['event_max_iterations'] = 100
-options['max_events'] = 10000
+# Extract variables
+pLV = y[:, 0]
+psa = y[:, 1]
+psv = y[:, 2]
+Vlv = y[:, 3]
+Qav = y[:, 4]
+Qmv = y[:, 5]
+Qs = y[:, 6]
 
-sim.handle_event = handle_event
-sim.event = event_func
-
-# Simulation settings
-tfinal = 15.0
-ncp = 1500  # Number of communication points
-t, y, yd = sim.simulate(tfinal, ncp)
-
-# Plotting the results
-t = np.array(t)
-y = np.array(y)
-
+# Plot pressures
 plt.figure(figsize=(12, 6))
-plt.plot(t, y[:, 0], label='P_LV')
-plt.plot(t, y[:, 1], label='P_SA')
-plt.plot(t, y[:, 2], label='P_SV')
-plt.xlabel('Time [s]')
-plt.ylabel('Pressure [mmHg]')
+plt.plot(t, pLV, label='P_LV')
+plt.plot(t, psa, label='P_SA')
+plt.plot(t, psv, label='P_SV')
+plt.xlabel('Time')
+plt.ylabel('Pressure')
+plt.title('Pressures Over Time')
 plt.legend()
-plt.title('Pressure vs. Time')
 plt.grid(True)
 plt.show()
 
+# Plot left ventricular volume
 plt.figure(figsize=(12, 6))
-plt.plot(t, y[:, 3], label='V_LV')
-plt.xlabel('Time [s]')
-plt.ylabel('Volume [ml]')
+plt.plot(t, Vlv, label='V_LV')
+plt.xlabel('Time')
+plt.ylabel('Volume')
+plt.title('Left Ventricular Volume Over Time')
 plt.legend()
-plt.title('Left Ventricular Volume vs. Time')
 plt.grid(True)
 plt.show()
-print(dir(IDA))
-print(dir(solvers))
-
