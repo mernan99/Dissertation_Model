@@ -1,0 +1,42 @@
+{
+  "build": "h5728263_3",
+  "build_number": 3,
+  "channel": "https://conda.anaconda.org/conda-forge/win-64",
+  "constrains": [],
+  "depends": [
+    "libiconv >=1.17,<2.0a0",
+    "libintl 0.22.5 h5728263_3"
+  ],
+  "extracted_package_dir": "C:\\Users\\acb22mj\\.conda\\pkgs\\libgettextpo-0.22.5-h5728263_3",
+  "files": [
+    "Library/bin/gettextpo-0.dll"
+  ],
+  "fn": "libgettextpo-0.22.5-h5728263_3.conda",
+  "license": "GPL-3.0-or-later",
+  "link": {
+    "source": "C:\\Users\\acb22mj\\.conda\\pkgs\\libgettextpo-0.22.5-h5728263_3",
+    "type": 1
+  },
+  "md5": "e46c142e2d2d9ccef31ad3d176b10fab",
+  "name": "libgettextpo",
+  "package_tarball_full_path": "C:\\Users\\acb22mj\\.conda\\pkgs\\libgettextpo-0.22.5-h5728263_3.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "Library/bin/gettextpo-0.dll",
+        "path_type": "hardlink",
+        "sha256": "4bb2545b601cdf441cc3f3e84246add51112cbd6fb439e10d636f74f580db96e",
+        "sha256_in_prefix": "4bb2545b601cdf441cc3f3e84246add51112cbd6fb439e10d636f74f580db96e",
+        "size_in_bytes": 602624
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "6747bd29a0896b21ee1fe07bd212210475655354a3e8033c25b797e054ddd821",
+  "size": 171120,
+  "subdir": "win-64",
+  "timestamp": 1723629671000,
+  "url": "https://conda.anaconda.org/conda-forge/win-64/libgettextpo-0.22.5-h5728263_3.conda",
+  "version": "0.22.5"
+}

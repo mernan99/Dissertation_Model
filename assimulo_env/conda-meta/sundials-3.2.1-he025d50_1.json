@@ -1,0 +1,713 @@
+{
+  "build": "he025d50_1",
+  "build_number": 1,
+  "channel": "https://conda.anaconda.org/conda-forge/win-64",
+  "constrains": [],
+  "depends": [
+    "vc >=14.1,<15.0a0"
+  ],
+  "extracted_package_dir": "C:\\Users\\acb22mj\\.conda\\pkgs\\sundials-3.2.1-he025d50_1",
+  "files": [
+    "Library/include/arkode/arkode.h",
+    "Library/include/arkode/arkode_bandpre.h",
+    "Library/include/arkode/arkode_bbdpre.h",
+    "Library/include/arkode/arkode_direct.h",
+    "Library/include/arkode/arkode_impl.h",
+    "Library/include/arkode/arkode_spils.h",
+    "Library/include/cvode/cvode.h",
+    "Library/include/cvode/cvode_bandpre.h",
+    "Library/include/cvode/cvode_bbdpre.h",
+    "Library/include/cvode/cvode_diag.h",
+    "Library/include/cvode/cvode_direct.h",
+    "Library/include/cvode/cvode_impl.h",
+    "Library/include/cvode/cvode_spils.h",
+    "Library/include/cvodes/cvodes.h",
+    "Library/include/cvodes/cvodes_bandpre.h",
+    "Library/include/cvodes/cvodes_bbdpre.h",
+    "Library/include/cvodes/cvodes_diag.h",
+    "Library/include/cvodes/cvodes_direct.h",
+    "Library/include/cvodes/cvodes_impl.h",
+    "Library/include/cvodes/cvodes_spils.h",
+    "Library/include/ida/ida.h",
+    "Library/include/ida/ida_bbdpre.h",
+    "Library/include/ida/ida_direct.h",
+    "Library/include/ida/ida_impl.h",
+    "Library/include/ida/ida_spils.h",
+    "Library/include/idas/idas.h",
+    "Library/include/idas/idas_bbdpre.h",
+    "Library/include/idas/idas_direct.h",
+    "Library/include/idas/idas_impl.h",
+    "Library/include/idas/idas_spils.h",
+    "Library/include/kinsol/kinsol.h",
+    "Library/include/kinsol/kinsol_bbdpre.h",
+    "Library/include/kinsol/kinsol_direct.h",
+    "Library/include/kinsol/kinsol_impl.h",
+    "Library/include/kinsol/kinsol_spils.h",
+    "Library/include/nvector/nvector_serial.h",
+    "Library/include/sundials/LICENSE",
+    "Library/include/sundials/sundials_band.h",
+    "Library/include/sundials/sundials_config.h",
+    "Library/include/sundials/sundials_dense.h",
+    "Library/include/sundials/sundials_direct.h",
+    "Library/include/sundials/sundials_fconfig.h",
+    "Library/include/sundials/sundials_fnvector.h",
+    "Library/include/sundials/sundials_iterative.h",
+    "Library/include/sundials/sundials_linearsolver.h",
+    "Library/include/sundials/sundials_math.h",
+    "Library/include/sundials/sundials_matrix.h",
+    "Library/include/sundials/sundials_mpi.h",
+    "Library/include/sundials/sundials_mpi_types.h",
+    "Library/include/sundials/sundials_nvector.h",
+    "Library/include/sundials/sundials_pcg.h",
+    "Library/include/sundials/sundials_sparse.h",
+    "Library/include/sundials/sundials_spbcgs.h",
+    "Library/include/sundials/sundials_spfgmr.h",
+    "Library/include/sundials/sundials_spgmr.h",
+    "Library/include/sundials/sundials_sptfqmr.h",
+    "Library/include/sundials/sundials_types.h",
+    "Library/include/sundials/sundials_version.h",
+    "Library/include/sunlinsol/sunlinsol_band.h",
+    "Library/include/sunlinsol/sunlinsol_dense.h",
+    "Library/include/sunlinsol/sunlinsol_pcg.h",
+    "Library/include/sunlinsol/sunlinsol_spbcgs.h",
+    "Library/include/sunlinsol/sunlinsol_spfgmr.h",
+    "Library/include/sunlinsol/sunlinsol_spgmr.h",
+    "Library/include/sunlinsol/sunlinsol_sptfqmr.h",
+    "Library/include/sunmatrix/sunmatrix_band.h",
+    "Library/include/sunmatrix/sunmatrix_dense.h",
+    "Library/include/sunmatrix/sunmatrix_sparse.h",
+    "Library/lib/sundials_arkode.lib",
+    "Library/lib/sundials_cvode.lib",
+    "Library/lib/sundials_cvodes.lib",
+    "Library/lib/sundials_ida.lib",
+    "Library/lib/sundials_idas.lib",
+    "Library/lib/sundials_kinsol.lib",
+    "Library/lib/sundials_nvecserial.lib",
+    "Library/lib/sundials_sunlinsolband.lib",
+    "Library/lib/sundials_sunlinsoldense.lib",
+    "Library/lib/sundials_sunlinsolpcg.lib",
+    "Library/lib/sundials_sunlinsolspbcgs.lib",
+    "Library/lib/sundials_sunlinsolspfgmr.lib",
+    "Library/lib/sundials_sunlinsolspgmr.lib",
+    "Library/lib/sundials_sunlinsolsptfqmr.lib",
+    "Library/lib/sundials_sunmatrixband.lib",
+    "Library/lib/sundials_sunmatrixdense.lib",
+    "Library/lib/sundials_sunmatrixsparse.lib"
+  ],
+  "fn": "sundials-3.2.1-he025d50_1.tar.bz2",
+  "license": "BSD 3-Clause",
+  "link": {
+    "source": "C:\\Users\\acb22mj\\.conda\\pkgs\\sundials-3.2.1-he025d50_1",
+    "type": 1
+  },
+  "md5": "d6e25b7edd841edf487938ff932bdeb3",
+  "name": "sundials",
+  "package_tarball_full_path": "C:\\Users\\acb22mj\\.conda\\pkgs\\sundials-3.2.1-he025d50_1.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "Library/include/arkode/arkode.h",
+        "path_type": "hardlink",
+        "sha256": "0af51f4ee831205eebcda5bb13ce33bf2da0958e51daa1747f8e715453c99d94",
+        "sha256_in_prefix": "0af51f4ee831205eebcda5bb13ce33bf2da0958e51daa1747f8e715453c99d94",
+        "size_in_bytes": 61792
+      },
+      {
+        "_path": "Library/include/arkode/arkode_bandpre.h",
+        "path_type": "hardlink",
+        "sha256": "32e5e34f8c90fb73e879cb30433a0d872d93b32165fc3aab9f23ee7b04100588",
+        "sha256_in_prefix": "32e5e34f8c90fb73e879cb30433a0d872d93b32165fc3aab9f23ee7b04100588",
+        "size_in_bytes": 5670
+      },
+      {
+        "_path": "Library/include/arkode/arkode_bbdpre.h",
+        "path_type": "hardlink",
+        "sha256": "217e2bb1226beaf772a032c01e017204cb07fa470a48d788bcec241d4238d338",
+        "sha256_in_prefix": "217e2bb1226beaf772a032c01e017204cb07fa470a48d788bcec241d4238d338",
+        "size_in_bytes": 11111
+      },
+      {
+        "_path": "Library/include/arkode/arkode_direct.h",
+        "path_type": "hardlink",
+        "sha256": "5cd8e07c24cb2fead776f11d2a401f3dee55d5cf4471d1bd0b544c68c32ea180",
+        "sha256_in_prefix": "5cd8e07c24cb2fead776f11d2a401f3dee55d5cf4471d1bd0b544c68c32ea180",
+        "size_in_bytes": 10405
+      },
+      {
+        "_path": "Library/include/arkode/arkode_impl.h",
+        "path_type": "hardlink",
+        "sha256": "038db65ca53b9e568412854b2e51727e6d010998e8c5df17b693c2e3ab6be4d4",
+        "sha256_in_prefix": "038db65ca53b9e568412854b2e51727e6d010998e8c5df17b693c2e3ab6be4d4",
+        "size_in_bytes": 40631
+      },
+      {
+        "_path": "Library/include/arkode/arkode_spils.h",
+        "path_type": "hardlink",
+        "sha256": "25142cad0b768b34fd465196c14f66fb1c71159ab7aed19212e91299265828da",
+        "sha256_in_prefix": "25142cad0b768b34fd465196c14f66fb1c71159ab7aed19212e91299265828da",
+        "size_in_bytes": 26764
+      },
+      {
+        "_path": "Library/include/cvode/cvode.h",
+        "path_type": "hardlink",
+        "sha256": "5155e1e1925bc643be57fb4b17dde7218ad86035457e133f528d2b1a86c073a3",
+        "sha256_in_prefix": "5155e1e1925bc643be57fb4b17dde7218ad86035457e133f528d2b1a86c073a3",
+        "size_in_bytes": 36162
+      },
+      {
+        "_path": "Library/include/cvode/cvode_bandpre.h",
+        "path_type": "hardlink",
+        "sha256": "d9835487f721195ac97b36fd339d386d299e885ab8a613f7e8fb431162a0e4fd",
+        "sha256_in_prefix": "d9835487f721195ac97b36fd339d386d299e885ab8a613f7e8fb431162a0e4fd",
+        "size_in_bytes": 6005
+      },
+      {
+        "_path": "Library/include/cvode/cvode_bbdpre.h",
+        "path_type": "hardlink",
+        "sha256": "05514b51fb6614d71e31a24a0fd8ec80e1ecbef83f6af724e87597610fb2bdd7",
+        "sha256_in_prefix": "05514b51fb6614d71e31a24a0fd8ec80e1ecbef83f6af724e87597610fb2bdd7",
+        "size_in_bytes": 11779
+      },
+      {
+        "_path": "Library/include/cvode/cvode_diag.h",
+        "path_type": "hardlink",
+        "sha256": "99806b98583436b1f1ea1fb923b04aa5a305ba65f38a94a959199eeb7c9f837f",
+        "sha256_in_prefix": "99806b98583436b1f1ea1fb923b04aa5a305ba65f38a94a959199eeb7c9f837f",
+        "size_in_bytes": 3945
+      },
+      {
+        "_path": "Library/include/cvode/cvode_direct.h",
+        "path_type": "hardlink",
+        "sha256": "41f74155d6ba3adbc9258f790da3983d27d640fdcbc51b52edac1ad57ec7eb12",
+        "sha256_in_prefix": "41f74155d6ba3adbc9258f790da3983d27d640fdcbc51b52edac1ad57ec7eb12",
+        "size_in_bytes": 7615
+      },
+      {
+        "_path": "Library/include/cvode/cvode_impl.h",
+        "path_type": "hardlink",
+        "sha256": "d106488fa525b0b3faf687ed205748fb089794a7e3cd11bc3bf6bc7bdf7980cb",
+        "sha256_in_prefix": "d106488fa525b0b3faf687ed205748fb089794a7e3cd11bc3bf6bc7bdf7980cb",
+        "size_in_bytes": 25246
+      },
+      {
+        "_path": "Library/include/cvode/cvode_spils.h",
+        "path_type": "hardlink",
+        "sha256": "84ed3f18ccaebee49c913a62c6f3196dae8fb7e3aefcfa93a4f09951cb2ff17f",
+        "sha256_in_prefix": "84ed3f18ccaebee49c913a62c6f3196dae8fb7e3aefcfa93a4f09951cb2ff17f",
+        "size_in_bytes": 17276
+      },
+      {
+        "_path": "Library/include/cvodes/cvodes.h",
+        "path_type": "hardlink",
+        "sha256": "e158cc77afe5868e7c12e2f1c26ad5e2bde93973b54e679edfc7db4ca3f7f026",
+        "sha256_in_prefix": "e158cc77afe5868e7c12e2f1c26ad5e2bde93973b54e679edfc7db4ca3f7f026",
+        "size_in_bytes": 86603
+      },
+      {
+        "_path": "Library/include/cvodes/cvodes_bandpre.h",
+        "path_type": "hardlink",
+        "sha256": "c883d353a164abeaba0a9a090b05934b1882f85090b49f21a0212c7dc6e87319",
+        "sha256_in_prefix": "c883d353a164abeaba0a9a090b05934b1882f85090b49f21a0212c7dc6e87319",
+        "size_in_bytes": 7273
+      },
+      {
+        "_path": "Library/include/cvodes/cvodes_bbdpre.h",
+        "path_type": "hardlink",
+        "sha256": "9ba5e504940b4c5dcd4914a7219902ca7342df493239e9cdace766fe06ffe45f",
+        "sha256_in_prefix": "9ba5e504940b4c5dcd4914a7219902ca7342df493239e9cdace766fe06ffe45f",
+        "size_in_bytes": 14083
+      },
+      {
+        "_path": "Library/include/cvodes/cvodes_diag.h",
+        "path_type": "hardlink",
+        "sha256": "c79cf69f7242d86c5faf1d4eeee23fc1a7c7c20142d82efdd1e2d86f9b00cab3",
+        "sha256_in_prefix": "c79cf69f7242d86c5faf1d4eeee23fc1a7c7c20142d82efdd1e2d86f9b00cab3",
+        "size_in_bytes": 5035
+      },
+      {
+        "_path": "Library/include/cvodes/cvodes_direct.h",
+        "path_type": "hardlink",
+        "sha256": "9a86079902034a8b1bd22c314f47ae8b8499b094a106adbd1e9ca90ae19a4710",
+        "sha256_in_prefix": "9a86079902034a8b1bd22c314f47ae8b8499b094a106adbd1e9ca90ae19a4710",
+        "size_in_bytes": 11642
+      },
+      {
+        "_path": "Library/include/cvodes/cvodes_impl.h",
+        "path_type": "hardlink",
+        "sha256": "0bc986b48a9cf700295156810c1a3424b938b2f7680fef21a234ed54df4499cb",
+        "sha256_in_prefix": "0bc986b48a9cf700295156810c1a3424b938b2f7680fef21a234ed54df4499cb",
+        "size_in_bytes": 48632
+      },
+      {
+        "_path": "Library/include/cvodes/cvodes_spils.h",
+        "path_type": "hardlink",
+        "sha256": "2c2e63221c7207ffe2179ba5b0457a95d4f49fd50c2f27c5ef294349e822b571",
+        "sha256_in_prefix": "2c2e63221c7207ffe2179ba5b0457a95d4f49fd50c2f27c5ef294349e822b571",
+        "size_in_bytes": 24635
+      },
+      {
+        "_path": "Library/include/ida/ida.h",
+        "path_type": "hardlink",
+        "sha256": "57431453348c998606c5e41cfb4447c4f860b050e4027ec08aebb96b782ddb7e",
+        "sha256_in_prefix": "57431453348c998606c5e41cfb4447c4f860b050e4027ec08aebb96b782ddb7e",
+        "size_in_bytes": 50031
+      },
+      {
+        "_path": "Library/include/ida/ida_bbdpre.h",
+        "path_type": "hardlink",
+        "sha256": "47bf89d1f56b9b13486436d251cfd289f285f76c3d8d216922ef8d50210d5109",
+        "sha256_in_prefix": "47bf89d1f56b9b13486436d251cfd289f285f76c3d8d216922ef8d50210d5109",
+        "size_in_bytes": 12115
+      },
+      {
+        "_path": "Library/include/ida/ida_direct.h",
+        "path_type": "hardlink",
+        "sha256": "7c8be9987904098e1de13f92f18ad56be354a6e4b7cf7835f55f7d3d6da087eb",
+        "sha256_in_prefix": "7c8be9987904098e1de13f92f18ad56be354a6e4b7cf7835f55f7d3d6da087eb",
+        "size_in_bytes": 8528
+      },
+      {
+        "_path": "Library/include/ida/ida_impl.h",
+        "path_type": "hardlink",
+        "sha256": "b31613e19422370ffe9055c563547d7663ef01ee50adbe7b68445b03ae7c0adc",
+        "sha256_in_prefix": "b31613e19422370ffe9055c563547d7663ef01ee50adbe7b68445b03ae7c0adc",
+        "size_in_bytes": 24591
+      },
+      {
+        "_path": "Library/include/ida/ida_spils.h",
+        "path_type": "hardlink",
+        "sha256": "eee5274352fc8073a43df57c4d843ee4ac682d199057205d860a9a7e791e7216",
+        "sha256_in_prefix": "eee5274352fc8073a43df57c4d843ee4ac682d199057205d860a9a7e791e7216",
+        "size_in_bytes": 15475
+      },
+      {
+        "_path": "Library/include/idas/idas.h",
+        "path_type": "hardlink",
+        "sha256": "3eb1e6f23bec5afae3a2c53a29072fb79a3afc1030a8f2a0a604c1187dc952df",
+        "sha256_in_prefix": "3eb1e6f23bec5afae3a2c53a29072fb79a3afc1030a8f2a0a604c1187dc952df",
+        "size_in_bytes": 101316
+      },
+      {
+        "_path": "Library/include/idas/idas_bbdpre.h",
+        "path_type": "hardlink",
+        "sha256": "eeeae9eba1aa957e49aa27a7f3951fca83f0e20858efa3c8d9236feb2b320904",
+        "sha256_in_prefix": "eeeae9eba1aa957e49aa27a7f3951fca83f0e20858efa3c8d9236feb2b320904",
+        "size_in_bytes": 13847
+      },
+      {
+        "_path": "Library/include/idas/idas_direct.h",
+        "path_type": "hardlink",
+        "sha256": "1e4bef4c465d511478a02df847def4fd141e527472a8518569301210f07ab554",
+        "sha256_in_prefix": "1e4bef4c465d511478a02df847def4fd141e527472a8518569301210f07ab554",
+        "size_in_bytes": 12164
+      },
+      {
+        "_path": "Library/include/idas/idas_impl.h",
+        "path_type": "hardlink",
+        "sha256": "ad5fdd4fac50bc26568820f7acc7bc78dc344395b6210a5393bc26b210462e80",
+        "sha256_in_prefix": "ad5fdd4fac50bc26568820f7acc7bc78dc344395b6210a5393bc26b210462e80",
+        "size_in_bytes": 45415
+      },
+      {
+        "_path": "Library/include/idas/idas_spils.h",
+        "path_type": "hardlink",
+        "sha256": "6559217312e33e6aee7a35d2f8da51a2358a5eb68aa44c264ed9197861fca743",
+        "sha256_in_prefix": "6559217312e33e6aee7a35d2f8da51a2358a5eb68aa44c264ed9197861fca743",
+        "size_in_bytes": 23372
+      },
+      {
+        "_path": "Library/include/kinsol/kinsol.h",
+        "path_type": "hardlink",
+        "sha256": "a8a2f7160e5c9f1fe60ddb43ea6a2a6f8daf7c2c594ea2dd1e3edd8ea1c18fbf",
+        "sha256_in_prefix": "a8a2f7160e5c9f1fe60ddb43ea6a2a6f8daf7c2c594ea2dd1e3edd8ea1c18fbf",
+        "size_in_bytes": 35209
+      },
+      {
+        "_path": "Library/include/kinsol/kinsol_bbdpre.h",
+        "path_type": "hardlink",
+        "sha256": "1089b339ebcceba1df8a6c27b74abff42d1e477a29cfcd9579d1c65a6fa5fb96",
+        "sha256_in_prefix": "1089b339ebcceba1df8a6c27b74abff42d1e477a29cfcd9579d1c65a6fa5fb96",
+        "size_in_bytes": 10016
+      },
+      {
+        "_path": "Library/include/kinsol/kinsol_direct.h",
+        "path_type": "hardlink",
+        "sha256": "4c5d6782ca2d23e58c5edac503b50d20b8e91e7a2973fc6349fea31c5c876802",
+        "sha256_in_prefix": "4c5d6782ca2d23e58c5edac503b50d20b8e91e7a2973fc6349fea31c5c876802",
+        "size_in_bytes": 6978
+      },
+      {
+        "_path": "Library/include/kinsol/kinsol_impl.h",
+        "path_type": "hardlink",
+        "sha256": "92c5bdfa14693a4668d8eaf5fe1c5ed7ce2cc24a0e74c0f39156289ad75c080f",
+        "sha256_in_prefix": "92c5bdfa14693a4668d8eaf5fe1c5ed7ce2cc24a0e74c0f39156289ad75c080f",
+        "size_in_bytes": 23473
+      },
+      {
+        "_path": "Library/include/kinsol/kinsol_spils.h",
+        "path_type": "hardlink",
+        "sha256": "c2052487b94b596cf3af80d3b2852ec5f624f319316c4c0c185596d0088258a2",
+        "sha256_in_prefix": "c2052487b94b596cf3af80d3b2852ec5f624f319316c4c0c185596d0088258a2",
+        "size_in_bytes": 12546
+      },
+      {
+        "_path": "Library/include/nvector/nvector_serial.h",
+        "path_type": "hardlink",
+        "sha256": "3eb7e790c21d6e4bb9786961c5042e6e8ba6091cb9dae6ca636ccb2944da3fff",
+        "sha256_in_prefix": "3eb7e790c21d6e4bb9786961c5042e6e8ba6091cb9dae6ca636ccb2944da3fff",
+        "size_in_bytes": 11089
+      },
+      {
+        "_path": "Library/include/sundials/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "ee2236fd665a79ae3d9a35499bb1a80d4fc7c37dfa800be637f26159525109d3",
+        "sha256_in_prefix": "ee2236fd665a79ae3d9a35499bb1a80d4fc7c37dfa800be637f26159525109d3",
+        "size_in_bytes": 3221
+      },
+      {
+        "_path": "Library/include/sundials/sundials_band.h",
+        "path_type": "hardlink",
+        "sha256": "85a097e88c24dfdd4e8f49cbfc22ff4faae00652bf8285e547b2eef0228b3473",
+        "sha256_in_prefix": "85a097e88c24dfdd4e8f49cbfc22ff4faae00652bf8285e547b2eef0228b3473",
+        "size_in_bytes": 7790
+      },
+      {
+        "_path": "Library/include/sundials/sundials_config.h",
+        "path_type": "hardlink",
+        "sha256": "a3d0975a085395ba597b7fa26f9bb0f6570ffa0b8d52b9297ce222a3a4ce3ea6",
+        "sha256_in_prefix": "a3d0975a085395ba597b7fa26f9bb0f6570ffa0b8d52b9297ce222a3a4ce3ea6",
+        "size_in_bytes": 3757
+      },
+      {
+        "_path": "Library/include/sundials/sundials_dense.h",
+        "path_type": "hardlink",
+        "sha256": "3f464f99a8abbbfff2a5886375c15d0e4c4c3d28f4b37e04fe06eae49d18922e",
+        "sha256_in_prefix": "3f464f99a8abbbfff2a5886375c15d0e4c4c3d28f4b37e04fe06eae49d18922e",
+        "size_in_bytes": 9014
+      },
+      {
+        "_path": "Library/include/sundials/sundials_direct.h",
+        "path_type": "hardlink",
+        "sha256": "bf5eec66d1c14e3511e48610e45b44e7cc1ae1a18bbc6b198276dc3a83001ced",
+        "sha256_in_prefix": "bf5eec66d1c14e3511e48610e45b44e7cc1ae1a18bbc6b198276dc3a83001ced",
+        "size_in_bytes": 13457
+      },
+      {
+        "_path": "Library/include/sundials/sundials_fconfig.h",
+        "path_type": "hardlink",
+        "sha256": "c6d7da8b03a89aba757805cf8374cf8f3c6a8a833757b3883221b82e84f51dcf",
+        "sha256_in_prefix": "c6d7da8b03a89aba757805cf8374cf8f3c6a8a833757b3883221b82e84f51dcf",
+        "size_in_bytes": 2045
+      },
+      {
+        "_path": "Library/include/sundials/sundials_fnvector.h",
+        "path_type": "hardlink",
+        "sha256": "cdfea3b7df5d323058d29426fe2b8c91649333715fb22438332aa34cb60f4256",
+        "sha256_in_prefix": "cdfea3b7df5d323058d29426fe2b8c91649333715fb22438332aa34cb60f4256",
+        "size_in_bytes": 1375
+      },
+      {
+        "_path": "Library/include/sundials/sundials_iterative.h",
+        "path_type": "hardlink",
+        "sha256": "7fc95ba24b841df3564a7d51b33b1ffc2a839da9489f9969d4570492d1e035ac",
+        "sha256_in_prefix": "7fc95ba24b841df3564a7d51b33b1ffc2a839da9489f9969d4570492d1e035ac",
+        "size_in_bytes": 14113
+      },
+      {
+        "_path": "Library/include/sundials/sundials_linearsolver.h",
+        "path_type": "hardlink",
+        "sha256": "d359b6f80ac577876ca3b7d43d2b6ef7b984850d938d5b037243008ffa2f69e2",
+        "sha256_in_prefix": "d359b6f80ac577876ca3b7d43d2b6ef7b984850d938d5b037243008ffa2f69e2",
+        "size_in_bytes": 16101
+      },
+      {
+        "_path": "Library/include/sundials/sundials_math.h",
+        "path_type": "hardlink",
+        "sha256": "61f9213fe7a0106d945aab42177e47e001f18ee15d76268d9c05bfcaca53a92b",
+        "sha256_in_prefix": "61f9213fe7a0106d945aab42177e47e001f18ee15d76268d9c05bfcaca53a92b",
+        "size_in_bytes": 4461
+      },
+      {
+        "_path": "Library/include/sundials/sundials_matrix.h",
+        "path_type": "hardlink",
+        "sha256": "96d32f25849dc32d010f2003dc210a47dccb206b5d0272c15315f3f48e3cb089",
+        "sha256_in_prefix": "96d32f25849dc32d010f2003dc210a47dccb206b5d0272c15315f3f48e3cb089",
+        "size_in_bytes": 7277
+      },
+      {
+        "_path": "Library/include/sundials/sundials_mpi.h",
+        "path_type": "hardlink",
+        "sha256": "cb743550c800164eb3bd0d535372ccdd02cd909970b4d06fdd894f42ef2978c0",
+        "sha256_in_prefix": "cb743550c800164eb3bd0d535372ccdd02cd909970b4d06fdd894f42ef2978c0",
+        "size_in_bytes": 1566
+      },
+      {
+        "_path": "Library/include/sundials/sundials_mpi_types.h",
+        "path_type": "hardlink",
+        "sha256": "bf55bc83e330758b365fb5ce23ee4497f53d99eeacb84ab628e52df41ee059f6",
+        "sha256_in_prefix": "bf55bc83e330758b365fb5ce23ee4497f53d99eeacb84ab628e52df41ee059f6",
+        "size_in_bytes": 1434
+      },
+      {
+        "_path": "Library/include/sundials/sundials_nvector.h",
+        "path_type": "hardlink",
+        "sha256": "435bb330495da91bb45a86cc743846051848a334f0388b250fbe5d2170c7d181",
+        "sha256_in_prefix": "435bb330495da91bb45a86cc743846051848a334f0388b250fbe5d2170c7d181",
+        "size_in_bytes": 16945
+      },
+      {
+        "_path": "Library/include/sundials/sundials_pcg.h",
+        "path_type": "hardlink",
+        "sha256": "644ba7999b984f25b1fb8d6f7b8118e6fc5344459480ac861dfd74c2e527834f",
+        "sha256_in_prefix": "644ba7999b984f25b1fb8d6f7b8118e6fc5344459480ac861dfd74c2e527834f",
+        "size_in_bytes": 6280
+      },
+      {
+        "_path": "Library/include/sundials/sundials_sparse.h",
+        "path_type": "hardlink",
+        "sha256": "6f89096d1d0ce3dcef483e1b72fdfc7537baa54530f5f6841f69b44f4f9ea112",
+        "sha256_in_prefix": "6f89096d1d0ce3dcef483e1b72fdfc7537baa54530f5f6841f69b44f4f9ea112",
+        "size_in_bytes": 8911
+      },
+      {
+        "_path": "Library/include/sundials/sundials_spbcgs.h",
+        "path_type": "hardlink",
+        "sha256": "95eb21def374e137abb53688075d45695fa63800fe13c4fa427f4fd82e653398",
+        "sha256_in_prefix": "95eb21def374e137abb53688075d45695fa63800fe13c4fa427f4fd82e653398",
+        "size_in_bytes": 7962
+      },
+      {
+        "_path": "Library/include/sundials/sundials_spfgmr.h",
+        "path_type": "hardlink",
+        "sha256": "3942a10e985c68de59d542229de3ab89be05873e27a97d884a2d9bb67623ab08",
+        "sha256_in_prefix": "3942a10e985c68de59d542229de3ab89be05873e27a97d884a2d9bb67623ab08",
+        "size_in_bytes": 11844
+      },
+      {
+        "_path": "Library/include/sundials/sundials_spgmr.h",
+        "path_type": "hardlink",
+        "sha256": "8fb586b8dfb940845bc2b7cbc1114913fa2fdeee7d230065484933405bfc4a8f",
+        "sha256_in_prefix": "8fb586b8dfb940845bc2b7cbc1114913fa2fdeee7d230065484933405bfc4a8f",
+        "size_in_bytes": 12446
+      },
+      {
+        "_path": "Library/include/sundials/sundials_sptfqmr.h",
+        "path_type": "hardlink",
+        "sha256": "47371ee6cf01a18e8ec9b3e909fcd1655b3ba13dc33025d433aa1d46b605e2ee",
+        "sha256_in_prefix": "47371ee6cf01a18e8ec9b3e909fcd1655b3ba13dc33025d433aa1d46b605e2ee",
+        "size_in_bytes": 10468
+      },
+      {
+        "_path": "Library/include/sundials/sundials_types.h",
+        "path_type": "hardlink",
+        "sha256": "9372b4f9b394bf6f93ee2f1a9f41e58d47ee995012f480a24648164f1992f000",
+        "sha256_in_prefix": "9372b4f9b394bf6f93ee2f1a9f41e58d47ee995012f480a24648164f1992f000",
+        "size_in_bytes": 4794
+      },
+      {
+        "_path": "Library/include/sundials/sundials_version.h",
+        "path_type": "hardlink",
+        "sha256": "1014166a6f96eb2f5b6867ade2d615ddfec9a2ec5c7016d50562fbd2a527898f",
+        "sha256_in_prefix": "1014166a6f96eb2f5b6867ade2d615ddfec9a2ec5c7016d50562fbd2a527898f",
+        "size_in_bytes": 2631
+      },
+      {
+        "_path": "Library/include/sunlinsol/sunlinsol_band.h",
+        "path_type": "hardlink",
+        "sha256": "4520600a3b1a58943545be0679be0a84e957b05410df0b14d03bc2ed6712d29b",
+        "sha256_in_prefix": "4520600a3b1a58943545be0679be0a84e957b05410df0b14d03bc2ed6712d29b",
+        "size_in_bytes": 3695
+      },
+      {
+        "_path": "Library/include/sunlinsol/sunlinsol_dense.h",
+        "path_type": "hardlink",
+        "sha256": "1b12430b42044be420d02f7d1b33072dda643df03ecb95de28af57eb0c3c37e4",
+        "sha256_in_prefix": "1b12430b42044be420d02f7d1b33072dda643df03ecb95de28af57eb0c3c37e4",
+        "size_in_bytes": 4029
+      },
+      {
+        "_path": "Library/include/sunlinsol/sunlinsol_pcg.h",
+        "path_type": "hardlink",
+        "sha256": "68f4c4a470de7e0a61643987f72912fd96acb2c7b83126fb9890011bc4d0a603",
+        "sha256_in_prefix": "68f4c4a470de7e0a61643987f72912fd96acb2c7b83126fb9890011bc4d0a603",
+        "size_in_bytes": 8871
+      },
+      {
+        "_path": "Library/include/sunlinsol/sunlinsol_spbcgs.h",
+        "path_type": "hardlink",
+        "sha256": "e0414ba7bb125cfd5c2dd98314d91d02f62a1558fd92a7573fbb626cf8db491e",
+        "sha256_in_prefix": "e0414ba7bb125cfd5c2dd98314d91d02f62a1558fd92a7573fbb626cf8db491e",
+        "size_in_bytes": 9705
+      },
+      {
+        "_path": "Library/include/sunlinsol/sunlinsol_spfgmr.h",
+        "path_type": "hardlink",
+        "sha256": "ae706b282068f02fe1eab683616d9c84e2e38431ea3967337e8b5c12d254c9c3",
+        "sha256_in_prefix": "ae706b282068f02fe1eab683616d9c84e2e38431ea3967337e8b5c12d254c9c3",
+        "size_in_bytes": 10635
+      },
+      {
+        "_path": "Library/include/sunlinsol/sunlinsol_spgmr.h",
+        "path_type": "hardlink",
+        "sha256": "03bc113e573065715eb7ae342ad8b169fdfa1f9b6b129c2da432dc1885550324",
+        "sha256_in_prefix": "03bc113e573065715eb7ae342ad8b169fdfa1f9b6b129c2da432dc1885550324",
+        "size_in_bytes": 10604
+      },
+      {
+        "_path": "Library/include/sunlinsol/sunlinsol_sptfqmr.h",
+        "path_type": "hardlink",
+        "sha256": "762e67883c2e1675ad8ff4d3af50174ccc2c0fde91568d38a32fd34eb0ec5683",
+        "sha256_in_prefix": "762e67883c2e1675ad8ff4d3af50174ccc2c0fde91568d38a32fd34eb0ec5683",
+        "size_in_bytes": 9525
+      },
+      {
+        "_path": "Library/include/sunmatrix/sunmatrix_band.h",
+        "path_type": "hardlink",
+        "sha256": "ed9c9ff7389dbcbce22e8833fc78c1f57c0c6285e426412cd97daeb4b8f552e8",
+        "sha256_in_prefix": "ed9c9ff7389dbcbce22e8833fc78c1f57c0c6285e426412cd97daeb4b8f552e8",
+        "size_in_bytes": 12420
+      },
+      {
+        "_path": "Library/include/sunmatrix/sunmatrix_dense.h",
+        "path_type": "hardlink",
+        "sha256": "9bca09daabd8ecbc9d2fdca78e40cd51b401ef0789a1ffb929be42dd25d8298d",
+        "sha256_in_prefix": "9bca09daabd8ecbc9d2fdca78e40cd51b401ef0789a1ffb929be42dd25d8298d",
+        "size_in_bytes": 9424
+      },
+      {
+        "_path": "Library/include/sunmatrix/sunmatrix_sparse.h",
+        "path_type": "hardlink",
+        "sha256": "2510c2ea895155385d50d83bebeb8ccda3fa7767f3172fd28254b2ed0259f69b",
+        "sha256_in_prefix": "2510c2ea895155385d50d83bebeb8ccda3fa7767f3172fd28254b2ed0259f69b",
+        "size_in_bytes": 13836
+      },
+      {
+        "_path": "Library/lib/sundials_arkode.lib",
+        "path_type": "hardlink",
+        "sha256": "42611d34cfe0091deac644f5aa377d9136725f9ef39972743a28e199a869933c",
+        "sha256_in_prefix": "42611d34cfe0091deac644f5aa377d9136725f9ef39972743a28e199a869933c",
+        "size_in_bytes": 2873720
+      },
+      {
+        "_path": "Library/lib/sundials_cvode.lib",
+        "path_type": "hardlink",
+        "sha256": "17c34ccba200da1b0629ae4568f477d18b935b4ea81df8cd32020916b8101f5c",
+        "sha256_in_prefix": "17c34ccba200da1b0629ae4568f477d18b935b4ea81df8cd32020916b8101f5c",
+        "size_in_bytes": 2611346
+      },
+      {
+        "_path": "Library/lib/sundials_cvodes.lib",
+        "path_type": "hardlink",
+        "sha256": "350401f380c3635b51f8f421df3f37a44cd049131771184a7cda9dea3c713282",
+        "sha256_in_prefix": "350401f380c3635b51f8f421df3f37a44cd049131771184a7cda9dea3c713282",
+        "size_in_bytes": 3229714
+      },
+      {
+        "_path": "Library/lib/sundials_ida.lib",
+        "path_type": "hardlink",
+        "sha256": "5f86767a402a23366415b0a372c6cefc0a89d430e742a2e9262f614abd59938c",
+        "sha256_in_prefix": "5f86767a402a23366415b0a372c6cefc0a89d430e742a2e9262f614abd59938c",
+        "size_in_bytes": 2482964
+      },
+      {
+        "_path": "Library/lib/sundials_idas.lib",
+        "path_type": "hardlink",
+        "sha256": "dcb70fcc43fcb5e95794984ba40aa0c7deb23a1f169c61310287fe9e5e1d3d78",
+        "sha256_in_prefix": "dcb70fcc43fcb5e95794984ba40aa0c7deb23a1f169c61310287fe9e5e1d3d78",
+        "size_in_bytes": 3089306
+      },
+      {
+        "_path": "Library/lib/sundials_kinsol.lib",
+        "path_type": "hardlink",
+        "sha256": "5b222acdb6798d8c2d230773d0e015e4be5a1590e042f352057b9a4909b6c2f2",
+        "sha256_in_prefix": "5b222acdb6798d8c2d230773d0e015e4be5a1590e042f352057b9a4909b6c2f2",
+        "size_in_bytes": 2326012
+      },
+      {
+        "_path": "Library/lib/sundials_nvecserial.lib",
+        "path_type": "hardlink",
+        "sha256": "63aa9a606b2aea4273ff65d9981c552ce6913531215dcecc07436d8dbb940bfc",
+        "sha256_in_prefix": "63aa9a606b2aea4273ff65d9981c552ce6913531215dcecc07436d8dbb940bfc",
+        "size_in_bytes": 207394
+      },
+      {
+        "_path": "Library/lib/sundials_sunlinsolband.lib",
+        "path_type": "hardlink",
+        "sha256": "1c6c477e3d7a46b170425984122f19b8ff1a79307e12ea57457f66dfae6f7af5",
+        "sha256_in_prefix": "1c6c477e3d7a46b170425984122f19b8ff1a79307e12ea57457f66dfae6f7af5",
+        "size_in_bytes": 198338
+      },
+      {
+        "_path": "Library/lib/sundials_sunlinsoldense.lib",
+        "path_type": "hardlink",
+        "sha256": "ae4d9d0f66d0a7006e2ad948139c676432d2604f0681ed05d13fe2207510394e",
+        "sha256_in_prefix": "ae4d9d0f66d0a7006e2ad948139c676432d2604f0681ed05d13fe2207510394e",
+        "size_in_bytes": 202952
+      },
+      {
+        "_path": "Library/lib/sundials_sunlinsolpcg.lib",
+        "path_type": "hardlink",
+        "sha256": "7a36cb210c67bd44eabb3f3a19787dd9980bd9d7a520cee27803115d0d27f109",
+        "sha256_in_prefix": "7a36cb210c67bd44eabb3f3a19787dd9980bd9d7a520cee27803115d0d27f109",
+        "size_in_bytes": 308502
+      },
+      {
+        "_path": "Library/lib/sundials_sunlinsolspbcgs.lib",
+        "path_type": "hardlink",
+        "sha256": "1b4e0810bd55a83d061be551332e3c81a35108954b408eba54da1095a2d9d1d6",
+        "sha256_in_prefix": "1b4e0810bd55a83d061be551332e3c81a35108954b408eba54da1095a2d9d1d6",
+        "size_in_bytes": 313922
+      },
+      {
+        "_path": "Library/lib/sundials_sunlinsolspfgmr.lib",
+        "path_type": "hardlink",
+        "sha256": "89e68af2253e16cccb52d9a04f023f373620941db0ee640b87661faef7b5a831",
+        "sha256_in_prefix": "89e68af2253e16cccb52d9a04f023f373620941db0ee640b87661faef7b5a831",
+        "size_in_bytes": 318184
+      },
+      {
+        "_path": "Library/lib/sundials_sunlinsolspgmr.lib",
+        "path_type": "hardlink",
+        "sha256": "dbf7615a4099d336b9af289b2c8c713aa52db617a366b981ed7e5c3ac387240f",
+        "sha256_in_prefix": "dbf7615a4099d336b9af289b2c8c713aa52db617a366b981ed7e5c3ac387240f",
+        "size_in_bytes": 319430
+      },
+      {
+        "_path": "Library/lib/sundials_sunlinsolsptfqmr.lib",
+        "path_type": "hardlink",
+        "sha256": "266603642c91d90abb41c77be9754692c5adf92e04c5a5dd072566d2f5a20d92",
+        "sha256_in_prefix": "266603642c91d90abb41c77be9754692c5adf92e04c5a5dd072566d2f5a20d92",
+        "size_in_bytes": 320510
+      },
+      {
+        "_path": "Library/lib/sundials_sunmatrixband.lib",
+        "path_type": "hardlink",
+        "sha256": "b16757cd58644be04fc4d9c8e7d03ecb791bca9f6b9a94becffcde697e55b7a8",
+        "sha256_in_prefix": "b16757cd58644be04fc4d9c8e7d03ecb791bca9f6b9a94becffcde697e55b7a8",
+        "size_in_bytes": 219690
+      },
+      {
+        "_path": "Library/lib/sundials_sunmatrixdense.lib",
+        "path_type": "hardlink",
+        "sha256": "e07a49462e46aa4913facb64f8c2868832caae39635a0f5b37854ca92552250e",
+        "sha256_in_prefix": "e07a49462e46aa4913facb64f8c2868832caae39635a0f5b37854ca92552250e",
+        "size_in_bytes": 210344
+      },
+      {
+        "_path": "Library/lib/sundials_sunmatrixsparse.lib",
+        "path_type": "hardlink",
+        "sha256": "142c4254b10e46f4599290f093c6324f16907982d90422b0c0d624eba2c57d00",
+        "sha256_in_prefix": "142c4254b10e46f4599290f093c6324f16907982d90422b0c0d624eba2c57d00",
+        "size_in_bytes": 243162
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "1c066eba6a3e5c7e6b9b1ee5a6ab956cbbebf1a13198b577f9d5dad876c04618",
+  "size": 2292255,
+  "subdir": "win-64",
+  "timestamp": 1567413765000,
+  "url": "https://conda.anaconda.org/conda-forge/win-64/sundials-3.2.1-he025d50_1.tar.bz2",
+  "version": "3.2.1"
+}

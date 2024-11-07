@@ -1,0 +1,14 @@
+# libvorbisenc pkg-config source file
+
+prefix=U:/envs/assimulo_env/Library
+exec_prefix=U:/envs/assimulo_env/Library/bin
+libdir=U:/envs/assimulo_env/Library/lib
+includedir=U:/envs/assimulo_env/Library/include
+
+Name: vorbisenc
+Description: vorbisenc is a library that provides a convenient API for setting up an encoding environment using libvorbis
+Version: 1.3.7
+Requires.private: vorbis
+Conflicts:
+Libs: -L${libdir} -lvorbisenc
+Cflags: -I${includedir}

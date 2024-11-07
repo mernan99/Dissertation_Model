@@ -1,0 +1,35 @@
+{
+  "build": "py37h03978a9_2",
+  "build_number": 2,
+  "channel": "https://conda.anaconda.org/conda-forge/win-64",
+  "constrains": [],
+  "depends": [
+    "matplotlib-base >=3.5.3,<3.5.4.0a0",
+    "pyqt",
+    "python >=3.7,<3.8.0a0",
+    "python_abi 3.7.* *_cp37m",
+    "tornado"
+  ],
+  "extracted_package_dir": "C:\\Users\\acb22mj\\.conda\\pkgs\\matplotlib-3.5.3-py37h03978a9_2",
+  "files": [],
+  "fn": "matplotlib-3.5.3-py37h03978a9_2.tar.bz2",
+  "license": "LicenseRef-PSF-based",
+  "link": {
+    "source": "C:\\Users\\acb22mj\\.conda\\pkgs\\matplotlib-3.5.3-py37h03978a9_2",
+    "type": 1
+  },
+  "md5": "1ce274c585b7a23c90f30da2eecbe676",
+  "name": "matplotlib",
+  "package_tarball_full_path": "C:\\Users\\acb22mj\\.conda\\pkgs\\matplotlib-3.5.3-py37h03978a9_2.tar.bz2",
+  "paths_data": {
+    "paths": [],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "4f1f65f53e1ec23cd75a2a81565a5ce16e665dc5b3f9a2fceb6039aff93aae56",
+  "size": 7546,
+  "subdir": "win-64",
+  "timestamp": 1661440409000,
+  "url": "https://conda.anaconda.org/conda-forge/win-64/matplotlib-3.5.3-py37h03978a9_2.tar.bz2",
+  "version": "3.5.3"
+}

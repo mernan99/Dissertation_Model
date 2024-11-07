@@ -1,0 +1,11 @@
+prefix=U:/envs/assimulo_env/Library 
+exec_prefix=U:/envs/assimulo_env/Library 
+libdir=U:/envs/assimulo_env/Library/lib 
+includedir=U:/envs/assimulo_env/Library/include 
+modules=0 
+Name: libXML 
+Version: 2.13.4 
+Description: libXML library version2. 
+Requires: 
+Libs: -LU:/envs/assimulo_env/Library/lib -lxml2 -liconv -lz 
+Cflags: -IU:/envs/assimulo_env/Library/include/libxml2 -IU:/envs/assimulo_env/Library/include 

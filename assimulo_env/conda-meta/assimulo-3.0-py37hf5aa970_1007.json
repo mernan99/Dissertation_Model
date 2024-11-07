@@ -1,0 +1,1592 @@
+{
+  "build": "py37hf5aa970_1007",
+  "build_number": 1007,
+  "channel": "https://conda.anaconda.org/conda-forge/win-64",
+  "constrains": [
+    "python_abi * *_cp37m"
+  ],
+  "depends": [
+    "matplotlib",
+    "numpy >=1.14.6,<2.0a0",
+    "python >=3.7,<3.8.0a0",
+    "scipy",
+    "sundials >=3.2.1,<3.3.0a0",
+    "vc >=14,<15.0a0"
+  ],
+  "extracted_package_dir": "C:\\Users\\acb22mj\\.conda\\pkgs\\assimulo-3.0-py37hf5aa970_1007",
+  "files": [
+    "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/PKG-INFO",
+    "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/SOURCES.txt",
+    "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/dependency_links.txt",
+    "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/native_libs.txt",
+    "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/not-zip-safe",
+    "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/top_level.txt",
+    "Lib/site-packages/assimulo/CHANGELOG",
+    "Lib/site-packages/assimulo/LICENSE",
+    "Lib/site-packages/assimulo/README",
+    "Lib/site-packages/assimulo/__init__.py",
+    "Lib/site-packages/assimulo/__pycache__/__init__.cpython-37.pyc",
+    "Lib/site-packages/assimulo/__pycache__/algebraic.cpython-37.pyc",
+    "Lib/site-packages/assimulo/__pycache__/exception.cpython-37.pyc",
+    "Lib/site-packages/assimulo/__pycache__/explicit_ode.cpython-37.pyc",
+    "Lib/site-packages/assimulo/__pycache__/implicit_ode.cpython-37.pyc",
+    "Lib/site-packages/assimulo/__pycache__/ode.cpython-37.pyc",
+    "Lib/site-packages/assimulo/__pycache__/problem.cpython-37.pyc",
+    "Lib/site-packages/assimulo/__pycache__/problem_algebraic.cpython-37.pyc",
+    "Lib/site-packages/assimulo/__pycache__/special_systems.cpython-37.pyc",
+    "Lib/site-packages/assimulo/__pycache__/support.cpython-37.pyc",
+    "Lib/site-packages/assimulo/algebraic.cp37-win_amd64.pyd",
+    "Lib/site-packages/assimulo/algebraic.py",
+    "Lib/site-packages/assimulo/examples/__init__.py",
+    "Lib/site-packages/assimulo/examples/__pycache__/__init__.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_basic.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_basic_backward.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_gyro.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_stability.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_disc.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_initial_sensitivity.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_jac.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_jac_sparse.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_jac_spgmr.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_parameters.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_parameters_fcn.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_parameters_modified.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_preconditioning.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/dasp3_basic.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/dopri5_basic.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/dopri5_with_disc.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/euler_basic.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/euler_vanderpol.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/euler_with_disc.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/glimda_vanderpol.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/ida_basic_backward.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/ida_with_disc.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/ida_with_initial_sensitivity.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/ida_with_jac.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/ida_with_jac_spgmr.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/ida_with_parameters.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/ida_with_user_defined_handle_result.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/kinsol_basic.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/kinsol_ors.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/kinsol_with_jac.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/lsodar_bouncing_ball.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/lsodar_vanderpol.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/lsodar_with_disc.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/mech_system_pendulum.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/radar_basic.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/radau5dae_time_events.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/radau5dae_vanderpol.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/radau5ode_vanderpol.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/radau5ode_with_disc.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/rodasode_vanderpol.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/rungekutta34_basic.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/rungekutta34_with_disc.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/__pycache__/rungekutta4_basic.cpython-37.pyc",
+    "Lib/site-packages/assimulo/examples/cvode_basic.py",
+    "Lib/site-packages/assimulo/examples/cvode_basic_backward.py",
+    "Lib/site-packages/assimulo/examples/cvode_gyro.py",
+    "Lib/site-packages/assimulo/examples/cvode_stability.py",
+    "Lib/site-packages/assimulo/examples/cvode_with_disc.py",
+    "Lib/site-packages/assimulo/examples/cvode_with_initial_sensitivity.py",
+    "Lib/site-packages/assimulo/examples/cvode_with_jac.py",
+    "Lib/site-packages/assimulo/examples/cvode_with_jac_sparse.py",
+    "Lib/site-packages/assimulo/examples/cvode_with_jac_spgmr.py",
+    "Lib/site-packages/assimulo/examples/cvode_with_parameters.py",
+    "Lib/site-packages/assimulo/examples/cvode_with_parameters_fcn.py",
+    "Lib/site-packages/assimulo/examples/cvode_with_parameters_modified.py",
+    "Lib/site-packages/assimulo/examples/cvode_with_preconditioning.py",
+    "Lib/site-packages/assimulo/examples/dasp3_basic.py",
+    "Lib/site-packages/assimulo/examples/dopri5_basic.py",
+    "Lib/site-packages/assimulo/examples/dopri5_with_disc.py",
+    "Lib/site-packages/assimulo/examples/euler_basic.py",
+    "Lib/site-packages/assimulo/examples/euler_vanderpol.py",
+    "Lib/site-packages/assimulo/examples/euler_with_disc.py",
+    "Lib/site-packages/assimulo/examples/glimda_vanderpol.py",
+    "Lib/site-packages/assimulo/examples/ida_basic_backward.py",
+    "Lib/site-packages/assimulo/examples/ida_with_disc.py",
+    "Lib/site-packages/assimulo/examples/ida_with_initial_sensitivity.py",
+    "Lib/site-packages/assimulo/examples/ida_with_jac.py",
+    "Lib/site-packages/assimulo/examples/ida_with_jac_spgmr.py",
+    "Lib/site-packages/assimulo/examples/ida_with_parameters.py",
+    "Lib/site-packages/assimulo/examples/ida_with_user_defined_handle_result.py",
+    "Lib/site-packages/assimulo/examples/kinsol_basic.py",
+    "Lib/site-packages/assimulo/examples/kinsol_ors.py",
+    "Lib/site-packages/assimulo/examples/kinsol_ors_matrix.mtx",
+    "Lib/site-packages/assimulo/examples/kinsol_with_jac.py",
+    "Lib/site-packages/assimulo/examples/lsodar_bouncing_ball.py",
+    "Lib/site-packages/assimulo/examples/lsodar_vanderpol.py",
+    "Lib/site-packages/assimulo/examples/lsodar_with_disc.py",
+    "Lib/site-packages/assimulo/examples/mech_system_pendulum.py",
+    "Lib/site-packages/assimulo/examples/radar_basic.py",
+    "Lib/site-packages/assimulo/examples/radau5dae_time_events.py",
+    "Lib/site-packages/assimulo/examples/radau5dae_vanderpol.py",
+    "Lib/site-packages/assimulo/examples/radau5ode_vanderpol.py",
+    "Lib/site-packages/assimulo/examples/radau5ode_with_disc.py",
+    "Lib/site-packages/assimulo/examples/rodasode_vanderpol.py",
+    "Lib/site-packages/assimulo/examples/rungekutta34_basic.py",
+    "Lib/site-packages/assimulo/examples/rungekutta34_with_disc.py",
+    "Lib/site-packages/assimulo/examples/rungekutta4_basic.py",
+    "Lib/site-packages/assimulo/exception.py",
+    "Lib/site-packages/assimulo/explicit_ode.cp37-win_amd64.pyd",
+    "Lib/site-packages/assimulo/explicit_ode.py",
+    "Lib/site-packages/assimulo/implicit_ode.cp37-win_amd64.pyd",
+    "Lib/site-packages/assimulo/implicit_ode.py",
+    "Lib/site-packages/assimulo/lib/__init__.py",
+    "Lib/site-packages/assimulo/lib/__pycache__/__init__.cpython-37.pyc",
+    "Lib/site-packages/assimulo/lib/__pycache__/radau_core.cpython-37.pyc",
+    "Lib/site-packages/assimulo/lib/radau_core.py",
+    "Lib/site-packages/assimulo/ode.cp37-win_amd64.pyd",
+    "Lib/site-packages/assimulo/ode.py",
+    "Lib/site-packages/assimulo/problem.cp37-win_amd64.pyd",
+    "Lib/site-packages/assimulo/problem.py",
+    "Lib/site-packages/assimulo/problem_algebraic.py",
+    "Lib/site-packages/assimulo/solvers/__init__.py",
+    "Lib/site-packages/assimulo/solvers/__pycache__/__init__.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/dasp3.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/euler.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/glimda.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/kinsol.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/odassl.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/odepack.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/radar5.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/radau5.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/rosenbrock.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/runge_kutta.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/__pycache__/sundials.cpython-37.pyc",
+    "Lib/site-packages/assimulo/solvers/dasp3.py",
+    "Lib/site-packages/assimulo/solvers/euler.cp37-win_amd64.pyd",
+    "Lib/site-packages/assimulo/solvers/euler.py",
+    "Lib/site-packages/assimulo/solvers/glimda.py",
+    "Lib/site-packages/assimulo/solvers/kinsol.cp37-win_amd64.pyd",
+    "Lib/site-packages/assimulo/solvers/kinsol.py",
+    "Lib/site-packages/assimulo/solvers/odassl.py",
+    "Lib/site-packages/assimulo/solvers/odepack.py",
+    "Lib/site-packages/assimulo/solvers/radar5.py",
+    "Lib/site-packages/assimulo/solvers/radau5.py",
+    "Lib/site-packages/assimulo/solvers/rosenbrock.py",
+    "Lib/site-packages/assimulo/solvers/runge_kutta.py",
+    "Lib/site-packages/assimulo/solvers/sundials.cp37-win_amd64.pyd",
+    "Lib/site-packages/assimulo/solvers/sundials.py",
+    "Lib/site-packages/assimulo/special_systems.cp37-win_amd64.pyd",
+    "Lib/site-packages/assimulo/special_systems.py",
+    "Lib/site-packages/assimulo/support.cp37-win_amd64.pyd",
+    "Lib/site-packages/assimulo/support.py",
+    "Lib/site-packages/assimulo/tests/__init__.py",
+    "Lib/site-packages/assimulo/tests/__pycache__/__init__.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/__pycache__/test_examples.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/__pycache__/test_explicit_ode.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/__pycache__/test_implicit_ode.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/__pycache__/test_ode.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/__pycache__/test_solvers.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/__init__.py",
+    "Lib/site-packages/assimulo/tests/solvers/__pycache__/__init__.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_euler.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_glimda.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_kinsol.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_odassl.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_odepack.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_radau5.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_rosenbrock.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_rungekutta.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_sundials.cpython-37.pyc",
+    "Lib/site-packages/assimulo/tests/solvers/test_euler.py",
+    "Lib/site-packages/assimulo/tests/solvers/test_glimda.py",
+    "Lib/site-packages/assimulo/tests/solvers/test_kinsol.py",
+    "Lib/site-packages/assimulo/tests/solvers/test_odassl.py",
+    "Lib/site-packages/assimulo/tests/solvers/test_odepack.py",
+    "Lib/site-packages/assimulo/tests/solvers/test_radau5.py",
+    "Lib/site-packages/assimulo/tests/solvers/test_rosenbrock.py",
+    "Lib/site-packages/assimulo/tests/solvers/test_rungekutta.py",
+    "Lib/site-packages/assimulo/tests/solvers/test_sundials.py",
+    "Lib/site-packages/assimulo/tests/test_examples.py",
+    "Lib/site-packages/assimulo/tests/test_explicit_ode.py",
+    "Lib/site-packages/assimulo/tests/test_implicit_ode.py",
+    "Lib/site-packages/assimulo/tests/test_ode.py",
+    "Lib/site-packages/assimulo/tests/test_solvers.py",
+    "Lib/site-packages/assimulo/thirdparty/dasp3/LICENSE_DASP3",
+    "Lib/site-packages/assimulo/thirdparty/glimda/LICENSE_GLIMDA",
+    "Lib/site-packages/assimulo/thirdparty/hairer/LICENSE_HAIRER",
+    "Lib/site-packages/assimulo/thirdparty/odassl/LICENSE_ODASSL",
+    "Lib/site-packages/assimulo/thirdparty/odepack/LICENSE_ODEPACK",
+    "Lib/site-packages/assimulo/version.txt"
+  ],
+  "fn": "assimulo-3.0-py37hf5aa970_1007.tar.bz2",
+  "license": "LGPL",
+  "link": {
+    "source": "C:\\Users\\acb22mj\\.conda\\pkgs\\assimulo-3.0-py37hf5aa970_1007",
+    "type": 1
+  },
+  "md5": "1d02aec762ae0eb95df0c4d00db551aa",
+  "name": "assimulo",
+  "package_tarball_full_path": "C:\\Users\\acb22mj\\.conda\\pkgs\\assimulo-3.0-py37hf5aa970_1007.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/PKG-INFO",
+        "path_type": "hardlink",
+        "sha256": "41c6fec4d813614d6fda742260f520fa1315d282d9b1b765dd4bc0b409c52835",
+        "sha256_in_prefix": "41c6fec4d813614d6fda742260f520fa1315d282d9b1b765dd4bc0b409c52835",
+        "size_in_bytes": 1939
+      },
+      {
+        "_path": "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/SOURCES.txt",
+        "path_type": "hardlink",
+        "sha256": "65dcab8ea2edcc674bc9c1013708864b340adebec836655b990e7bdce048e01f",
+        "sha256_in_prefix": "65dcab8ea2edcc674bc9c1013708864b340adebec836655b990e7bdce048e01f",
+        "size_in_bytes": 4634
+      },
+      {
+        "_path": "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/dependency_links.txt",
+        "path_type": "hardlink",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "sha256_in_prefix": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "size_in_bytes": 1
+      },
+      {
+        "_path": "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/native_libs.txt",
+        "path_type": "hardlink",
+        "sha256": "9712aac7e7909313edfd3e6696fe84f196cd9d3e0b4dc48225bf87331f245023",
+        "sha256_in_prefix": "9712aac7e7909313edfd3e6696fe84f196cd9d3e0b4dc48225bf87331f245023",
+        "size_in_bytes": 408
+      },
+      {
+        "_path": "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/not-zip-safe",
+        "path_type": "hardlink",
+        "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+        "sha256_in_prefix": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+        "size_in_bytes": 2
+      },
+      {
+        "_path": "Lib/site-packages/Assimulo-3.0-py3.7-win-amd64.egg-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "b323d1b81a79d4224d628883f6e0199de952508f7caa0fdacf95861edfd310c9",
+        "sha256_in_prefix": "b323d1b81a79d4224d628883f6e0199de952508f7caa0fdacf95861edfd310c9",
+        "size_in_bytes": 9
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/CHANGELOG",
+        "path_type": "hardlink",
+        "sha256": "c8f4a5efcd5f67f48b775444fdbef54a0cacdbab784c3115ba0c6ed467be3a05",
+        "sha256_in_prefix": "c8f4a5efcd5f67f48b775444fdbef54a0cacdbab784c3115ba0c6ed467be3a05",
+        "size_in_bytes": 10493
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "1a45b1d0a8603dfe2cfc644f9dab970b1762f92babe2aac6eb2f5d4572c4a680",
+        "sha256_in_prefix": "1a45b1d0a8603dfe2cfc644f9dab970b1762f92babe2aac6eb2f5d4572c4a680",
+        "size_in_bytes": 7653
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/README",
+        "path_type": "hardlink",
+        "sha256": "523c4493f99ba4420ed569fd3626871fdd17fcb9aea552a445aaa9bbef7176c0",
+        "sha256_in_prefix": "523c4493f99ba4420ed569fd3626871fdd17fcb9aea552a445aaa9bbef7176c0",
+        "size_in_bytes": 1770
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "880f809e20177fdef5355c633ddd57c468dca77aa23b9df4948bda1a790bcba6",
+        "sha256_in_prefix": "880f809e20177fdef5355c633ddd57c468dca77aa23b9df4948bda1a790bcba6",
+        "size_in_bytes": 1276
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__pycache__/__init__.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "144013e47ef63d2a003e1519510b2fae4b2a72ae6bac7c4d30c2aaa0a1d44ad6",
+        "sha256_in_prefix": "144013e47ef63d2a003e1519510b2fae4b2a72ae6bac7c4d30c2aaa0a1d44ad6",
+        "size_in_bytes": 843
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__pycache__/algebraic.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "8849ee308b2518bd0de2829914682acf3ab6c4c576f4abe0129b29a837161ffa",
+        "sha256_in_prefix": "8849ee308b2518bd0de2829914682acf3ab6c4c576f4abe0129b29a837161ffa",
+        "size_in_bytes": 469
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__pycache__/exception.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "e141fd8487af25f3e0d64d75d86f272bb409e1a4baa3123a807b64b3d246b842",
+        "sha256_in_prefix": "e141fd8487af25f3e0d64d75d86f272bb409e1a4baa3123a807b64b3d246b842",
+        "size_in_bytes": 2309
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__pycache__/explicit_ode.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "3a4571ac4631b8a536a00dc202b8ac6874879920cba40098a9c13583feaa600b",
+        "sha256_in_prefix": "3a4571ac4631b8a536a00dc202b8ac6874879920cba40098a9c13583feaa600b",
+        "size_in_bytes": 475
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__pycache__/implicit_ode.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "bab3e5e6f2b9c0604cc35fc7070c2414c8b79ab0cb3f47b27f9bff83ffd4f811",
+        "sha256_in_prefix": "bab3e5e6f2b9c0604cc35fc7070c2414c8b79ab0cb3f47b27f9bff83ffd4f811",
+        "size_in_bytes": 475
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__pycache__/ode.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "63bb8b5bf774523cadb4c66bb95564194e7747ebf729726087bf57de80ae2bc8",
+        "sha256_in_prefix": "63bb8b5bf774523cadb4c66bb95564194e7747ebf729726087bf57de80ae2bc8",
+        "size_in_bytes": 457
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__pycache__/problem.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "58f1af099253bd853e1875272524a052a45e81f921b1b2828c98b110b4ca76c1",
+        "sha256_in_prefix": "58f1af099253bd853e1875272524a052a45e81f921b1b2828c98b110b4ca76c1",
+        "size_in_bytes": 465
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__pycache__/problem_algebraic.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "e20911949e372bf24f2569376df665075bbdeef2b9a9a2d75cefe65e456a4602",
+        "sha256_in_prefix": "e20911949e372bf24f2569376df665075bbdeef2b9a9a2d75cefe65e456a4602",
+        "size_in_bytes": 4028
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__pycache__/special_systems.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "e4b31a5e074741bc72a0b5c7ac64157ee3408762b0a2124dc07f9617328e1806",
+        "sha256_in_prefix": "e4b31a5e074741bc72a0b5c7ac64157ee3408762b0a2124dc07f9617328e1806",
+        "size_in_bytes": 481
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/__pycache__/support.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "f196309da928ea168ba2f14227eb7db82c771505c31e791fb5c2272b68b3630c",
+        "sha256_in_prefix": "f196309da928ea168ba2f14227eb7db82c771505c31e791fb5c2272b68b3630c",
+        "size_in_bytes": 465
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/algebraic.cp37-win_amd64.pyd",
+        "path_type": "hardlink",
+        "sha256": "9077e66234084153ef3e226de72ea20cd25ab407f893405df6e95b1625067fbd",
+        "sha256_in_prefix": "9077e66234084153ef3e226de72ea20cd25ab407f893405df6e95b1625067fbd",
+        "size_in_bytes": 76800
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/algebraic.py",
+        "path_type": "hardlink",
+        "sha256": "3ee256ac4727bafce25f0d4152203c97569f518faac598d54c0e57ed8a382596",
+        "sha256_in_prefix": "3ee256ac4727bafce25f0d4152203c97569f518faac598d54c0e57ed8a382596",
+        "size_in_bytes": 308
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "218163df6bb0e55bc2bd8ac5d25aa33358b390c6a4a11eafdc15cf7df2a01bac",
+        "sha256_in_prefix": "218163df6bb0e55bc2bd8ac5d25aa33358b390c6a4a11eafdc15cf7df2a01bac",
+        "size_in_bytes": 1708
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/__init__.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "ac6208d90f3c94d05aab8ad5fdff1d0d5a1794103feb08586367c023cce54980",
+        "sha256_in_prefix": "ac6208d90f3c94d05aab8ad5fdff1d0d5a1794103feb08586367c023cce54980",
+        "size_in_bytes": 1103
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_basic.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "84bb975fc92543068d4bb9c291f45426b02852b9817307b31dd94935876db9ed",
+        "sha256_in_prefix": "84bb975fc92543068d4bb9c291f45426b02852b9817307b31dd94935876db9ed",
+        "size_in_bytes": 1438
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_basic_backward.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "3a59939c8b020a4f2bb57bad7130d3bb58cbe198fdbfe86bc1537ebec96d03a7",
+        "sha256_in_prefix": "3a59939c8b020a4f2bb57bad7130d3bb58cbe198fdbfe86bc1537ebec96d03a7",
+        "size_in_bytes": 1387
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_gyro.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "4b25c872d8486a8d2153acfd95b2e12c66da9d0f705043657d4553084020447f",
+        "sha256_in_prefix": "4b25c872d8486a8d2153acfd95b2e12c66da9d0f705043657d4553084020447f",
+        "size_in_bytes": 2560
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_stability.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "75431428809b0b382a004329f7f963d5a21fb9feea9f425ff349f7f3a5243a8e",
+        "sha256_in_prefix": "75431428809b0b382a004329f7f963d5a21fb9feea9f425ff349f7f3a5243a8e",
+        "size_in_bytes": 2170
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_disc.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "3d8a21cf0bbd9ba453764054d9c480b087d98e8d792d33b1141c27e884f21cda",
+        "sha256_in_prefix": "3d8a21cf0bbd9ba453764054d9c480b087d98e8d792d33b1141c27e884f21cda",
+        "size_in_bytes": 3927
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_initial_sensitivity.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "536923c19b4996ebbf3ea555a7b0ffba285be8f7c1640e8d135ac7ca9718cc90",
+        "sha256_in_prefix": "536923c19b4996ebbf3ea555a7b0ffba285be8f7c1640e8d135ac7ca9718cc90",
+        "size_in_bytes": 3180
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_jac.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "99da0bf0d20bf9918f9161ed39fa84e61cda278031a0dc10e6fb828a7d2cc031",
+        "sha256_in_prefix": "99da0bf0d20bf9918f9161ed39fa84e61cda278031a0dc10e6fb828a7d2cc031",
+        "size_in_bytes": 1699
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_jac_sparse.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "d043482877f19e8a9b0e38594c67b77de8f78aea019841dcbba277d1d0263c37",
+        "sha256_in_prefix": "d043482877f19e8a9b0e38594c67b77de8f78aea019841dcbba277d1d0263c37",
+        "size_in_bytes": 2332
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_jac_spgmr.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "fb204295b81be327543e7b853575513de16b22505d6756956b5b860036e89c0e",
+        "sha256_in_prefix": "fb204295b81be327543e7b853575513de16b22505d6756956b5b860036e89c0e",
+        "size_in_bytes": 1823
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_parameters.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "3a4b023970a68491343b24cc0ccb5db54800f1dace31744711fe9fd3a4bfd4c4",
+        "sha256_in_prefix": "3a4b023970a68491343b24cc0ccb5db54800f1dace31744711fe9fd3a4bfd4c4",
+        "size_in_bytes": 2337
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_parameters_fcn.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "4f89be5bffbf2d515f6503e021cf56869f43c421ced9bfc7562877ae739c9461",
+        "sha256_in_prefix": "4f89be5bffbf2d515f6503e021cf56869f43c421ced9bfc7562877ae739c9461",
+        "size_in_bytes": 3093
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_parameters_modified.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "2e2509d40a29128c905d63a8863069bc8f53b0d28541419d2c4f60e045a9547b",
+        "sha256_in_prefix": "2e2509d40a29128c905d63a8863069bc8f53b0d28541419d2c4f60e045a9547b",
+        "size_in_bytes": 2162
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/cvode_with_preconditioning.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "2771f8a2faaa35be9957d14bf4157a7ecb0f9529ecb5d8b6fdaa0980bd924a16",
+        "sha256_in_prefix": "2771f8a2faaa35be9957d14bf4157a7ecb0f9529ecb5d8b6fdaa0980bd924a16",
+        "size_in_bytes": 2213
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/dasp3_basic.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "aa516ac47307d947b41f1057a90dbd1a3901861de2d0c59e867a9cb2b30e7a4f",
+        "sha256_in_prefix": "aa516ac47307d947b41f1057a90dbd1a3901861de2d0c59e867a9cb2b30e7a4f",
+        "size_in_bytes": 2431
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/dopri5_basic.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "8eee47dbaafa05db70264ad76fed4f4996de6561e06e1def8f01e7784bec253b",
+        "sha256_in_prefix": "8eee47dbaafa05db70264ad76fed4f4996de6561e06e1def8f01e7784bec253b",
+        "size_in_bytes": 1257
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/dopri5_with_disc.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "01ee463858a1348a0af81c8c85b4ce9eb94ab816880f6b559453cddc3b33871f",
+        "sha256_in_prefix": "01ee463858a1348a0af81c8c85b4ce9eb94ab816880f6b559453cddc3b33871f",
+        "size_in_bytes": 3905
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/euler_basic.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "f8efdd5fbe6316ee91c20e1adb80c56910234a1316821d9b7912ad20a2746b1c",
+        "sha256_in_prefix": "f8efdd5fbe6316ee91c20e1adb80c56910234a1316821d9b7912ad20a2746b1c",
+        "size_in_bytes": 1392
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/euler_vanderpol.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "669d24f4ea399cee9bc57b3c7e5788449e7f85822e9b303b59f4394ef8389927",
+        "sha256_in_prefix": "669d24f4ea399cee9bc57b3c7e5788449e7f85822e9b303b59f4394ef8389927",
+        "size_in_bytes": 1927
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/euler_with_disc.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "795fdaa65593db706f018d5b28085b3ceed1dac0433709f8a0d2fcf1f3ddb77b",
+        "sha256_in_prefix": "795fdaa65593db706f018d5b28085b3ceed1dac0433709f8a0d2fcf1f3ddb77b",
+        "size_in_bytes": 3968
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/glimda_vanderpol.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "35a7ceb3c53d6a724239efbf06d7a5e9fcf11b1ab1ca8ebec188d252a58dd970",
+        "sha256_in_prefix": "35a7ceb3c53d6a724239efbf06d7a5e9fcf11b1ab1ca8ebec188d252a58dd970",
+        "size_in_bytes": 1824
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/ida_basic_backward.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "2deed3ebfde9f01676f38b8ada1e2dd587335ea5c924fd2ad3e0fa8fed3503b8",
+        "sha256_in_prefix": "2deed3ebfde9f01676f38b8ada1e2dd587335ea5c924fd2ad3e0fa8fed3503b8",
+        "size_in_bytes": 1371
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/ida_with_disc.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "c506e8a04c0b9b5c9f14368fc2b4bc0ff60b6cfc2c6071bff3ea3c0fd0de2eb4",
+        "sha256_in_prefix": "c506e8a04c0b9b5c9f14368fc2b4bc0ff60b6cfc2c6071bff3ea3c0fd0de2eb4",
+        "size_in_bytes": 3998
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/ida_with_initial_sensitivity.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "b35a09f11a3b3b7771b131b6dee45d38c67260750a42c0cac1f04c817181f005",
+        "sha256_in_prefix": "b35a09f11a3b3b7771b131b6dee45d38c67260750a42c0cac1f04c817181f005",
+        "size_in_bytes": 2886
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/ida_with_jac.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "0046d67a7ef642977ec6651de1c1d88bf473023c6ed28990867bb43625cdc857",
+        "sha256_in_prefix": "0046d67a7ef642977ec6651de1c1d88bf473023c6ed28990867bb43625cdc857",
+        "size_in_bytes": 2698
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/ida_with_jac_spgmr.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "fae9e299efb2ba416de4f0842f3db3ce85ae889b9f1359a5b91793e1d8378483",
+        "sha256_in_prefix": "fae9e299efb2ba416de4f0842f3db3ce85ae889b9f1359a5b91793e1d8378483",
+        "size_in_bytes": 1914
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/ida_with_parameters.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "b50bb2dc906b54ef316ba007bb6344c9318d5e40376c91d0fdb25fb130992a4e",
+        "sha256_in_prefix": "b50bb2dc906b54ef316ba007bb6344c9318d5e40376c91d0fdb25fb130992a4e",
+        "size_in_bytes": 2404
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/ida_with_user_defined_handle_result.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "2dea030496e898f5cf54b7576caf9d80463313a8b9b1fa65f987115df220ae4c",
+        "sha256_in_prefix": "2dea030496e898f5cf54b7576caf9d80463313a8b9b1fa65f987115df220ae4c",
+        "size_in_bytes": 2578
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/kinsol_basic.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "dddfddc56da1894e44d7db337774dc65d532ba6509e1a9306aab08f2ad2b114a",
+        "sha256_in_prefix": "dddfddc56da1894e44d7db337774dc65d532ba6509e1a9306aab08f2ad2b114a",
+        "size_in_bytes": 1053
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/kinsol_ors.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "2ecd38950ee0fe7f3a5d3c6370a6fa666246ac1a87d5f1dc62f8e29035a96d2c",
+        "sha256_in_prefix": "2ecd38950ee0fe7f3a5d3c6370a6fa666246ac1a87d5f1dc62f8e29035a96d2c",
+        "size_in_bytes": 3770
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/kinsol_with_jac.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "55afbb1ebfc87581ece5b0b74cc3fcdaed1413d1ca935989b47646805e04199e",
+        "sha256_in_prefix": "55afbb1ebfc87581ece5b0b74cc3fcdaed1413d1ca935989b47646805e04199e",
+        "size_in_bytes": 1394
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/lsodar_bouncing_ball.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "5f679fcf0b3a1546555909999e15239686703b792e535221c6be847b248d0090",
+        "sha256_in_prefix": "5f679fcf0b3a1546555909999e15239686703b792e535221c6be847b248d0090",
+        "size_in_bytes": 3709
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/lsodar_vanderpol.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "7d392a2637e0cd527f243fa798417a3a972002c7db83ec9825b14c7914106972",
+        "sha256_in_prefix": "7d392a2637e0cd527f243fa798417a3a972002c7db83ec9825b14c7914106972",
+        "size_in_bytes": 1561
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/lsodar_with_disc.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "4c1e6913ca62c17f97b142993524fb40dc828bdf12e463787a282504f9ec60b9",
+        "sha256_in_prefix": "4c1e6913ca62c17f97b142993524fb40dc828bdf12e463787a282504f9ec60b9",
+        "size_in_bytes": 3894
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/mech_system_pendulum.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "fabdd105bffdd417e0b4be97b4a95e489b567f525b39fb2788ad8382341752b6",
+        "sha256_in_prefix": "fabdd105bffdd417e0b4be97b4a95e489b567f525b39fb2788ad8382341752b6",
+        "size_in_bytes": 2639
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/radar_basic.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "693c383cf6715f03685efb77765d031c8ee89dce267762c3b3c58b3801a2ca09",
+        "sha256_in_prefix": "693c383cf6715f03685efb77765d031c8ee89dce267762c3b3c58b3801a2ca09",
+        "size_in_bytes": 1697
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/radau5dae_time_events.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "a0246043b8fcd43e0e94e9f6a31e1435b4737c9b51e629870c713ede87c4e097",
+        "sha256_in_prefix": "a0246043b8fcd43e0e94e9f6a31e1435b4737c9b51e629870c713ede87c4e097",
+        "size_in_bytes": 2038
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/radau5dae_vanderpol.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "0afce5e1aae976c2efbbe09fe36d03c8d6041d9afab6fb1dc8c8f7d07e5b5757",
+        "sha256_in_prefix": "0afce5e1aae976c2efbbe09fe36d03c8d6041d9afab6fb1dc8c8f7d07e5b5757",
+        "size_in_bytes": 1763
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/radau5ode_vanderpol.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "4cdb463a04fcc1270f38888d546d68a2d4efdc45bea1a05b976e3d0b5fa21cdf",
+        "sha256_in_prefix": "4cdb463a04fcc1270f38888d546d68a2d4efdc45bea1a05b976e3d0b5fa21cdf",
+        "size_in_bytes": 1565
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/radau5ode_with_disc.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "d55ea56a058519fe779558574fc6bff2b035444be8eab095c14967616ccf02b3",
+        "sha256_in_prefix": "d55ea56a058519fe779558574fc6bff2b035444be8eab095c14967616ccf02b3",
+        "size_in_bytes": 3697
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/rodasode_vanderpol.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "79d9d5510dae883b085bfbf6d9d80b93356826379c260a7dd95f3acfc889b1c4",
+        "sha256_in_prefix": "79d9d5510dae883b085bfbf6d9d80b93356826379c260a7dd95f3acfc889b1c4",
+        "size_in_bytes": 1857
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/rungekutta34_basic.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "3ab6a56b5cd2caa1e58d26fb9e301fdb92ab245eab3c62c50c81df91e6deb2bd",
+        "sha256_in_prefix": "3ab6a56b5cd2caa1e58d26fb9e301fdb92ab245eab3c62c50c81df91e6deb2bd",
+        "size_in_bytes": 1289
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/rungekutta34_with_disc.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "b652f6084b1e8bd37105eeb72093986ead1f0077c59fe6e9ad4e8bf8b972d20b",
+        "sha256_in_prefix": "b652f6084b1e8bd37105eeb72093986ead1f0077c59fe6e9ad4e8bf8b972d20b",
+        "size_in_bytes": 3652
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/__pycache__/rungekutta4_basic.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "fe8763f140ef2e3d6815244557832625442ba311ed8ab3dd2ce9201eb88cb6f9",
+        "sha256_in_prefix": "fe8763f140ef2e3d6815244557832625442ba311ed8ab3dd2ce9201eb88cb6f9",
+        "size_in_bytes": 1266
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_basic.py",
+        "path_type": "hardlink",
+        "sha256": "33df9cc57fad96aaa6775edbc66d3824cb3536d4e00a88810c385570312bfd00",
+        "sha256_in_prefix": "33df9cc57fad96aaa6775edbc66d3824cb3536d4e00a88810c385570312bfd00",
+        "size_in_bytes": 2174
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_basic_backward.py",
+        "path_type": "hardlink",
+        "sha256": "abfa4f21ea4f87fa9e0356a13a1ca1f8b111e19e38f745ae352b8231738fc8a5",
+        "sha256_in_prefix": "abfa4f21ea4f87fa9e0356a13a1ca1f8b111e19e38f745ae352b8231738fc8a5",
+        "size_in_bytes": 2187
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_gyro.py",
+        "path_type": "hardlink",
+        "sha256": "fbceb72459aab0d1580d62484f13d4593a27e8a495053cd35b186998095874e3",
+        "sha256_in_prefix": "fbceb72459aab0d1580d62484f13d4593a27e8a495053cd35b186998095874e3",
+        "size_in_bytes": 3011
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_stability.py",
+        "path_type": "hardlink",
+        "sha256": "ab09f48e21485ada2dd3b799cb9c7f8b6c12f17e4817baae3f7eaf0d24cafc0e",
+        "sha256_in_prefix": "ab09f48e21485ada2dd3b799cb9c7f8b6c12f17e4817baae3f7eaf0d24cafc0e",
+        "size_in_bytes": 2699
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_with_disc.py",
+        "path_type": "hardlink",
+        "sha256": "c0700d7bdc0f63d0f9d23d6e70c305bf883276a34fa130f79fa30703d7139129",
+        "sha256_in_prefix": "c0700d7bdc0f63d0f9d23d6e70c305bf883276a34fa130f79fa30703d7139129",
+        "size_in_bytes": 5564
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_with_initial_sensitivity.py",
+        "path_type": "hardlink",
+        "sha256": "5051d378f4e423eaa270fe98ba64a75722c78fac448f0bfdc01a615f1a9902db",
+        "sha256_in_prefix": "5051d378f4e423eaa270fe98ba64a75722c78fac448f0bfdc01a615f1a9902db",
+        "size_in_bytes": 4793
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_with_jac.py",
+        "path_type": "hardlink",
+        "sha256": "354d070a09d7482f014d19017573e9d2b26e138a8acd47f8223f107c020115fd",
+        "sha256_in_prefix": "354d070a09d7482f014d19017573e9d2b26e138a8acd47f8223f107c020115fd",
+        "size_in_bytes": 2399
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_with_jac_sparse.py",
+        "path_type": "hardlink",
+        "sha256": "c13a2895c26b5a55cd209ec383723ee41ea91348c7a0106d5bc8980916f8e4f8",
+        "sha256_in_prefix": "c13a2895c26b5a55cd209ec383723ee41ea91348c7a0106d5bc8980916f8e4f8",
+        "size_in_bytes": 2899
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_with_jac_spgmr.py",
+        "path_type": "hardlink",
+        "sha256": "b4f30bdb28b37fc86a8474df6078d20f30ea464820644c929c21cf3b7bf2b03d",
+        "sha256_in_prefix": "b4f30bdb28b37fc86a8474df6078d20f30ea464820644c929c21cf3b7bf2b03d",
+        "size_in_bytes": 2578
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_with_parameters.py",
+        "path_type": "hardlink",
+        "sha256": "0d32f4a518e75b725bbabea41984d805805837dbe079a0eae787d580aff8cd2b",
+        "sha256_in_prefix": "0d32f4a518e75b725bbabea41984d805805837dbe079a0eae787d580aff8cd2b",
+        "size_in_bytes": 3373
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_with_parameters_fcn.py",
+        "path_type": "hardlink",
+        "sha256": "8a140e9a3a6e45b212ad48a63fad7c098094e0985e6027f06539ce1a3622308d",
+        "sha256_in_prefix": "8a140e9a3a6e45b212ad48a63fad7c098094e0985e6027f06539ce1a3622308d",
+        "size_in_bytes": 3989
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_with_parameters_modified.py",
+        "path_type": "hardlink",
+        "sha256": "d9e1271306ae223f837b2384a70e91af3ed81836acb90fb60b2175ab2073b87b",
+        "sha256_in_prefix": "d9e1271306ae223f837b2384a70e91af3ed81836acb90fb60b2175ab2073b87b",
+        "size_in_bytes": 3252
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/cvode_with_preconditioning.py",
+        "path_type": "hardlink",
+        "sha256": "2ed62e31c4ab5f5fe6084bcd3b5abba40511fe77e8cd3fcad9d7a8793a1d3113",
+        "sha256_in_prefix": "2ed62e31c4ab5f5fe6084bcd3b5abba40511fe77e8cd3fcad9d7a8793a1d3113",
+        "size_in_bytes": 3408
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/dasp3_basic.py",
+        "path_type": "hardlink",
+        "sha256": "e6fba418081a3586b12d37a29201bbb3a51ec1245285d3a0eef1818fcbbdfe56",
+        "sha256_in_prefix": "e6fba418081a3586b12d37a29201bbb3a51ec1245285d3a0eef1818fcbbdfe56",
+        "size_in_bytes": 2940
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/dopri5_basic.py",
+        "path_type": "hardlink",
+        "sha256": "dfd6ef849ff9501189a4ba03f6b4505aa3201b503ea26fe6db6b8fec7bc2a2e3",
+        "sha256_in_prefix": "dfd6ef849ff9501189a4ba03f6b4505aa3201b503ea26fe6db6b8fec7bc2a2e3",
+        "size_in_bytes": 1849
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/dopri5_with_disc.py",
+        "path_type": "hardlink",
+        "sha256": "46792820fa9419edaadca6743160a240ea28fd641e6eaf792c5d4da60f4b9c82",
+        "sha256_in_prefix": "46792820fa9419edaadca6743160a240ea28fd641e6eaf792c5d4da60f4b9c82",
+        "size_in_bytes": 5575
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/euler_basic.py",
+        "path_type": "hardlink",
+        "sha256": "497d5a631cc7a6df9cef11e557547b9de76ca5b4cf1c7399055e37fdc7c274d8",
+        "sha256_in_prefix": "497d5a631cc7a6df9cef11e557547b9de76ca5b4cf1c7399055e37fdc7c274d8",
+        "size_in_bytes": 2072
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/euler_vanderpol.py",
+        "path_type": "hardlink",
+        "sha256": "806a1e5cc3731e6a53e3027d4f63d5c1e3b5c46faf10d506c7d80890b28fd3b7",
+        "sha256_in_prefix": "806a1e5cc3731e6a53e3027d4f63d5c1e3b5c46faf10d506c7d80890b28fd3b7",
+        "size_in_bytes": 2629
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/euler_with_disc.py",
+        "path_type": "hardlink",
+        "sha256": "cadbca45a3312edfe068131fd74590b0df2a8b93082c9ceadc477bcb8564f6ad",
+        "sha256_in_prefix": "cadbca45a3312edfe068131fd74590b0df2a8b93082c9ceadc477bcb8564f6ad",
+        "size_in_bytes": 5574
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/glimda_vanderpol.py",
+        "path_type": "hardlink",
+        "sha256": "4beefebab17da40f509d8e45926e7b50d7ff9e34767f2e96cc23df85070cda28",
+        "sha256_in_prefix": "4beefebab17da40f509d8e45926e7b50d7ff9e34767f2e96cc23df85070cda28",
+        "size_in_bytes": 2629
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/ida_basic_backward.py",
+        "path_type": "hardlink",
+        "sha256": "3d98bdad77b91f20430e6f6dc972f8c07770a5d4745bbad8a90fbbd3194951d4",
+        "sha256_in_prefix": "3d98bdad77b91f20430e6f6dc972f8c07770a5d4745bbad8a90fbbd3194951d4",
+        "size_in_bytes": 2064
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/ida_with_disc.py",
+        "path_type": "hardlink",
+        "sha256": "ba33d9611aa3d638c83440763d45518c4ab54719ab640581f9a0de2748bebef6",
+        "sha256_in_prefix": "ba33d9611aa3d638c83440763d45518c4ab54719ab640581f9a0de2748bebef6",
+        "size_in_bytes": 5717
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/ida_with_initial_sensitivity.py",
+        "path_type": "hardlink",
+        "sha256": "2f5aab586d0534d46406c2ed7e0aaeb8373a868467818e26a393259990457e99",
+        "sha256_in_prefix": "2f5aab586d0534d46406c2ed7e0aaeb8373a868467818e26a393259990457e99",
+        "size_in_bytes": 4159
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/ida_with_jac.py",
+        "path_type": "hardlink",
+        "sha256": "952dff693a20861bf091afde30f10f67e1dfef65483397db071bc94a6b6671ac",
+        "sha256_in_prefix": "952dff693a20861bf091afde30f10f67e1dfef65483397db071bc94a6b6671ac",
+        "size_in_bytes": 3820
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/ida_with_jac_spgmr.py",
+        "path_type": "hardlink",
+        "sha256": "c4e42cfb04020b1c5e7f098d474d02d98bba3e5e466bcd7062751f518206c357",
+        "sha256_in_prefix": "c4e42cfb04020b1c5e7f098d474d02d98bba3e5e466bcd7062751f518206c357",
+        "size_in_bytes": 2710
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/ida_with_parameters.py",
+        "path_type": "hardlink",
+        "sha256": "7ac27149c5d23d5a8c831955b72c625c61ca65c77678cc3a50f9abbf1b68fa41",
+        "sha256_in_prefix": "7ac27149c5d23d5a8c831955b72c625c61ca65c77678cc3a50f9abbf1b68fa41",
+        "size_in_bytes": 3597
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/ida_with_user_defined_handle_result.py",
+        "path_type": "hardlink",
+        "sha256": "1b94285c2dbfb979742d14c9007799f22d98ef1a81b0dc1b17ede36b4d02d68f",
+        "sha256_in_prefix": "1b94285c2dbfb979742d14c9007799f22d98ef1a81b0dc1b17ede36b4d02d68f",
+        "size_in_bytes": 3671
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/kinsol_basic.py",
+        "path_type": "hardlink",
+        "sha256": "ea8851811b4eecbe971c8de6ef4d1c60153950f485d21422f501b0aa533d93d4",
+        "sha256_in_prefix": "ea8851811b4eecbe971c8de6ef4d1c60153950f485d21422f501b0aa533d93d4",
+        "size_in_bytes": 1607
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/kinsol_ors.py",
+        "path_type": "hardlink",
+        "sha256": "95ed8bbed3009eb20b21cdc87642dc1e7bd24551b7bac77d769412eddf0c7fcf",
+        "sha256_in_prefix": "95ed8bbed3009eb20b21cdc87642dc1e7bd24551b7bac77d769412eddf0c7fcf",
+        "size_in_bytes": 4694
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/kinsol_ors_matrix.mtx",
+        "path_type": "hardlink",
+        "sha256": "45bc8ed3704b9746431ad892dc28fc431da14d62b39db65300e1d922cb9c8045",
+        "sha256_in_prefix": "45bc8ed3704b9746431ad892dc28fc431da14d62b39db65300e1d922cb9c8045",
+        "size_in_bytes": 197935
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/kinsol_with_jac.py",
+        "path_type": "hardlink",
+        "sha256": "38925e1a56e233642ab2df4cee96444970bb044a2c4e23f04700897eb9cd5a17",
+        "sha256_in_prefix": "38925e1a56e233642ab2df4cee96444970bb044a2c4e23f04700897eb9cd5a17",
+        "size_in_bytes": 1836
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/lsodar_bouncing_ball.py",
+        "path_type": "hardlink",
+        "sha256": "14465dd4557598aba8d4c4c4cb29cdb0f353dc25441a410ead898437d82cdd45",
+        "sha256_in_prefix": "14465dd4557598aba8d4c4c4cb29cdb0f353dc25441a410ead898437d82cdd45",
+        "size_in_bytes": 4856
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/lsodar_vanderpol.py",
+        "path_type": "hardlink",
+        "sha256": "81c449bf981be2dc4026701b4007c22fbab5bdf178affb83f062d348ccb81917",
+        "sha256_in_prefix": "81c449bf981be2dc4026701b4007c22fbab5bdf178affb83f062d348ccb81917",
+        "size_in_bytes": 2268
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/lsodar_with_disc.py",
+        "path_type": "hardlink",
+        "sha256": "0a070eb11dba16ba5c931838053eab1e161068fd35eedae1f338cb1dcf8bc94f",
+        "sha256_in_prefix": "0a070eb11dba16ba5c931838053eab1e161068fd35eedae1f338cb1dcf8bc94f",
+        "size_in_bytes": 5592
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/mech_system_pendulum.py",
+        "path_type": "hardlink",
+        "sha256": "dc5c09291df51886f28e81311523243a3d05148021fdb7d835fb93722b386efd",
+        "sha256_in_prefix": "dc5c09291df51886f28e81311523243a3d05148021fdb7d835fb93722b386efd",
+        "size_in_bytes": 2780
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/radar_basic.py",
+        "path_type": "hardlink",
+        "sha256": "a37109c7f3991fb955aafb7403eb294f194c4100a741b3ea831344bc424c7cd4",
+        "sha256_in_prefix": "a37109c7f3991fb955aafb7403eb294f194c4100a741b3ea831344bc424c7cd4",
+        "size_in_bytes": 2254
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/radau5dae_time_events.py",
+        "path_type": "hardlink",
+        "sha256": "171563a6c9be70c269f4814a71a143fe97787d9d3aa2be01b100fe474be51556",
+        "sha256_in_prefix": "171563a6c9be70c269f4814a71a143fe97787d9d3aa2be01b100fe474be51556",
+        "size_in_bytes": 2384
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/radau5dae_vanderpol.py",
+        "path_type": "hardlink",
+        "sha256": "22a7d01b5b0961dfce1d5362e86bb3b2c565869ce852a92120f0251eea14b19e",
+        "sha256_in_prefix": "22a7d01b5b0961dfce1d5362e86bb3b2c565869ce852a92120f0251eea14b19e",
+        "size_in_bytes": 2584
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/radau5ode_vanderpol.py",
+        "path_type": "hardlink",
+        "sha256": "f82225d49b18baeb9d08fde1979cafbce8f0469f527a88d3c699a85b23b50c92",
+        "sha256_in_prefix": "f82225d49b18baeb9d08fde1979cafbce8f0469f527a88d3c699a85b23b50c92",
+        "size_in_bytes": 2311
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/radau5ode_with_disc.py",
+        "path_type": "hardlink",
+        "sha256": "12ef31b08cad919f8f9da154559fea882ab9bed33570d85daa8de1fcd00ea4bb",
+        "sha256_in_prefix": "12ef31b08cad919f8f9da154559fea882ab9bed33570d85daa8de1fcd00ea4bb",
+        "size_in_bytes": 5307
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/rodasode_vanderpol.py",
+        "path_type": "hardlink",
+        "sha256": "8f5520221c5e86df5c9dac060ef0a9ea2b920d4d2b22addc3ccd8a0949450249",
+        "sha256_in_prefix": "8f5520221c5e86df5c9dac060ef0a9ea2b920d4d2b22addc3ccd8a0949450249",
+        "size_in_bytes": 2521
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/rungekutta34_basic.py",
+        "path_type": "hardlink",
+        "sha256": "8bd64afcde80f6bf1ea0ff7088fa57b3df8b6c05365a0aa1db23002ad78b9a0f",
+        "sha256_in_prefix": "8bd64afcde80f6bf1ea0ff7088fa57b3df8b6c05365a0aa1db23002ad78b9a0f",
+        "size_in_bytes": 1934
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/rungekutta34_with_disc.py",
+        "path_type": "hardlink",
+        "sha256": "3dc750c6ab4c8915e3111c3fa8cfc41257525c03021c055398468b7d359a5742",
+        "sha256_in_prefix": "3dc750c6ab4c8915e3111c3fa8cfc41257525c03021c055398468b7d359a5742",
+        "size_in_bytes": 5267
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/examples/rungekutta4_basic.py",
+        "path_type": "hardlink",
+        "sha256": "e79058023ce983f5779db07b84e8fae704bcda3f27a9254c3c028d9e6148c927",
+        "sha256_in_prefix": "e79058023ce983f5779db07b84e8fae704bcda3f27a9254c3c028d9e6148c927",
+        "size_in_bytes": 1876
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/exception.py",
+        "path_type": "hardlink",
+        "sha256": "5517673c22695e31a703f033056b2c7f49777d9a0b9448954ae818c31763b9d3",
+        "sha256_in_prefix": "5517673c22695e31a703f033056b2c7f49777d9a0b9448954ae818c31763b9d3",
+        "size_in_bytes": 1526
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/explicit_ode.cp37-win_amd64.pyd",
+        "path_type": "hardlink",
+        "sha256": "da6bc336d2a5284057f40c164263e54c166c89c6ff5b2b81a4046c5750ff4d00",
+        "sha256_in_prefix": "da6bc336d2a5284057f40c164263e54c166c89c6ff5b2b81a4046c5750ff4d00",
+        "size_in_bytes": 141312
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/explicit_ode.py",
+        "path_type": "hardlink",
+        "sha256": "c637fad20ad45a17ef5c4ada5c1ebcd77a4028ff8e83d7eadc25870b19ee57ec",
+        "sha256_in_prefix": "c637fad20ad45a17ef5c4ada5c1ebcd77a4028ff8e83d7eadc25870b19ee57ec",
+        "size_in_bytes": 311
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/implicit_ode.cp37-win_amd64.pyd",
+        "path_type": "hardlink",
+        "sha256": "e82d6f4743ec7058a9ad3a029ca73489230bdca29557e160f92d9ce4b1721a76",
+        "sha256_in_prefix": "e82d6f4743ec7058a9ad3a029ca73489230bdca29557e160f92d9ce4b1721a76",
+        "size_in_bytes": 185856
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/implicit_ode.py",
+        "path_type": "hardlink",
+        "sha256": "175ee3403cd47dd61762cda8252df61503dc3d2fe81d8fa1e16bb277604886aa",
+        "sha256_in_prefix": "175ee3403cd47dd61762cda8252df61503dc3d2fe81d8fa1e16bb277604886aa",
+        "size_in_bytes": 311
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/lib/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "57eb64ebac6eeac060d6400f285d41de784c6df1fc7cda3298ec23e45323c036",
+        "sha256_in_prefix": "57eb64ebac6eeac060d6400f285d41de784c6df1fc7cda3298ec23e45323c036",
+        "size_in_bytes": 687
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/lib/__pycache__/__init__.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "beaf218dc04bf3ea4f5521a5ae42d9f2e870940e644dd711eb2d8b4978d85c7b",
+        "sha256_in_prefix": "beaf218dc04bf3ea4f5521a5ae42d9f2e870940e644dd711eb2d8b4978d85c7b",
+        "size_in_bytes": 162
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/lib/__pycache__/radau_core.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "3378b955557d8c18074934b2eca9efa2e48fb06c64bb4b3eddeb3fc245cfc46e",
+        "sha256_in_prefix": "3378b955557d8c18074934b2eca9efa2e48fb06c64bb4b3eddeb3fc245cfc46e",
+        "size_in_bytes": 14457
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/lib/radau_core.py",
+        "path_type": "hardlink",
+        "sha256": "b9dc8e9dc55d9598766472c627cbf28708e0614088653e8603e7e5a6c426a0c4",
+        "sha256_in_prefix": "b9dc8e9dc55d9598766472c627cbf28708e0614088653e8603e7e5a6c426a0c4",
+        "size_in_bytes": 14015
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/ode.cp37-win_amd64.pyd",
+        "path_type": "hardlink",
+        "sha256": "815ed7bf2a80c7ec8f0439f8429d4d3e045e228742a58b31959cc361f68a3e0e",
+        "sha256_in_prefix": "815ed7bf2a80c7ec8f0439f8429d4d3e045e228742a58b31959cc361f68a3e0e",
+        "size_in_bytes": 174592
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/ode.py",
+        "path_type": "hardlink",
+        "sha256": "906f35cf0094db10d0296bb209fe25ef7051d83db03a837353870626b042e9c3",
+        "sha256_in_prefix": "906f35cf0094db10d0296bb209fe25ef7051d83db03a837353870626b042e9c3",
+        "size_in_bytes": 302
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/problem.cp37-win_amd64.pyd",
+        "path_type": "hardlink",
+        "sha256": "99dd2a64ffb4ccdd835a1cc033034c71da23f5adcc789f52d10150341f6d8efc",
+        "sha256_in_prefix": "99dd2a64ffb4ccdd835a1cc033034c71da23f5adcc789f52d10150341f6d8efc",
+        "size_in_bytes": 191488
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/problem.py",
+        "path_type": "hardlink",
+        "sha256": "4d4a6e297f2b8e6f7a49423d788865fbff4b5d886e659a8d6c8739f185980f29",
+        "sha256_in_prefix": "4d4a6e297f2b8e6f7a49423d788865fbff4b5d886e659a8d6c8739f185980f29",
+        "size_in_bytes": 306
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/problem_algebraic.py",
+        "path_type": "hardlink",
+        "sha256": "031f0855b257e709be5b120134c60e781a69dcacf4dc4df42b1a2180beb0ebde",
+        "sha256_in_prefix": "031f0855b257e709be5b120134c60e781a69dcacf4dc4df42b1a2180beb0ebde",
+        "size_in_bytes": 4112
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "aa99a542503b81f9db26bb19bf52437edf1ae444185abf961d337c769de42174",
+        "sha256_in_prefix": "aa99a542503b81f9db26bb19bf52437edf1ae444185abf961d337c769de42174",
+        "size_in_bytes": 2540
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/__init__.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "a4d13080ce79102d71c0bba2ba05cd470b5ebd6b35a7b3ce2dbcc5c390a7c80f",
+        "sha256_in_prefix": "a4d13080ce79102d71c0bba2ba05cd470b5ebd6b35a7b3ce2dbcc5c390a7c80f",
+        "size_in_bytes": 1780
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/dasp3.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "64080f7cc5d56af480dda525c30963c7a95d927af8455df7222f60306be34b61",
+        "sha256_in_prefix": "64080f7cc5d56af480dda525c30963c7a95d927af8455df7222f60306be34b61",
+        "size_in_bytes": 6498
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/euler.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "2ecb5c49aa618d2e661cb07571c23c831076b2f2b5649299a2a239b20419800a",
+        "sha256_in_prefix": "2ecb5c49aa618d2e661cb07571c23c831076b2f2b5649299a2a239b20419800a",
+        "size_in_bytes": 469
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/glimda.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "60324051b901dbf680cbd6b513993e8b99af152a18c765653c2a02528b8a8ae8",
+        "sha256_in_prefix": "60324051b901dbf680cbd6b513993e8b99af152a18c765653c2a02528b8a8ae8",
+        "size_in_bytes": 15091
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/kinsol.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "e6b2aabc44dd8d880b44190c1267103bf76f6393081ec6e4b11f76b2c3186aca",
+        "sha256_in_prefix": "e6b2aabc44dd8d880b44190c1267103bf76f6393081ec6e4b11f76b2c3186aca",
+        "size_in_bytes": 471
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/odassl.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "7b9fa6fbbe8428511d281d860285487d46b42833300276986ed7187e8c7487fb",
+        "sha256_in_prefix": "7b9fa6fbbe8428511d281d860285487d46b42833300276986ed7187e8c7487fb",
+        "size_in_bytes": 11046
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/odepack.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "cef54b1bbaa62876fad9637b0d60ffe6923804473420bc15a65d64feb00ca2b2",
+        "sha256_in_prefix": "cef54b1bbaa62876fad9637b0d60ffe6923804473420bc15a65d64feb00ca2b2",
+        "size_in_bytes": 30507
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/radar5.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "1425128882f88636e2b98a0de24bf90a0970ed69b8d9ab15299ee79c6393820c",
+        "sha256_in_prefix": "1425128882f88636e2b98a0de24bf90a0970ed69b8d9ab15299ee79c6393820c",
+        "size_in_bytes": 26749
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/radau5.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "660f04e487f069a36f606e68e7555c4146ea7d0332abdb0bc11ab07a465023df",
+        "sha256_in_prefix": "660f04e487f069a36f606e68e7555c4146ea7d0332abdb0bc11ab07a465023df",
+        "size_in_bytes": 42925
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/rosenbrock.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "c8e4fe8f4b452ee842e7025bd251d075619783e9a99b1a2a9a77a0fee331d73f",
+        "sha256_in_prefix": "c8e4fe8f4b452ee842e7025bd251d075619783e9a99b1a2a9a77a0fee331d73f",
+        "size_in_bytes": 14353
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/runge_kutta.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "383f0453ce32b1b512b50c1f705c8d819ba62af12c6c8a5519f0907cb6f31180",
+        "sha256_in_prefix": "383f0453ce32b1b512b50c1f705c8d819ba62af12c6c8a5519f0907cb6f31180",
+        "size_in_bytes": 25579
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/__pycache__/sundials.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "febc7e31444be5bdca4c26ee19072a84a17be8323f9ebe89f6dd4018293384ff",
+        "sha256_in_prefix": "febc7e31444be5bdca4c26ee19072a84a17be8323f9ebe89f6dd4018293384ff",
+        "size_in_bytes": 475
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/dasp3.py",
+        "path_type": "hardlink",
+        "sha256": "4c2afa1d3e6bf6d9876aada9380c093ebc1e5241731bb163658306b90f5fc206",
+        "sha256_in_prefix": "4c2afa1d3e6bf6d9876aada9380c093ebc1e5241731bb163658306b90f5fc206",
+        "size_in_bytes": 7891
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/euler.cp37-win_amd64.pyd",
+        "path_type": "hardlink",
+        "sha256": "1d384a4444f4020d153a0f4e3c396b8513511a80e057c21d073b633eb0466056",
+        "sha256_in_prefix": "1d384a4444f4020d153a0f4e3c396b8513511a80e057c21d073b633eb0466056",
+        "size_in_bytes": 221696
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/euler.py",
+        "path_type": "hardlink",
+        "sha256": "22ed01c56408fd16673f9df666f7a7dd4eb00f40117dece8b65b5e193e9c124e",
+        "sha256_in_prefix": "22ed01c56408fd16673f9df666f7a7dd4eb00f40117dece8b65b5e193e9c124e",
+        "size_in_bytes": 304
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/glimda.py",
+        "path_type": "hardlink",
+        "sha256": "73764c4acf49348952de1bfada958ca1a3b50394dbf849a7c6be5146a1517786",
+        "sha256_in_prefix": "73764c4acf49348952de1bfada958ca1a3b50394dbf849a7c6be5146a1517786",
+        "size_in_bytes": 18032
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/kinsol.cp37-win_amd64.pyd",
+        "path_type": "hardlink",
+        "sha256": "b472febb526f524e41ee70b1ba156832283e8e856059b5bb2540a6447d632575",
+        "sha256_in_prefix": "b472febb526f524e41ee70b1ba156832283e8e856059b5bb2540a6447d632575",
+        "size_in_bytes": 242688
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/kinsol.py",
+        "path_type": "hardlink",
+        "sha256": "4778a656a1ad8db66b4ffb65d460052d479e895602b6d115828ab0c15bd385e1",
+        "sha256_in_prefix": "4778a656a1ad8db66b4ffb65d460052d479e895602b6d115828ab0c15bd385e1",
+        "size_in_bytes": 305
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/odassl.py",
+        "path_type": "hardlink",
+        "sha256": "c800e4e11568cdaed052cb4122e85778f4c9691b1924ceac25dcc88a0e2c7740",
+        "sha256_in_prefix": "c800e4e11568cdaed052cb4122e85778f4c9691b1924ceac25dcc88a0e2c7740",
+        "size_in_bytes": 14150
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/odepack.py",
+        "path_type": "hardlink",
+        "sha256": "ba383ac43adf73139056c53a61b95a4b9dacde35a87f0e8e488e1d38b73b7531",
+        "sha256_in_prefix": "ba383ac43adf73139056c53a61b95a4b9dacde35a87f0e8e488e1d38b73b7531",
+        "size_in_bytes": 41210
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/radar5.py",
+        "path_type": "hardlink",
+        "sha256": "04172727e947f2c8788cdb4c9ae3d976613f556e01728d299e478032890f12f8",
+        "sha256_in_prefix": "04172727e947f2c8788cdb4c9ae3d976613f556e01728d299e478032890f12f8",
+        "size_in_bytes": 33296
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/radau5.py",
+        "path_type": "hardlink",
+        "sha256": "35de239b930328e882ec33d765f11201cab30654b657fc78ea4cc3e5ec7345c5",
+        "sha256_in_prefix": "35de239b930328e882ec33d765f11201cab30654b657fc78ea4cc3e5ec7345c5",
+        "size_in_bytes": 66152
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/rosenbrock.py",
+        "path_type": "hardlink",
+        "sha256": "69d2e86787508d38ca06fac88629d3e3e5319a61cd5c525985fdb398d5497def",
+        "sha256_in_prefix": "69d2e86787508d38ca06fac88629d3e3e5319a61cd5c525985fdb398d5497def",
+        "size_in_bytes": 16638
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/runge_kutta.py",
+        "path_type": "hardlink",
+        "sha256": "5c470cd06d8e0723ab7c179486ef7b0b7e6c2631519412534ce82f2479076bae",
+        "sha256_in_prefix": "5c470cd06d8e0723ab7c179486ef7b0b7e6c2631519412534ce82f2479076bae",
+        "size_in_bytes": 30353
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/sundials.cp37-win_amd64.pyd",
+        "path_type": "hardlink",
+        "sha256": "d152e11ee0f33a47287f7edb2cefdb919401a4a3e199d211c9f6a45c982a2202",
+        "sha256_in_prefix": "d152e11ee0f33a47287f7edb2cefdb919401a4a3e199d211c9f6a45c982a2202",
+        "size_in_bytes": 750592
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/solvers/sundials.py",
+        "path_type": "hardlink",
+        "sha256": "813b9ba58619b2cbc75e38ddb1106a7282ca0f95313e64768b17c86bfa716d78",
+        "sha256_in_prefix": "813b9ba58619b2cbc75e38ddb1106a7282ca0f95313e64768b17c86bfa716d78",
+        "size_in_bytes": 307
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/special_systems.cp37-win_amd64.pyd",
+        "path_type": "hardlink",
+        "sha256": "3302a3b104c7423267ccd316c791a9224efd5769c84ea19e3063b21e26f7ed52",
+        "sha256_in_prefix": "3302a3b104c7423267ccd316c791a9224efd5769c84ea19e3063b21e26f7ed52",
+        "size_in_bytes": 118784
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/special_systems.py",
+        "path_type": "hardlink",
+        "sha256": "05e899bd290b6175bb7fe9037bf892a6f402bb08abf8caa436909738b7cfa337",
+        "sha256_in_prefix": "05e899bd290b6175bb7fe9037bf892a6f402bb08abf8caa436909738b7cfa337",
+        "size_in_bytes": 314
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/support.cp37-win_amd64.pyd",
+        "path_type": "hardlink",
+        "sha256": "5cdb415e02ff5000f8f191a0faa968e1236e8c857447f4501e0fd7d6f022b03a",
+        "sha256_in_prefix": "5cdb415e02ff5000f8f191a0faa968e1236e8c857447f4501e0fd7d6f022b03a",
+        "size_in_bytes": 58880
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/support.py",
+        "path_type": "hardlink",
+        "sha256": "f0faccfbe020dd12e37cddc9147712659c6797123397b72162bccc46f7f9e090",
+        "sha256_in_prefix": "f0faccfbe020dd12e37cddc9147712659c6797123397b72162bccc46f7f9e090",
+        "size_in_bytes": 306
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "57eb64ebac6eeac060d6400f285d41de784c6df1fc7cda3298ec23e45323c036",
+        "sha256_in_prefix": "57eb64ebac6eeac060d6400f285d41de784c6df1fc7cda3298ec23e45323c036",
+        "size_in_bytes": 687
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/__pycache__/__init__.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "8adbb38701ea4a883ec974e63ebb1f5dbc77afc590447514822c5e85c1c09df2",
+        "sha256_in_prefix": "8adbb38701ea4a883ec974e63ebb1f5dbc77afc590447514822c5e85c1c09df2",
+        "size_in_bytes": 164
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/__pycache__/test_examples.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "80636a03140819570371f95dca6b1690e4960a68044196ff021a472cdb1e416a",
+        "sha256_in_prefix": "80636a03140819570371f95dca6b1690e4960a68044196ff021a472cdb1e416a",
+        "size_in_bytes": 10057
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/__pycache__/test_explicit_ode.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "de4676451aeb42094b3441562303c2b3aa963dfb578097fbfb74ceafb606e10e",
+        "sha256_in_prefix": "de4676451aeb42094b3441562303c2b3aa963dfb578097fbfb74ceafb606e10e",
+        "size_in_bytes": 1870
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/__pycache__/test_implicit_ode.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "7fd68bf1da8ccffdb44100aefcf8e5abbffa3009509098ea4e6805c48cf71ad5",
+        "sha256_in_prefix": "7fd68bf1da8ccffdb44100aefcf8e5abbffa3009509098ea4e6805c48cf71ad5",
+        "size_in_bytes": 1948
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/__pycache__/test_ode.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "d9fc46eff185b5094ac979065b481a5f0a2b7d909a0e2b158d1dc878a90c2602",
+        "sha256_in_prefix": "d9fc46eff185b5094ac979065b481a5f0a2b7d909a0e2b158d1dc878a90c2602",
+        "size_in_bytes": 2261
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/__pycache__/test_solvers.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "331e4a325c0d1e3aa75553db31e68d396216475f0d1f8c406633e5df899f1875",
+        "sha256_in_prefix": "331e4a325c0d1e3aa75553db31e68d396216475f0d1f8c406633e5df899f1875",
+        "size_in_bytes": 2425
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "20b0d34ea76cdf11cdc3f3918ae4a7b58c2fdc7baed03756f715c4bb3216b44d",
+        "sha256_in_prefix": "20b0d34ea76cdf11cdc3f3918ae4a7b58c2fdc7baed03756f715c4bb3216b44d",
+        "size_in_bytes": 703
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__pycache__/__init__.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "34dfd8978fffbcc6af1f783decd38c061e4040d95c41b8fd3f0113db06712277",
+        "sha256_in_prefix": "34dfd8978fffbcc6af1f783decd38c061e4040d95c41b8fd3f0113db06712277",
+        "size_in_bytes": 172
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_euler.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "083610329af7d0a4a31973985bc4d403c483980a5dc8f6429a4b1afa3f21397a",
+        "sha256_in_prefix": "083610329af7d0a4a31973985bc4d403c483980a5dc8f6429a4b1afa3f21397a",
+        "size_in_bytes": 9770
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_glimda.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "e8f69e9787767e9c00b9be1ec4eb83b14f5ca628f77eaa33bf690b35202a8664",
+        "sha256_in_prefix": "e8f69e9787767e9c00b9be1ec4eb83b14f5ca628f77eaa33bf690b35202a8664",
+        "size_in_bytes": 5005
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_kinsol.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "3c1c5da08204ce8a024451d9bcf7c67107f99b0f275d22ffaa69aa3d863ca35b",
+        "sha256_in_prefix": "3c1c5da08204ce8a024451d9bcf7c67107f99b0f275d22ffaa69aa3d863ca35b",
+        "size_in_bytes": 1584
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_odassl.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "dcfd552d816c9f01b25beb92efead88d329f0d3d0913e6a842d4b591c0b27b8e",
+        "sha256_in_prefix": "dcfd552d816c9f01b25beb92efead88d329f0d3d0913e6a842d4b591c0b27b8e",
+        "size_in_bytes": 2524
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_odepack.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "ec87cb0609da3809030ce9c2dfcb848a794f9de6769c0d54917b1e73c2408e49",
+        "sha256_in_prefix": "ec87cb0609da3809030ce9c2dfcb848a794f9de6769c0d54917b1e73c2408e49",
+        "size_in_bytes": 6537
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_radau5.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "1d62925eb9d1104c4725925d059ce90dec8d8e2b8eb545ddbcf7cc11cb66f638",
+        "sha256_in_prefix": "1d62925eb9d1104c4725925d059ce90dec8d8e2b8eb545ddbcf7cc11cb66f638",
+        "size_in_bytes": 29840
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_rosenbrock.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "db225c7cfaa5062855fdee7c4eba1c931c48403a4769adc806f0578d7c3b3774",
+        "sha256_in_prefix": "db225c7cfaa5062855fdee7c4eba1c931c48403a4769adc806f0578d7c3b3774",
+        "size_in_bytes": 2495
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_rungekutta.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "65cf1470b72536a7ff7280031a64a953f7f138418a697f031a92208aef4ed3c5",
+        "sha256_in_prefix": "65cf1470b72536a7ff7280031a64a953f7f138418a697f031a92208aef4ed3c5",
+        "size_in_bytes": 8918
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/__pycache__/test_sundials.cpython-37.pyc",
+        "path_type": "hardlink",
+        "sha256": "2a9bf752a850391a14aa8f14200658912a8e452cd7fe3f3f6d1246cf71551665",
+        "sha256_in_prefix": "2a9bf752a850391a14aa8f14200658912a8e452cd7fe3f3f6d1246cf71551665",
+        "size_in_bytes": 41768
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/test_euler.py",
+        "path_type": "hardlink",
+        "sha256": "ea5ed19671f7ec0f8d772b8c50c930911ec54ff0ab361cf0a8549e58a82d7391",
+        "sha256_in_prefix": "ea5ed19671f7ec0f8d772b8c50c930911ec54ff0ab361cf0a8549e58a82d7391",
+        "size_in_bytes": 9254
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/test_glimda.py",
+        "path_type": "hardlink",
+        "sha256": "9b80bc58e837a51ed515a4f78837f51ae5e62a1e1ca030ad53ab2233cf9d7d66",
+        "sha256_in_prefix": "9b80bc58e837a51ed515a4f78837f51ae5e62a1e1ca030ad53ab2233cf9d7d66",
+        "size_in_bytes": 6131
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/test_kinsol.py",
+        "path_type": "hardlink",
+        "sha256": "ef527c4b47fb0079fc1e971db8912bdec647d450a5d763fe0c8ea12513e7de70",
+        "sha256_in_prefix": "ef527c4b47fb0079fc1e971db8912bdec647d450a5d763fe0c8ea12513e7de70",
+        "size_in_bytes": 1879
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/test_odassl.py",
+        "path_type": "hardlink",
+        "sha256": "fbecaa959f1892039914750f84686181b9ea7aa17a47aa3769c9807b90ceb53e",
+        "sha256_in_prefix": "fbecaa959f1892039914750f84686181b9ea7aa17a47aa3769c9807b90ceb53e",
+        "size_in_bytes": 2883
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/test_odepack.py",
+        "path_type": "hardlink",
+        "sha256": "8bb0678d11d0a523664182156d470b5db20138316e6dea4375b46fe314b32970",
+        "sha256_in_prefix": "8bb0678d11d0a523664182156d470b5db20138316e6dea4375b46fe314b32970",
+        "size_in_bytes": 7731
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/test_radau5.py",
+        "path_type": "hardlink",
+        "sha256": "ba7ba6e2a21636800ee53184c7963fc0edbe323ce6706dd45bf4e684f46522cf",
+        "sha256_in_prefix": "ba7ba6e2a21636800ee53184c7963fc0edbe323ce6706dd45bf4e684f46522cf",
+        "size_in_bytes": 33283
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/test_rosenbrock.py",
+        "path_type": "hardlink",
+        "sha256": "2921b87be03d3cc92e4e3a02d80c2488793ad1e5b55ea622a3a56ce281b7606e",
+        "sha256_in_prefix": "2921b87be03d3cc92e4e3a02d80c2488793ad1e5b55ea622a3a56ce281b7606e",
+        "size_in_bytes": 2701
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/test_rungekutta.py",
+        "path_type": "hardlink",
+        "sha256": "2040843a3fb3786dbddc0109f6ef8ec14b1b58f9388a381bd489c5cc42c8de63",
+        "sha256_in_prefix": "2040843a3fb3786dbddc0109f6ef8ec14b1b58f9388a381bd489c5cc42c8de63",
+        "size_in_bytes": 8795
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/solvers/test_sundials.py",
+        "path_type": "hardlink",
+        "sha256": "c8ed03b145058643fcbf98f6d4895dcf2f5c0fdc42b710aeab28982b8722de2a",
+        "sha256_in_prefix": "c8ed03b145058643fcbf98f6d4895dcf2f5c0fdc42b710aeab28982b8722de2a",
+        "size_in_bytes": 46514
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/test_examples.py",
+        "path_type": "hardlink",
+        "sha256": "f68fb8204f3b81e1e91baa393c71efc87c63a02fccc87b72b7c1767f289fc4ff",
+        "sha256_in_prefix": "f68fb8204f3b81e1e91baa393c71efc87c63a02fccc87b72b7c1767f289fc4ff",
+        "size_in_bytes": 7831
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/test_explicit_ode.py",
+        "path_type": "hardlink",
+        "sha256": "3cf667e248312652d54391f207c6ebceb40e8c341aa2a08e6f49dd352b2fe39d",
+        "sha256_in_prefix": "3cf667e248312652d54391f207c6ebceb40e8c341aa2a08e6f49dd352b2fe39d",
+        "size_in_bytes": 1777
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/test_implicit_ode.py",
+        "path_type": "hardlink",
+        "sha256": "0af8340c2040371f3066593b2b2e3515922b291618b6bc83952a33bbd8c9e9e8",
+        "sha256_in_prefix": "0af8340c2040371f3066593b2b2e3515922b291618b6bc83952a33bbd8c9e9e8",
+        "size_in_bytes": 1868
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/test_ode.py",
+        "path_type": "hardlink",
+        "sha256": "d5f0b34c089ffb478611155b191b42b2016e25485a9348a27913cb1ab850ec55",
+        "sha256_in_prefix": "d5f0b34c089ffb478611155b191b42b2016e25485a9348a27913cb1ab850ec55",
+        "size_in_bytes": 2946
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/tests/test_solvers.py",
+        "path_type": "hardlink",
+        "sha256": "05532abd8e55650e8e287051aa378bf0f67f74dbe99b8ab57844553f03d4b63e",
+        "sha256_in_prefix": "05532abd8e55650e8e287051aa378bf0f67f74dbe99b8ab57844553f03d4b63e",
+        "size_in_bytes": 2188
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/thirdparty/dasp3/LICENSE_DASP3",
+        "path_type": "hardlink",
+        "sha256": "020a06d4a4368c3ee321cc9935c340d4ec7e6918287dff9c1e857f781ac5a504",
+        "sha256_in_prefix": "020a06d4a4368c3ee321cc9935c340d4ec7e6918287dff9c1e857f781ac5a504",
+        "size_in_bytes": 638
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/thirdparty/glimda/LICENSE_GLIMDA",
+        "path_type": "hardlink",
+        "sha256": "d5731d58a88d31964887d9c3c86b8451f78a478a192277a0ee95a7570b6afaa3",
+        "sha256_in_prefix": "d5731d58a88d31964887d9c3c86b8451f78a478a192277a0ee95a7570b6afaa3",
+        "size_in_bytes": 1059
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/thirdparty/hairer/LICENSE_HAIRER",
+        "path_type": "hardlink",
+        "sha256": "f46c4e2dc21adb6d894eb7962834a0dd04cb695e0b69267bf18c132324213d8b",
+        "sha256_in_prefix": "f46c4e2dc21adb6d894eb7962834a0dd04cb695e0b69267bf18c132324213d8b",
+        "size_in_bytes": 1421
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/thirdparty/odassl/LICENSE_ODASSL",
+        "path_type": "hardlink",
+        "sha256": "45c3c80ae67d924f4c6b188c3069a49db7beeb91e9e45410a668415ff413d688",
+        "sha256_in_prefix": "45c3c80ae67d924f4c6b188c3069a49db7beeb91e9e45410a668415ff413d688",
+        "size_in_bytes": 1246
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/thirdparty/odepack/LICENSE_ODEPACK",
+        "path_type": "hardlink",
+        "sha256": "df2697e6dc6d82a4e8e198301008c1dbb4f07e0de71edab565d8bcfce37edc6e",
+        "sha256_in_prefix": "df2697e6dc6d82a4e8e198301008c1dbb4f07e0de71edab565d8bcfce37edc6e",
+        "size_in_bytes": 424
+      },
+      {
+        "_path": "Lib/site-packages/assimulo/version.txt",
+        "path_type": "hardlink",
+        "sha256": "71c3c78c6893743aa322a830fe59a8e2476f4ca5704be7d824f41f1f4dba761d",
+        "sha256_in_prefix": "71c3c78c6893743aa322a830fe59a8e2476f4ca5704be7d824f41f1f4dba761d",
+        "size_in_bytes": 30
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "assimulo=3.0",
+  "sha256": "bd8ea1220fbc349908c34ab5ac4af4ae97e79be01d447464a14c540090d6da9e",
+  "size": 995517,
+  "subdir": "win-64",
+  "timestamp": 1566036858000,
+  "url": "https://conda.anaconda.org/conda-forge/win-64/assimulo-3.0-py37hf5aa970_1007.tar.bz2",
+  "version": "3.0"
+}

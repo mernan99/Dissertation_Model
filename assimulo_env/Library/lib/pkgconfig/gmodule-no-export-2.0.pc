@@ -1,0 +1,13 @@
+prefix=U:/envs/assimulo_env/Library
+includedir=${prefix}/include
+libdir=${prefix}/lib
+
+gmodule_supported=true
+
+Name: GModule
+Description: Dynamic module loader for GLib
+Version: 2.82.2
+Requires: glib-2.0
+Libs: -L${libdir} -lgmodule-2.0
+Libs.private:  -liconv
+Cflags: -I${includedir}
