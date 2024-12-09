@@ -1,0 +1,1022 @@
+# # Define the time range equivalent to `x` in Julia
+# x = np.arange(10, 13, 0.002)  # Start=10, Stop=13, Step=0.002
+
+# # Initialize variables
+# τ = t_τL[1]
+# tr = 0.0
+# n = 0
+
+# # Simulation for an ensemble of parameters
+# def simulate_ensemble(param_values, t_τL, x, trajectories=5):
+#     outputs = np.zeros((4503, trajectories))
+#     for i in range(trajectories):
+#         u0 = np.array([8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0])
+#         params = param_values[i, :]
+#         model = CardiovascularModel(u0, np.zeros(7), params, t_τL)
+#         problem = Implicit_Problem(model.res, u0, np.zeros(7), 0.0)
+#         problem.root = model.root
+#         problem.handle_event = model.handle_event
+#         problem.nroots = 1
+
+#         solver = IDA(problem)
+#         solver.report_continuously = False
+#         solver.atol = 1e-8
+#         solver.rtol = 1e-8
+#         solver.maxord = 5
+#         solver.maxh = 0.05
+#         solver.maxsteps = 10000
+
+#         _, y, _ = solver.simulate(tfinal=13, ncp_list=x)
+#         outputs[:1501, i] = y[:, 0]  # pLV
+#         outputs[1502:3002, i] = y[:, 1]  # psa
+#         outputs[3003:4503, i] = y[:, 3]  # Vlv
+#     return outputs
+
+
+
+# # Example parameter matrix (replace with actual parameter sets)
+# parameter_matrix = np.tile(p, (1, 5))  # 5 trajectories for illustration
+
+# # Call the function
+# ensemble_outputs = simulate_ensemble(parameter_matrix, trajectories=5)
+
+# # Print shape of results to verify
+# print(f"Ensemble outputs shape: {ensemble_outputs.shape}")
+
+
+# # Define bounds for the parameters
+# bounds = [
+#     [0.21, 0.34],  # τ_es
+#     [0.36, 0.585],  # τ_ep
+#     [0.042, 0.078],  # Rmv
+#     [0.0231, 0.0429],  # Zao
+#     [0.777, 1.443],  # Rs
+#     [0.791, 1.469],  # Csa
+#     [7.7, 14.3],  # Csv
+#     [1.05, 1.95],  # E_max
+#     [0.021, 0.039],  # E_min
+# ]
+
+# # Create Sobol samples
+# problem = {
+#     "num_vars": len(bounds),
+#     "names": ["τ_es", "τ_ep", "Rmv", "Zao", "Rs", "Csa", "Csv", "E_max", "E_min"],
+#     "bounds": bounds,
+# }
+
+# N = 12000  # Number of samples
+# param_values = saltelli.sample(problem, N)  # Generate Sobol samples
+# print(f"param_values original shape: {param_values.shape}")
+
+# # Reshape or validate Sobol samples for proper usage
+# param_values = param_values[:, :9]  # Ensure each row is a valid parameter set
+# print(f"param_values reshaped shape: {param_values.shape}")
+
+
+
+# # Sensitivity analysis function
+# def gsa_function(params):
+#     """
+#     Simulate the model for a given parameter set and return the outputs for sensitivity analysis.
+
+#     Parameters:
+#         params (np.ndarray): Parameter set.
+
+#     Returns:
+#         np.ndarray: Outputs of interest for the Sobol analysis.
+#     """
+#     trajectories = params.shape[0]
+#     outputs = np.zeros((4503, trajectories))
+
+#     for i in range(trajectories):
+#         u0 = np.array([8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0])
+#         model = CardiovascularModel(u0, np.zeros(7), params[i], t_τL)
+#         problem = Implicit_Problem(model.res, u0, np.zeros(7), 0.0)
+#         problem.root = model.root
+#         problem.handle_event = model.handle_event
+#         problem.nroots = 1
+
+#         solver = IDA(problem)
+#         solver.report_continuously = False
+#         solver.atol = 1e-8
+#         solver.rtol = 1e-8
+#         solver.maxord = 5
+#         solver.maxh = 0.05
+#         solver.maxsteps = 10000
+
+#         _, y, _ = solver.simulate(tfinal=13, ncp_list=x)
+#         outputs[:1501, i] = y[:, 0]  # pLV
+#         outputs[1502:3002, i] = y[:, 1]  # psa
+#         outputs[3003:4503, i] = y[:, 3]  # Vlv
+
+#     return outputs
+
+# # Compute outputs for the Sobol analysis
+# outputs = gsa_function(param_values)
+
+# # Reshape outputs into required structure for Sobol analysis
+# S1, ST = [], []
+# for i in range(4503):
+#     sobol_indices = sobol.analyze(problem, outputs[i, :], print_to_console=False)
+#     S1.append(sobol_indices["S1"])
+#     ST.append(sobol_indices["ST"])
+
+# S1 = np.array(S1)
+# ST = np.array(ST)
+
+# # Replace negative indices with a small positive value
+# def replace_negatives(S):
+#     S[S <= 0] = 1e-6
+#     return S
+
+# S1 = replace_negatives(S1)
+# ST = replace_negatives(ST)
+
+# # Save to HDF5 file
+# with h5py.File("s3T.h5", "w") as f:
+#     f.create_dataset("A", data=ST)
+
+# # Load from HDF5 file
+# with h5py.File("s21.h5", "r") as f:
+#     s21 = f["A"][:]
+
+# # Plot Sobol indices
+# time = np.arange(10, 13, 0.002)
+# params_labels = ["τ_es", "τ_ep", "Rmv", "Zao", "Rs", "Csa", "Csv", "E_max", "E_min"]
+
+# for i, label in enumerate(params_labels):
+#     plt.figure(figsize=(12, 6))
+#     plt.plot(time, S1[:, i], label=f"First Order - {label}")
+#     plt.plot(time, ST[:, i], label=f"Total Order - {label}")
+#     plt.xlabel("Cardiac Cycles")
+#     plt.ylabel("Sobol Index")
+#     plt.title(f"Sobol Indices - {label}")
+#     plt.legend()
+#     plt.grid(True)
+#     plt.show()
+
+# # Compute time-averaged indices
+# S1_avg = np.mean(S1, axis=0)
+# ST_avg = np.mean(ST, axis=0)
+
+# # Bar plot of time-averaged Sobol indices
+# plt.figure(figsize=(12, 6))
+# plt.bar(params_labels, S1_avg, label="First Order", alpha=0.7)
+# plt.bar(params_labels, ST_avg, label="Total Order", alpha=0.7)
+# plt.xlabel("Parameters")
+# plt.ylabel("Time-Averaged Sobol Index")
+# plt.title("Time-Averaged Sobol Indices")
+# plt.legend()
+# plt.grid(True)
+# plt.show()
+
+# # Define time range for Sobol analysis
+# time_range = np.arange(10, 13, 0.002)  # 1501 time steps
+
+# # Variables from sensitivity analysis outputs
+# # Example Sobol result outputs for each variable (replace these with actual results from `sobol.analyze`)
+# S1_SAP = S1[1502:3002, :]  # Systemic Arterial Pressure first-order indices
+# ST_SAP = ST[1502:3002, :]  # Systemic Arterial Pressure total-order indices
+
+# S1_LVV = S1[3003:4503, :]  # Left Ventricular Volume first-order indices
+# ST_LVV = ST[3003:4503, :]  # Left Ventricular Volume total-order indices
+
+# # Time-averaged calculations for systemic arterial pressure (SA.P)
+# S11_SAP = np.zeros(9)  # Initialize first-order indices
+# STT_SAP = np.zeros(9)  # Initialize total-order indices
+
+# for i in range(9):  # Iterate over parameters
+#     S11_SAP[i] = np.sum(S1_SAP[:, i] * np.var(outputs[1502:3002, :], axis=0)) / (
+#         np.sum(np.var(outputs[1502:3002, :], axis=0)) * len(time_range)
+#     )
+#     STT_SAP[i] = np.sum(ST_SAP[:, i] * np.var(outputs[1502:3002, :], axis=0)) / (
+#         np.sum(np.var(outputs[1502:3002, :], axis=0)) * len(time_range)
+#     )
+
+# # Time-averaged calculations for left ventricular volume (LV.V)
+# S11_LVV = np.zeros(9)
+# STT_LVV = np.zeros(9)
+
+# for i in range(9):  # Iterate over parameters
+#     S11_LVV[i] = np.sum(S1_LVV[:, i] * np.var(outputs[3003:4503, :], axis=0)) / (
+#         np.sum(np.var(outputs[3003:4503, :], axis=0)) * len(time_range)
+#     )
+#     STT_LVV[i] = np.sum(ST_LVV[:, i] * np.var(outputs[3003:4503, :], axis=0)) / (
+#         np.sum(np.var(outputs[3003:4503, :], axis=0)) * len(time_range)
+#     )
+
+# # Plot bar charts for time-averaged Sobol indices
+# param_labels = ["τ_es", "τ_ep", "Rmv", "Zao", "Rs", "Csa", "Csv", "E_max", "E_min"]
+
+# plt.figure(figsize=(12, 6))
+# plt.bar(param_labels, S11_SAP, label="First Order", alpha=0.7)
+# plt.bar(param_labels, STT_SAP, label="Total Order", alpha=0.7)
+# plt.xlabel("Parameters")
+# plt.ylabel("Time-Averaged Sobol Index")
+# plt.title("Time-Averaged Sobol Indices - Systemic Arterial Pressure (SA.P)")
+# plt.legend()
+# plt.grid(True)
+# plt.show()
+
+# plt.figure(figsize=(12, 6))
+# plt.bar(param_labels, S11_LVV, label="First Order", alpha=0.7)
+# plt.bar(param_labels, STT_LVV, label="Total Order", alpha=0.7)
+# plt.xlabel("Parameters")
+# plt.ylabel("Time-Averaged Sobol Index")
+# plt.title("Time-Averaged Sobol Indices - Left Ventricular Volume (LV.V)")
+# plt.legend()
+# plt.grid(True)
+# plt.show()
+
+# # Create heatmaps for Sobol indices
+# S1_combined = np.array([S11_SAP, S11_LVV]).T
+# ST_combined = np.array([STT_SAP, STT_LVV]).T
+
+# # Create heatmap for first-order indices
+# plt.figure(figsize=(12, 6))
+# sns.heatmap(S1_combined, annot=True, xticklabels=["SA.P", "LV.V"], yticklabels=param_labels, cmap="plasma")
+# plt.title("First-Order Sobol Indices Heatmap")
+# plt.xlabel("Measurements")
+# plt.ylabel("Parameters")
+# plt.show()
+
+# # Create heatmap for total-order indices
+# plt.figure(figsize=(12, 6))
+# sns.heatmap(ST_combined, annot=True, xticklabels=["SA.P", "LV.V"], yticklabels=param_labels, cmap="plasma")
+# plt.title("Total-Order Sobol Indices Heatmap")
+# plt.xlabel("Measurements")
+# plt.ylabel("Parameters")
+# plt.show()
+
+# Simulation for ensemble of parameters
+
+def run_simulation_wrapper(args):
+    params, u0, udot0, t_τL, saveat = args
+    return run_simulation(params, u0, udot0, t_τL, saveat)
+
+def run_simulation(params, u0, udot0, t_τL, saveat):
+    τ_es, τ_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min = params
+
+    # Enforce constraints on parameters to prevent invalid values
+    if τ_ep <= τ_es:
+        τ_ep = τ_es + 1e-6
+
+    if E_min >= E_max:
+        E_min = E_max - 1e-6
+
+    # Set minimum positive values to avoid division by zero
+    Rmv = max(Rmv, 1e-6)
+    Zao = max(Zao, 1e-6)
+    Rs = max(Rs, 1e-6)
+    Csa = max(Csa, 1e-6)
+    Csv = max(Csv, 1e-6)
+    E_max = max(E_max, 1e-6)
+    E_min = max(E_min, 0.0)
+
+    p = np.array([τ_es, τ_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min])
+
+    # Initialize the model
+    model = CardiovascularModel(u0, udot0, p, t_τL)
+    problem_instance = Implicit_Problem(model.res, u0, udot0, 0.0)
+    problem_instance.root = model.root
+    problem_instance.handle_event = model.handle_event
+    problem_instance.nroots = 1
+
+    solver = IDA(problem_instance)
+    solver.atol = 1e-6
+    solver.rtol = 1e-6
+    solver.maxord = 5
+    solver.maxh = 0.05  # Increase maximum step size
+    solver.maxsteps = 10000  # Allow more solver steps
+    solver.report_continuously = True  # Ensure continuous output
+
+    tfinal = t_τL[-1] + 0.1
+
+    try:
+        # Simulate the model with specified output times
+        solver.simulate(tfinal, ncp_list=saveat)
+        # Extract variables at the specified times
+        y = np.array(solver.y_sol)
+
+        # Check if y has the same length as saveat
+        if len(y) != len(saveat):
+            # Pad with NaNs if necessary
+            missing_points = len(saveat) - len(y)
+            y = np.vstack([y, np.full((missing_points, y.shape[1]), np.nan)])
+
+        # Return time-series outputs (pLV, psa, Vlv)
+        pLV = y[:, 0]
+        psa = y[:, 1]
+        Vlv = y[:, 3]
+
+        return np.column_stack((pLV, psa, Vlv))
+
+    except Exception as e:
+        print(f"Simulation failed with exception: {e}")
+        print(f"Last solver time: {solver.t}")
+        # Return NaNs for failed simulations
+        num_time_points = len(saveat)
+        return np.full((num_time_points, 3), np.nan)
+
+if __name__ == "__main__":
+    # Define the problem for SALib
+    problem = {
+        "num_vars": 9,
+        "names": ["τ_es", "τ_ep", "Rmv", "Zao", "Rs", "Csa", "Csv", "E_max", "E_min"],
+        "bounds": [
+            (0.21, 0.34),    # τ_es
+            (0.36, 0.585),   # τ_ep
+            (0.042, 0.078),  # Rmv
+            (0.0231, 0.0429),# Zao
+            (0.777, 1.443),  # Rs
+            (0.791, 1.469),  # Csa
+            (7.7, 14.3),     # Csv
+            (1.05, 1.95),    # E_max
+            (0.021, 0.039)   # E_min
+        ]
+    }
+
+    # Set the sample size (N = number of base samples)
+    N = 100  # Adjust as needed
+
+    # Generate Sobol samples using SALib's saltelli.sample
+    param_values = saltelli.sample(problem, N, calc_second_order=True)
+
+    # Define the time points at which to save the outputs
+    start_time = 10  # Start time for sensitivity analysis outputs
+    end_time = 13    # End time for sensitivity analysis outputs
+    time_step = 0.002
+    saveat = np.arange(start_time, end_time + time_step, time_step)
+
+    # Initial conditions
+    u0 = np.array([8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0])
+    udot0 = np.zeros(7)
+    t_τL = HRV(end_time + 1.0)
+
+    # Run simulations
+    print("Running simulations...")
+    args_list = [(params, u0, udot0, t_τL, saveat) for params in param_values]
+
+    with multiprocessing.Pool() as pool:
+        results = list(tqdm(pool.imap_unordered(run_simulation_wrapper, args_list), total=len(args_list)))
+
+    # Convert results to a NumPy array
+    Y = np.array(results)
+
+    # Identify valid simulations (exclude those with NaNs)
+    valid_simulations = ~np.isnan(Y).any(axis=(1, 2))
+    Y_valid = Y[valid_simulations]
+    param_values_valid = param_values[valid_simulations]
+
+    if len(Y_valid) < 10:
+        print("Not enough valid simulations to perform sensitivity analysis.")
+        exit()
+    else:
+        # Proceed with Sobol sensitivity analysis
+        num_time_points = len(saveat)
+        num_params = problem['num_vars']
+        num_outputs = 3  # pLV, psa, Vlv
+
+        # Initialize dictionaries to hold Sobol indices for each output
+        S1 = {'pLV': np.zeros((num_time_points, num_params)),
+              'psa': np.zeros((num_time_points, num_params)),
+              'Vlv': np.zeros((num_time_points, num_params))}
+
+        ST = {'pLV': np.zeros((num_time_points, num_params)),
+              'psa': np.zeros((num_time_points, num_params)),
+              'Vlv': np.zeros((num_time_points, num_params))}
+
+        output_names = ['pLV', 'psa', 'Vlv']
+        parameter_names = problem['names']
+
+        for output_idx, output_name in enumerate(output_names):
+            print(f"\nPerforming Sobol sensitivity analysis for {output_name}...")
+            for t_idx in tqdm(range(num_time_points)):
+                Y_t = Y_valid[:, t_idx, output_idx]
+
+                # Check if variance is zero
+                if np.var(Y_t) == 0:
+                    S1[output_name][t_idx, :] = np.zeros(num_params)
+                    ST[output_name][t_idx, :] = np.zeros(num_params)
+                    continue
+
+                Si = sobol.analyze(problem, Y_t, calc_second_order=True, print_to_console=False)
+                S1[output_name][t_idx, :] = Si['S1']
+                ST[output_name][t_idx, :] = Si['ST']
+
+        # Time-averaged Sobol indices for pLV
+        var_pLV = np.var(Y_valid[:, :, 0], axis=0)  # Variance at each time point
+        total_var_pLV = np.sum(var_pLV)
+
+        S1_mean_pLV = np.nansum(S1['pLV'] * var_pLV[:, None], axis=0) / total_var_pLV
+        ST_mean_pLV = np.nansum(ST['pLV'] * var_pLV[:, None], axis=0) / total_var_pLV
+
+        # Bar plot for time-averaged Sobol indices for pLV
+        x = np.arange(num_params)
+        plt.figure(figsize=(12, 6))
+        plt.bar(x - 0.2, S1_mean_pLV, width=0.4, label='First-order')
+        plt.bar(x + 0.2, ST_mean_pLV, width=0.4, label='Total-order')
+        plt.xticks(x, parameter_names, rotation=45)
+        plt.ylabel('Time-averaged Sobol index')
+        plt.title('Time-averaged Sobol indices for pLV')
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+
+        # Similarly for psa and Vlv
+
+        # For psa
+        var_psa = np.var(Y_valid[:, :, 1], axis=0)
+        total_var_psa = np.sum(var_psa)
+
+        S1_mean_psa = np.nansum(S1['psa'] * var_psa[:, None], axis=0) / total_var_psa
+        ST_mean_psa = np.nansum(ST['psa'] * var_psa[:, None], axis=0) / total_var_psa
+
+        # Plot for psa
+        x = np.arange(num_params)
+        plt.figure(figsize=(12, 6))
+        plt.bar(x - 0.2, S1_mean_psa, width=0.4, label='First-order')
+        plt.bar(x + 0.2, ST_mean_psa, width=0.4, label='Total-order')
+        plt.xticks(x, parameter_names, rotation=45)
+        plt.ylabel('Time-averaged Sobol index')
+        plt.title('Time-averaged Sobol indices for psa')
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+
+        # For Vlv
+        var_Vlv = np.var(Y_valid[:, :, 2], axis=0)
+        total_var_Vlv = np.sum(var_Vlv)
+
+        S1_mean_Vlv = np.nansum(S1['Vlv'] * var_Vlv[:, None], axis=0) / total_var_Vlv
+        ST_mean_Vlv = np.nansum(ST['Vlv'] * var_Vlv[:, None], axis=0) / total_var_Vlv
+
+        # Plot for Vlv
+        x = np.arange(num_params)
+        plt.figure(figsize=(12, 6))
+        plt.bar(x - 0.2, S1_mean_Vlv, width=0.4, label='First-order')
+        plt.bar(x + 0.2, ST_mean_Vlv, width=0.4, label='Total-order')
+        plt.xticks(x, parameter_names, rotation=45)
+        plt.ylabel('Time-averaged Sobol index')
+        plt.title('Time-averaged Sobol indices for Vlv')
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+You said:
+import numpy as np
+import matplotlib.pyplot as plt
+from assimulo.problem import Implicit_Problem
+from assimulo.solvers.sundials import IDA
+from SALib.sample import saltelli
+from SALib.analyze import sobol
+from tqdm import tqdm
+import h5py
+import seaborn as sns
+from multiprocessing import Pool, cpu_count
+
+
+# Valve function remains the same
+def Valve(R, deltaP):
+    q = 0.0
+    R = max(R, 1e-6)    
+    if -deltaP < 0.0:
+        q = deltaP / R
+    else:
+        q = 0.0
+    return q
+
+# Define the model class
+class CardiovascularModel:
+    def __init__(self, u0, udot0, p, t_τL):
+        self.p = p
+        self.t_τL = t_τL
+        self.τ = t_τL[0]
+        self.tr = 0.0
+        self.n = 0  # Counter for events
+        self.u0 = u0
+        self.udot0 = udot0
+        self.Eshift = 0.0
+        self.cycle_phase = "systole"  # Start with systole
+
+    # Residual function for IDA
+    def res(self, t, y, ydot):
+        pLV, psa, psv, Vlv, Qav, Qmv, Qs = y
+        τ_es, τ_ep, Rmv, Zao, Rs, Csa, Csv, E_max, E_min = self.p
+        E_t = self.ShiElastance(t, E_min, E_max, self.τ, τ_es, τ_ep, self.Eshift)
+        DE_t = self.DShiElastance(t, E_min, E_max, self.τ, τ_es, τ_ep, self.Eshift)
+
+        print(f"self.p shape: {self.p.shape}, self.p content: {self.p}")
+        res = np.zeros_like(y)
+        res[0] = ydot[0] - ((Qmv - Qav) * E_t + pLV / E_t * DE_t)
+        res[1] = ydot[1] - (Qav - Qs) / Csa
+        res[2] = ydot[2] - (Qs - Qmv) / Csv
+        res[3] = ydot[3] - (Qmv - Qav)
+        res[4] = Qav - Valve(Zao, pLV - psa)
+        res[5] = Qmv - Valve(Rmv, psv - pLV)
+        res[6] = ydot[6] - (ydot[1] - ydot[2]) / Rs
+        return res
+
+    # ShiElastance function as a method
+    def ShiElastance(self, t, E_min, E_max, τ, τ_es, τ_ep, Eshift):
+        t_i = (t - self.tr) % τ  # Time within the current cardiac cycle
+        if t_i <= τ_es:
+            E_p = (1 - np.cos(t_i / τ_es * np.pi)) / 2
+        elif t_i <= τ_ep:
+            E_p = (1 + np.cos((t_i - τ_es) / (τ_ep - τ_es) * np.pi)) / 2
+        else:
+            E_p = 0.0
+        E = E_min + (E_max - E_min) * E_p
+        return E
+
+    # Derivative of ShiElastance as a method
+    def DShiElastance(self, t, E_min, E_max, τ, τ_es, τ_ep, Eshift):
+        t_i = (t - self.tr) % τ
+        if t_i <= τ_es:
+            dE_p = (np.pi / τ_es) * np.sin(t_i / τ_es * np.pi) / 2
+        elif t_i <= τ_ep:
+            dE_p = - (np.pi / (τ_ep - τ_es)) * np.sin((t_i - τ_es) / (τ_ep - τ_es) * np.pi) / 2
+        else:
+            dE_p = 0.0
+        dE = (E_max - E_min) * dE_p
+        return dE
+
+    # Event function to update τ and tr
+    def handle_event(self, solver, event_info):
+        self.n += 1
+
+        if self.cycle_phase == "systole":
+            self.cycle_phase = "diastole"
+            self.tr = solver.t
+        elif self.cycle_phase == "diastole":
+            self.cycle_phase = "systole"
+            self.tr = solver.t
+            if self.n + 1 < len(self.t_τL):
+                self.τ = self.t_τL[self.n + 1] - self.t_τL[self.n]
+            else:
+                solver.terminate = True
+
+    def root(self, t, y, ydot):
+        t_i = (t - self.tr) % self.τ
+        if self.cycle_phase == "systole":
+            return np.array([t_i - self.p[0]])  # τ_es
+        elif self.cycle_phase == "diastole":
+            return np.array([t_i - self.p[1]])  # τ_ep
+        else:
+            return np.array([0.0])
+
+# Define the parameters
+p = np.array([0.3, 0.45, 0.06, 0.033, 1.11, 1.13, 11.0, 1.5, 0.03])
+
+# Generate the heart rate variability times
+def HRV(end_time):
+    t_τL = []
+    t_current = 0.0
+    while t_current < end_time + 1.0:  # Add buffer time
+        τ = np.random.uniform(0.8, 1.1)
+        t_current += τ
+        t_τL.append(t_current)
+    return np.array(t_τL)
+
+# Define the time points for initial simulation
+simulation_end_time = 35  # We need to simulate up to at least 35 seconds
+
+# Generate t_τL to cover the simulation time beyond 35 seconds
+t_τL = HRV(simulation_end_time)
+
+# Print total simulation time for verification
+print(f"Total simulation time: {t_τL[-1] + 0.1} seconds")
+
+# Initial conditions
+u0 = np.array([8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0])
+udot0 = np.zeros(7)  # Initial derivatives
+
+# Initialize the model
+model = CardiovascularModel(u0, udot0, p, t_τL)
+
+# Create the problem instance
+problem = Implicit_Problem(model.res, u0, udot0, 0.0)
+problem.name = 'Cardiovascular Model with Events'
+
+# Set the root function and event handler
+problem.root = model.root
+problem.handle_event = model.handle_event
+
+# Set the number of roots (events)
+problem.nroots = 1
+
+# Set up the solver
+solver = IDA(problem)
+solver.report_continuously = True  # Ensure continuous output
+solver.atol = 1e-6
+solver.rtol = 1e-6
+solver.maxord = 5
+solver.maxh = 0.05  # Increase maximum step size
+solver.maxsteps = 10000  # Allow more solver steps
+
+# Simulate
+tfinal = t_τL[-1] + 0.1  # Ensure simulation covers all events
+
+# Define the times at which to save the outputs for plotting
+plot_saveat = np.arange(0, tfinal + 0.002, 0.002)
+
+# Simulate the model with specified output times
+t, y, yd = solver.simulate(tfinal, ncp_list=plot_saveat)
+
+# Extract variables
+pLV = y[:, 0]
+psa = y[:, 1]
+psv = y[:, 2]
+Vlv = y[:, 3]
+Qav = y[:, 4]
+Qmv = y[:, 5]
+Qs = y[:, 6]
+
+# Plot pressures between 33 and 35 seconds
+plt.figure(figsize=(12, 6))
+plt.plot(t, pLV, label='P_LV')
+plt.plot(t, psa, label='P_SA')
+plt.plot(t, psv, label='P_SV')
+plt.xlabel('Time (s)')
+plt.ylabel('Pressure')
+plt.title('Pressures Over Time')
+plt.legend()
+plt.grid(True)
+plt.xlim(33, 35)  # Limit x-axis to between 33 and 35 seconds
+plt.show()
+
+# Plot left ventricular volume between 33 and 35 seconds
+plt.figure(figsize=(12, 6))
+plt.plot(t, Vlv, label='V_LV')
+plt.xlabel('Time (s)')
+plt.ylabel('Volume')
+plt.title('Left Ventricular Volume Over Time')
+plt.legend()
+plt.grid(True)
+plt.xlim(33, 35)  # Limit x-axis to between 33 and 35 seconds
+plt.show()
+
+
+"-------------------------------------------------------------------------------------------senstivity-analysis-----------------------------------------------------------------------------------------------------"
+
+# Simulation functions with multiprocessing
+def simulate_single_trajectory(args):
+    index, param_values, t_τL, x = args
+    u0 = np.array([8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0])
+    params = param_values[index, :]
+
+    # Compute τ_ep from τ_es and Δτ
+    τ_es = params[0]
+    Δτ = params[1]
+    τ_ep = τ_es + Δτ
+
+    # Update params array
+    params = np.insert(params, 1, τ_ep)
+    params = np.delete(params, 2)  # Remove Δτ
+    assert τ_ep > τ_es, f"Invalid parameters: τ_ep ({τ_ep}) should be greater than τ_es ({τ_es})"
+
+    model = CardiovascularModel(u0, np.zeros(7), params, t_τL)
+    problem = Implicit_Problem(model.res, u0, np.zeros(7), x[0])  # Set initial time to x[0]
+    problem.root = model.root
+    problem.handle_event = model.handle_event
+    problem.nroots = 1
+
+    solver = IDA(problem)
+    solver.report_continuously = False
+    solver.atol = 1e-6
+    solver.rtol = 1e-6
+    solver.maxord = 5
+    solver.maxh = 0.05
+    solver.maxsteps = 10000
+
+    t, y, _ = solver.simulate(tfinal=x[-1], ncp_list=x)
+    print(f"Expected time points: {len(x)}, Solver time points: {y.shape[0]}")
+
+    if y.shape[0] != len(x):
+        raise ValueError(f"Solver generated different number of time points: {y.shape[0]} vs {len(x)}")
+
+    # Extract outputs
+    pLV = y[:, 0]
+    psa = y[:, 1]
+    Vlv = y[:, 3]
+
+    return pLV, psa, Vlv
+
+def simulate_ensemble(param_values, t_τL, x, trajectories=None):
+    if trajectories is None:
+        trajectories = param_values.shape[0]
+    num_time_points = len(x)
+    num_trajectories = trajectories
+
+    # Prepare arguments for each process
+    args = [(i, param_values, t_τL, x) for i in range(num_trajectories)]
+
+    # Use multiprocessing pool to parallelize simulations
+    with Pool(processes=cpu_count()) as pool:
+        results = pool.map(simulate_single_trajectory, args)
+
+    valid_results = [(i, res) for i, res in enumerate(results) if res is not None]
+
+    num_valid = len(valid_results)
+    outputs = np.zeros((3 * num_time_points, num_valid))
+
+    # Combine results into outputs array
+    for idx, (i, (pLV, psa, Vlv)) in enumerate(valid_results):
+        outputs[:num_time_points, idx] = pLV
+        outputs[num_time_points:2 * num_time_points, idx] = psa
+        outputs[2 * num_time_points:, idx] = Vlv
+
+    return outputs
+
+def plot_sobol_heatmap(S_matrix, parameter_names, output_names, title, colormap="plasma"):
+    """
+    Function to plot a Sobol sensitivity heatmap.
+    
+    Parameters:
+        S_matrix (2D array): Matrix of Sobol indices.
+        parameter_names (list): Names of the parameters (row labels).
+        output_names (list): Names of the outputs (column labels).
+        title (str): Title for the heatmap.
+        colormap (str): Matplotlib colormap for the heatmap.
+    """
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    # Plot the heatmap
+    heatmap = ax.imshow(S_matrix, cmap=colormap, aspect="auto", vmin=0, vmax=1)
+
+    # Set the ticks
+    ax.set_xticks(np.arange(len(output_names)))
+    ax.set_xticklabels(output_names, rotation=45, ha="right", fontsize=10)
+    ax.set_yticks(np.arange(len(parameter_names)))
+    ax.set_yticklabels(parameter_names, fontsize=10)
+
+    # Add labels and title
+    ax.set_title(title, fontsize=12)
+    ax.set_xlabel("Outputs", fontsize=10)
+    ax.set_ylabel("Parameters", fontsize=10)
+
+    # Add colorbar
+    cbar = fig.colorbar(heatmap, ax=ax, orientation="vertical", shrink=0.8, pad=0.02)
+    cbar.set_label("Sobol Index", fontsize=10)
+
+    # Annotate the heatmap with the values
+    for i in range(len(parameter_names)):
+        for j in range(len(output_names)):
+            value = S_matrix[i, j]
+            ax.text(j, i, f"{value:.2f}", ha="center", va="center", color="white" if value > 0.5 else "black", fontsize=8)
+
+    plt.tight_layout()
+    plt.show()
+
+if __name__ == "__main__":
+    # Parameters
+    p = np.array([0.3, 0.45, 0.06, 0.033, 1.11, 1.13, 11.0, 1.5, 0.03])
+    problem = {
+        'num_vars': 9,
+        'names': ['τ_es', 'Δτ', 'Rmv', 'Zao', 'Rs', 'Csa', 'Csv', 'E_max', 'E_min'],
+        'bounds': [
+            [0.21, 0.34],        # τ_es
+            [0.15, 0.245],       # τ_ep 
+            [0.042, 0.078],      # Rmv
+            [0.0231, 0.0429],    # Zao
+            [0.777, 1.443],      # Rs
+            [0.791, 1.469],      # Csa
+            [7.7, 14.3],         # Csv
+            [1.05, 1.95],        # E_max
+            [0.021, 0.039],      # E_min
+        ]
+    }
+    N = 1000  # Increased Sobol sample size
+    param_values = saltelli.sample(problem, N, calc_second_order=True)
+
+    num_parameters = len(problem["names"])
+    num_outputs = 3  # Number of outputs (e.g., pLV, psa, Vlv)
+    # Generate t_τL
+    simulation_end_time = 35
+    t_τL = HRV(simulation_end_time)
+
+    # Simulation time points
+    x = np.arange(10, 13, 0.002)
+
+    # Simulate ensemble
+    ensemble_outputs = simulate_ensemble(param_values, t_τL, x)
+
+    print("param_values.shape:", param_values.shape)
+    print("ensemble_outputs.shape:", ensemble_outputs.shape)
+
+    # Sobol analysis
+    # Choose specific indices corresponding to variables and time points
+    num_time_points = len(x)
+    indices_to_analyze = [num_time_points - 1]  # Analyze the last time point
+    variables_to_analyze = ['pLV', 'psa', 'Vlv']
+    variable_indices = [0, 1, 3]  # Indices in y corresponding to the variables
+
+    for idx in indices_to_analyze:
+        Y = ensemble_outputs[idx, :]
+        sobol_indices = sobol.analyze(problem, Y, calc_second_order=True, print_to_console=False)
+        S1 = sobol_indices["S1"]
+        ST = sobol_indices["ST"]
+        print(f"Time point: {x[idx]:.3f}")
+        print("S1 indices:", S1)
+        print("ST indices:", ST)
+
+       # Initialize matrices for S1 and ST indices
+    S1_matrix = np.zeros((num_parameters, num_outputs))
+    ST_matrix = np.zeros((num_parameters, num_outputs))
+
+    # Analyze Sobol indices for each output
+    for output_idx, variable in enumerate(["pLV", "psa", "Vlv"]):
+        Y = ensemble_outputs[output_idx * len(x):(output_idx + 1) * len(x), :]
+        sobol_indices = sobol.analyze(problem, Y[-1, :], calc_second_order=True, print_to_console=False)
+        S1_matrix[:, output_idx] = sobol_indices["S1"]
+        ST_matrix[:, output_idx] = sobol_indices["ST"]
+
+    parameter_names = problem["names"]
+    output_names = ["pLV", "psa", "Vlv"]
+
+
+    # Assuming you want to analyze pLV at all time points
+    S1_list, ST_list = [], []
+    for i in range(num_time_points):
+        Y = ensemble_outputs[i, :]
+        sobol_indices = sobol.analyze(problem, Y, calc_second_order=True, print_to_console=False)
+        S1_list.append(sobol_indices["S1"])
+        ST_list.append(sobol_indices["ST"])
+    # Convert lists to arrays for plotting
+    S1_array = np.array(S1_list)
+    ST_array = np.array(ST_list)
+
+    # Sobol analysis at selected time points
+    selected_time_indices = [0, num_time_points // 2, num_time_points - 1]  # Start, middle, end
+    S1_results = {}
+    ST_results = {}
+
+    for idx in selected_time_indices:
+        Y = ensemble_outputs[idx, :]  # pLV at selected time point
+        sobol_indices = sobol.analyze(problem, Y, calc_second_order=True, print_to_console=False)
+        S1_results[x[idx]] = sobol_indices["S1"]
+        ST_results[x[idx]] = sobol_indices["ST"]
+
+    # Plotting Sobol indices over selected time points
+    for param_idx, param_name in enumerate(problem["names"]):
+        S1_values = [S1_results[time_point][param_idx] for time_point in x[selected_time_indices]]
+        ST_values = [ST_results[time_point][param_idx] for time_point in x[selected_time_indices]]
+        plt.plot([x[idx] for idx in selected_time_indices], S1_values, label=f"S1 - {param_name}")
+        plt.plot([x[idx] for idx in selected_time_indices], ST_values, label=f"ST - {param_name}")
+
+    plt.xlabel('Time (s)')
+    plt.ylabel('Sobol Indices')
+    plt.legend()
+    plt.show()
+
+    plot_sobol_heatmap(S1_matrix, parameter_names, output_names, "Sobol - First Order", colormap="plasma")
+
+    # Total-order indices heatmap
+    plot_sobol_heatmap(ST_matrix, parameter_names, output_names, "Sobol - Total Order", colormap="plasma")
+
+
+
+
+# lb = [0.21, 0.36, 0.042, 0.0231, 0.777, 0.791, 7.7, 1.05, 0.021]
+# ub = [0.34, 0.585, 0.078, 0.0429, 1.443, 1.469, 14.3, 1.95, 0.039]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+def simulate_single_trajectory(args):
+    index, param_values, t_τL, x = args
+    u0 = np.array([8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0])
+    params = param_values[index, :]
+
+    # Compute τ_ep from τ_es and Δτ
+    τ_es = params[0]
+    Δτ = params[1]
+    τ_ep = τ_es + Δτ
+
+    # Update params array
+    params = np.insert(params, 1, τ_ep)
+    params = np.delete(params, 2)  # Remove Δτ
+
+    if τ_ep <= τ_es:
+        print(f"Invalid parameters: τ_ep ({τ_ep}) should be greater than τ_es ({τ_es})")
+        return None
+
+    model = CardiovascularModel(u0, np.zeros(7), params, t_τL)
+    problem = Implicit_Problem(model.res, u0, np.zeros(7), 0.0)  # Start from t=0
+    problem.root = model.root
+    problem.handle_event = model.handle_event
+    problem.nroots = 1
+
+    solver = IDA(problem)
+    solver.report_continuously = False
+    solver.atol = 1e-6
+    solver.rtol = 1e-6
+    solver.maxord = 5
+    solver.maxh = 0.05
+    solver.maxsteps = 10000
+
+    try:
+        # Simulate the model
+        t, y, _ = solver.simulate(tfinal=x[-1], ncp_list=x)
+    except Exception as e:
+        print(f"Simulation failed for index {index} at time {x[-1]} with error: {e}")
+        return None
+
+    # Exclude the initial time point at t=0.0
+    t = t[1:]
+    y = y[1:, :]
+
+    # Verify that lengths match
+    if len(y) != len(x):
+        print(f"After discarding initial point, length of y ({len(y)}) does not match length of x ({len(x)})")
+        return None
+
+    # Extract outputs
+    pLV = y[:, 0]
+    psa = y[:, 1]
+    Vlv = y[:, 3]
+
+    return pLV, psa, Vlv
+
+
+def simulate_ensemble(param_values, t_τL, x, trajectories=None):
+    if trajectories is None:
+        trajectories = param_values.shape[0]
+    num_time_points = len(x)
+    num_trajectories = trajectories
+
+    # Prepare arguments for each process
+    args = [(i, param_values, t_τL, x) for i in range(num_trajectories)]
+
+    # Use multiprocessing pool to parallelize simulations
+    with Pool(processes=cpu_count()) as pool:
+        results = pool.map(simulate_single_trajectory, args)
+
+    valid_results = [(i, res) for i, res in enumerate(results) if res is not None]
+
+    num_valid = len(valid_results)
+    outputs = np.zeros((3 * num_time_points, num_valid))
+
+    # Combine results into outputs array
+    for idx, (i, (pLV, psa, Vlv)) in enumerate(valid_results):
+        outputs[:num_time_points, idx] = pLV
+        outputs[num_time_points:2 * num_time_points, idx] = psa
+        outputs[2 * num_time_points:, idx] = Vlv
+
+    return outputs
+
+
+if ensemble_outputs.shape[1] < param_values.shape[0]:
+    print("Not enough valid simulations for Sobol analysis.")
+    # Handle accordingly, e.g., by adjusting N or parameter ranges
+else:
+    # Proceed with Sobol analysis
