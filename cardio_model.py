@@ -30,7 +30,7 @@ class CardiovascularModel:
         
         """
         
-        self.p = p
+        self.p = np.array(p)
         self.t_τL = t_τL
         self.τ = t_τL[0]
         self.tr = 0.0
