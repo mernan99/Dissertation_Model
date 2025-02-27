@@ -363,7 +363,7 @@ def main():
         X_train=X_train,
         Y_train_list=Y_train_list,
         bounds_list=problem['bounds'],
-        polynomial_degree=5
+        polynomial_degree=6
     )
 
     pLV_metamodel, psa_metamodel, Vlv_metamodel = meta_models

@@ -9,6 +9,7 @@ from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
 import openturns as ot
 from multiprocessing import Pool, cpu_count
 import sys 
+import time
 
 sys.stdout = open('output.log', 'w')
 
@@ -327,6 +328,8 @@ try:
         plt.show()
 
     if __name__ == "__main__":
+
+        start_time = time.time()
         # Parameters
         p = np.array([0.3, 0.45, 0.06, 0.033, 1.11, 1.13, 11.0, 1.5, 0.03])
         problem = {
@@ -439,6 +442,9 @@ try:
 
         plot_sobol_heatmap(S1_matrix, parameter_names, output_names, "Sobol - First Order", colormap="plasma")
         plot_sobol_heatmap(ST_matrix, parameter_names, output_names, "Sobol - Total Order", colormap="plasma")
+
+        end_time = time.time()
+        print(f"Elapsed time: {end_time - start_time:.2f} seconds")
 
 
 
