@@ -1,7 +1,8 @@
+# full implementation with surrogate import
 import numpy as np
 import matplotlib.pyplot as plt
 import openturns as ot
-import time  # <-- Import the time module
+import time 
 
 from assimulo.problem import Implicit_Problem
 from assimulo.solvers.sundials import IDA
@@ -11,7 +12,7 @@ from SALib.analyze import sobol
 from multiprocessing import Pool, cpu_count
 
 ###############################################################################
-#                        MODEL CODE (BASELINE SIMULATION)                     #
+##                        MODEL CODE (BASELINE SIMULATION)                     #
 ###############################################################################
 
 def Valve(R, deltaP):
@@ -104,7 +105,7 @@ def HRV(end_time):
     return np.array(t_τL)
 
 ###############################################################################
-#              1) BASELINE RUN + PLOTTING (MODEL GRAPH)                       #
+##              1) BASELINE RUN + PLOTTING (MODEL GRAPH)                       #
 ###############################################################################
 
 def baseline_run_and_plot():
@@ -170,7 +171,7 @@ def baseline_run_and_plot():
 
 
 ###############################################################################
-#              2) ENSEMBLE SIMULATION + SOBOL (TABLE + HEATMAP)               #
+##              2) ENSEMBLE SIMULATION + SOBOL (TABLE + HEATMAP)               #
 ###############################################################################
 
 def simulate_single_trajectory(args):
@@ -278,6 +279,23 @@ def plot_sobol_heatmap(S_matrix, parameter_names, output_names, title, colormap=
     plt.tight_layout()
     plt.show()
 
+def plot_parity(true_vals, pred_vals, output_name):
+    """
+    Simple parity plot of Surrogate vs. Full-model outputs
+    """
+    plt.figure(figsize=(6,6))
+    plt.scatter(true_vals, pred_vals, alpha=0.5, label='Data')
+    # 1:1 line
+    min_val = min(true_vals.min(), pred_vals.min())
+    max_val = max(true_vals.max(), pred_vals.max())
+    plt.plot([min_val, max_val], [min_val, max_val], 'r--', label='Ideal 1:1')
+    plt.xlabel('Full Model (True)')
+    plt.ylabel('Surrogate Prediction')
+    plt.title(f'Parity Plot for {output_name}')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
 def main():
     """
     Main entry point for the script.
@@ -288,13 +306,13 @@ def main():
     start_time = time.time()
 
     ############################################################################
-    # A) BASELINE SIMULATION + PLOT
+    ## A) BASELINE SIMULATION + PLOT
     ############################################################################
     print("\n=== Running Baseline Simulation ===")
     baseline_run_and_plot()
 
     ############################################################################
-    # B) ENSEMBLE SIMULATION & SOBOL ANALYSIS
+    ## B) ENSEMBLE SIMULATION & SOBOL ANALYSIS
     ############################################################################
     print("\n=== Running Ensemble Simulations for Sensitivity ===")
     problem = {
@@ -326,13 +344,6 @@ def main():
     # Perform ensemble runs
     ensemble_data, valid_ids = simulate_ensemble(param_values, t_τL, x)
     print("ensemble_data.shape:", ensemble_data.shape)
-
-    # each column is a valid simulation
-    # rows 0..(len(x)-1) => pLV(t),
-    #      len(x)..(2*len(x)-1) => psa(t),
-    #      2*len(x)..(3*len(x)-1) => Vlv(t)
-
-    # => We do final-time analysis for pLV, psa, Vlv
     num_time_points = len(x)
     pLV_block = ensemble_data[:num_time_points, :]
     psa_block = ensemble_data[num_time_points:2*num_time_points, :]
@@ -342,11 +353,6 @@ def main():
     pLV_final = pLV_block[final_idx, :]
     psa_final = psa_block[final_idx, :]
     Vlv_final = Vlv_block[final_idx, :]
-
-    # direct (full-model) Sobol (commented out for brevity):
-    # si_pLV = sobol.analyze(problem, pLV_final, calc_second_order=True, print_to_console=False)
-    # si_psa = sobol.analyze(problem, psa_final, calc_second_order=True, print_to_console=False)
-    # si_Vlv = sobol.analyze(problem, Vlv_final, calc_second_order=True, print_to_console=False)
 
     # Surrogate-based approach
     from surrogate import (
@@ -367,6 +373,15 @@ def main():
     )
 
     pLV_metamodel, psa_metamodel, Vlv_metamodel = meta_models
+
+    pLV_pred = evaluate_pce_model_openturns(pLV_metamodel, X_train)
+    plot_parity(pLV_final, pLV_pred, 'pLV')
+
+    psa_pred = evaluate_pce_model_openturns(psa_metamodel, X_train)
+    plot_parity(psa_final, psa_pred, 'psa')
+
+    Vlv_pred = evaluate_pce_model_openturns(Vlv_metamodel, X_train)
+    plot_parity(Vlv_final, Vlv_pred, 'Vlv')
 
     print("\n=== Surrogate-based Sobol for pLV ===")
     si_pLV_sur = sobol_analysis_with_surrogate(pLV_metamodel, problem_dict=problem, N_sobol=1000)

@@ -59,7 +59,7 @@ def build_pce_surrogates_openturns(
             poly_basis_factory, enumeration_function
         )
 
-        # We'll limit to 1000 basis terms; or the library chooses adaptively
+        # limit to 1000 basis terms; or the library chooses adaptively
         adaptive_strategy = ot.FixedStrategy(total_poly_basis, 1000)
 
         # 4) Create the FunctionalChaosAlgorithm with no custom projection strategy
@@ -70,7 +70,7 @@ def build_pce_surrogates_openturns(
             adaptive_strategy
         )
 
-        # Simply run with the default approach (no setProjectionStrategy())
+        # default approach (no setProjectionStrategy())
         chaos_algo.run()
 
         # 5) Extract the resulting metamodel
