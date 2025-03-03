@@ -36,7 +36,7 @@ class TwoChamberModel:
         res[1] = ydot[1] - ((Qsvn - Qmv)*E_t_LA + (Pla/E_t_LA)*DE_t_LA)
 
         # 3) dVlv/dt
-        res[2] = ydot[2] - (Qav - Qmv)
+        res[2] = ydot[2] - (Qmv - Qav)
 
         # 4) dVla/dt
         res[3] = ydot[3] - (Qsvn - Qmv)
@@ -175,17 +175,17 @@ def run_minimal():
     solver.make_consistent('IDA_YA_YDP_INIT')
 
     # 1) Loose Tolerances
-    solver.atol = 1e-3
-    solver.rtol = 1e-3
+    solver.atol = 1e-5
+    solver.rtol = 1e-5
 
     # 2) Big maxsteps, smaller step size
     solver.maxsteps = 1000000
-    solver.maxh = 0.01
+    solver.maxh = 0.001
     solver.maxord = 2
     solver.display_progress = True
 
     t_final = 35.0
-    save_times = np.linspace(0, t_final, 300)
+    save_times = np.linspace(0, t_final, 5000)
 
     t_out, y, yd_out = solver.simulate(t_final, ncp_list=save_times)
 

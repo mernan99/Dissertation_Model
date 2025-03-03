@@ -296,6 +296,9 @@ def plot_parity(true_vals, pred_vals, output_name):
     plt.grid(True)
     plt.show()
 
+    # at the same time interval, the plot plarity plots the true value from the full model and the predicted value from the surrogate model. 
+    #The 1:1 line is also plotted to show how well the surrogate model predicts the true value.
+
 def main():
     """
     Main entry point for the script.
@@ -369,18 +372,22 @@ def main():
         X_train=X_train,
         Y_train_list=Y_train_list,
         bounds_list=problem['bounds'],
-        polynomial_degree=6
+        polynomial_degree=5
     )
 
     pLV_metamodel, psa_metamodel, Vlv_metamodel = meta_models
 
-    pLV_pred = evaluate_pce_model_openturns(pLV_metamodel, X_train)
+    pLV_pred = evaluate_pce_model_openturns([pLV_metamodel], X_train)
+    pLV_pred = pLV_pred[:, 0]
+
     plot_parity(pLV_final, pLV_pred, 'pLV')
 
-    psa_pred = evaluate_pce_model_openturns(psa_metamodel, X_train)
+    psa_pred = evaluate_pce_model_openturns([psa_metamodel], X_train)
+    psa_pred = psa_pred[:, 0]
     plot_parity(psa_final, psa_pred, 'psa')
 
-    Vlv_pred = evaluate_pce_model_openturns(Vlv_metamodel, X_train)
+    Vlv_pred = evaluate_pce_model_openturns([Vlv_metamodel], X_train)
+    Vlv_pred = Vlv_pred[:, 0]
     plot_parity(Vlv_final, Vlv_pred, 'Vlv')
 
     print("\n=== Surrogate-based Sobol for pLV ===")

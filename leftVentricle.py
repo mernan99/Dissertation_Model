@@ -487,13 +487,16 @@ def main():
     # 1) PLOT THE SURROGATE (parity + 1D slice) BEFORE SENSITIVITY
     # -------------------------------------------------------------------------
     print("\n=== Plotting Surrogate vs Full Model (parity) ===")
-    pLV_pred = evaluate_pce_model_openturns(pLV_metamodel, X_train)
+    pLV_pred = evaluate_pce_model_openturns([pLV_metamodel], X_train)
+    pLv_pred = pLV_pred[:, 0]
     plot_parity(pLV_final, pLV_pred, 'pLV')
 
-    psa_pred = evaluate_pce_model_openturns(psa_metamodel, X_train)
+    psa_pred = evaluate_pce_model_openturns([psa_metamodel], X_train)
+    psa_pred = psa_pred[:, 0]
     plot_parity(psa_final, psa_pred, 'psa')
 
-    Vlv_pred = evaluate_pce_model_openturns(Vlv_metamodel, X_train)
+    Vlv_pred = evaluate_pce_model_openturns([Vlv_metamodel], X_train)
+    Vlv_pred = Vlv_pred[:, 0]   
     plot_parity(Vlv_final, Vlv_pred, 'Vlv')
 
     print("\n=== 1D Slice: Full vs Surrogate for pLV ===")
