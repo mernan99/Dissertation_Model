@@ -15,6 +15,23 @@ class TwoChamberModel:
         self.Eshift_lv = 0.0
         self.Eshift_la = 0.92
 
+
+
+    def valve_flow(self, CQ, p_up, p_down, smoothing=0.1):
+        """
+        Smooth valve flow function with exponent clipping to avoid overflow.
+        """
+        deltaP = p_up - p_down
+
+        # Clip the exponent to some safe range, e.g. [-30, 30]
+        exponent = np.clip(-deltaP / smoothing, -30.0, 30.0)
+
+        opening_fraction = 1.0 / (1.0 + np.exp(exponent))
+
+        flow = CQ * np.sqrt(np.maximum(deltaP, 0.0)) * opening_fraction
+        return flow
+
+
     def res(self, t, y, ydot):
         Plv, Pla, Vlv, Vla, Psas, Qsas, Psat, Qsat, Psvn, Qsvn, Qav, Qmv = y
         (v0_lv, Emin_lv, Emax_lv, τes_lv, τed_lv,
@@ -60,15 +77,22 @@ class TwoChamberModel:
         res[9] = ydot[9] - ((ydot[8] - ydot[3])/Rsvn)
 
         # 11) Qav
-        Qav_expr = 0.0
-        if Plv >= Psas:
-            Qav_expr = CQ_AV * np.sqrt(Plv - Psas)
+        # Qav_expr = 0.0
+        # if Plv >= Psas:
+        #     Qav_expr = CQ_AV * np.sqrt(Plv - Psas)
+        # res[10] = Qav - Qav_expr
+
+        # # 12) Qmv
+        # Qmv_expr = 0.0
+        # if Pla >= Plv:
+        #     Qmv_expr = CQ_MV * np.sqrt(Pla - Plv)
+        # res[11] = Qmv - Qmv_expr
+        # 11) Qav
+        Qav_expr = self.valve_flow(CQ_AV, Plv, Psas, smoothing=0.1)
         res[10] = Qav - Qav_expr
 
         # 12) Qmv
-        Qmv_expr = 0.0
-        if Pla >= Plv:
-            Qmv_expr = CQ_MV * np.sqrt(Pla - Plv)
+        Qmv_expr = self.valve_flow(CQ_MV, Pla, Plv, smoothing=0.1)
         res[11] = Qmv - Qmv_expr
 
         return res
