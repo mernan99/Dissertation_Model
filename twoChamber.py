@@ -158,6 +158,7 @@ class TwoChamberModel:
         return (Emax_la - Emin_la)*dE_pla
 
 def run_minimal():
+    x = 6.2e-5
     p = [
         5.0,  # v0_lv
         0.1,  # Emin_lv
@@ -172,8 +173,8 @@ def run_minimal():
         350.0,# CQ_AV
         400.0,# CQ_MV
         0.08, # Csas
-        0.003,# Rsas
-        6.2e-5,# Lsas
+        0.06,# Rsas
+        x,# Lsas
         1.6,  # Csat
         0.05, # Rsat
         0.0017,# Lsat
@@ -183,7 +184,7 @@ def run_minimal():
         0.075 # Rsvn
     ]
 
-    u0 = np.array([1.0,1.0,5.0,4.0,  100.0,0.0,100.0,0.0,  0.0,0.0, 0.0,0.0])
+    u0 = np.array([1.0, 1.0, 5.0, 4.0, 100.0, 0.0, 100.0, 0.0, 0.0, 0.0, 0.0, 0.0])
     udot0 = np.zeros_like(u0)
 
     model = TwoChamberModel(p, u0, udot0, τ=1.0)

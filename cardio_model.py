@@ -1,5 +1,9 @@
 # cardio_model.py
 import numpy as np
+import matplotlib.pyplot as plt
+from assimulo.problem import Implicit_Problem
+from assimulo.solvers.sundials import IDA
+
 
 # Valve function remains the same
 def Valve(R, deltaP):
@@ -109,3 +113,46 @@ class CardiovascularModel:
         """
         t_i = (t - self.tr) % self.τ
         return np.array([t_i - self.p[0]])
+
+def baseline_run_and_plot():
+    # Define baseline parameters
+    p = [0.3, 0.45, 0.06, 0.033, 1.11, 1.13, 11.0, 1.5, 0.03]
+    simulation_end_time = 35
+    t_τL = HRV(simulation_end_time)
+
+    u0 = np.array([8.0, 8.0, 8.0, 265.0, 0.0, 0.0, 0.0])
+    udot0 = np.zeros(7)
+
+    model = CardiovascularModel(u0, udot0, p, t_τL)
+    problem = Implicit_Problem(model.res, u0, udot0, 0.0)
+    problem.root = model.root
+    problem.handle_event = model.handle_event
+    problem.nroots = 1
+
+    solver = IDA(problem)
+    solver.report_continuously = True
+    solver.atol = 1e-6
+    solver.rtol = 1e-6
+    solver.maxord = 5
+    solver.maxh = 0.05
+    solver.maxsteps = 20000
+
+    tfinal = t_τL[-1] + 0.1
+    plot_saveat = np.arange(0, tfinal + 0.002, 0.002)
+
+    # Run solver
+    t_values, y, yd = solver.simulate(tfinal, ncp_list=plot_saveat)
+
+    # Convert t_values to NumPy array to avoid AttributeError
+    t_values = np.array(t_values)
+
+    # Extract relevant training data
+    X_train = np.tile(p, (len(t_values), 1))  # Ensure correct shape
+    Y_train_list = [y[:, 0], y[:, 1], y[:, 3]]  # pLV, psa, Vlv
+
+    print("Returning X_train shape:", X_train.shape)
+    print("Returning Y_train_list lengths:", [len(y_data) for y_data in Y_train_list])
+    print("Returning time values shape:", t_values.shape)  # Should now work
+
+    return X_train, Y_train_list, t_values  # Ensure three values are returned
+
