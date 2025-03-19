@@ -19,7 +19,7 @@ def Valve(R, deltaP):
 def HRV(end_time):
     t_τL = []
     t_current = 0.0
-    while t_current < end_time + 1.0:  # Add buffer time
+    while t_current < end_time + 1.0:  
         τ = np.random.uniform(0.8, 1.1)
         t_current += τ
         t_τL.append(t_current)

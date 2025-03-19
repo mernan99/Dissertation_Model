@@ -47,10 +47,14 @@ class TwoChamberModel:
         res = np.zeros(12)
 
         # 1) dPlv/dt
-        res[0] = ydot[0] - ((Qmv - Qav)*E_t_LV + (Plv/E_t_LV)*DE_t_LV)
+        # res[0] = ydot[0] - ((Qmv - Qav)*E_t_LV + (Plv/E_t_LV)*DE_t_LV)
+        res[0] = ydot[0] - ( (Qmv - Qav)*E_t_LV + (Vlv - v0_lv)*DE_t_LV )
+
 
         # 2) dPla/dt
-        res[1] = ydot[1] - ((Qsvn - Qmv)*E_t_LA + (Pla/E_t_LA)*DE_t_LA)
+        # res[1] = ydot[1] - ((Qsvn - Qmv)*E_t_LA + (Pla/E_t_LA)*DE_t_LA)
+        res[1] = ydot[1] - ( (Qsvn - Qmv)*E_t_LA + (Vla - v0_la)*DE_t_LA )
+
 
         # 3) dVlv/dt
         res[2] = ydot[2] - (Qmv - Qav)
@@ -106,10 +110,10 @@ class TwoChamberModel:
         ti_lv = (t + (1.0 - self.Eshift_lv)*τ) % τ
 
         if ti_lv <= τes_lv:
-            Ep_lv = 0.5*(1.0 - np.cos(np.pi*ti_lv/τes_lv))
+            Ep_lv = (1.0 - np.cos(ti_lv/τes_lv*np.pi)) / 2.0
         elif ti_lv <= τed_lv:
             r = (ti_lv - τes_lv)/(τed_lv - τes_lv)
-            Ep_lv = 0.5*(1.0 + np.cos(np.pi*r))
+            Ep_lv = (1.0 + np.cos(np.pi*r)) / 2.0
         else:
             Ep_lv = 0.0
         return Emin_lv + (Emax_lv - Emin_lv)*Ep_lv
@@ -120,10 +124,10 @@ class TwoChamberModel:
         ti_lv = (t + (1.0 - self.Eshift_lv)*τ) % τ
 
         if ti_lv <= τes_lv:
-            dE_p_lv = (np.pi/τes_lv)*np.sin(np.pi*ti_lv/τes_lv)/2.0
+            dE_p_lv = (np.pi / τes_lv) * np.sin(ti_lv / τes_lv * np.pi) / 2.0
         elif ti_lv <= τed_lv:
-            r = (ti_lv - τes_lv)/(τed_lv - τes_lv)
-            dE_p_lv = - (np.pi/(τed_lv - τes_lv))*np.sin(np.pi*r)/2.0
+            r = (ti_lv - τes_lv) / (τed_lv - τes_lv)
+            dE_p_lv = - (np.pi / (τed_lv - τes_lv)) * np.sin(np.pi * r) / 2.0
         else:
             dE_p_lv = 0.0
         return (Emax_lv - Emin_lv)*dE_p_lv
@@ -135,10 +139,10 @@ class TwoChamberModel:
         ti_la = (t + (1.0 - self.Eshift_la)*τ) % τ
 
         if ti_la <= τes_la:
-            Ep_la = 0.5*(1.0 - np.cos(np.pi*ti_la/τes_la))
+            Ep_la = (1.0 - np.cos(ti_la/τes_la * np.pi)) / 2.0
         elif ti_la <= τed_la:
             r = (ti_la - τes_la)/(τed_la - τes_la)
-            Ep_la = 0.5*(1.0 + np.cos(np.pi*r))
+            Ep_la = (1.0 + np.cos(np.pi*r)) / 2.0
         else:
             Ep_la = 0.0
         return Emin_la + (Emax_la - Emin_la)*Ep_la
@@ -149,10 +153,10 @@ class TwoChamberModel:
         ti_la = (t + (1.0 - self.Eshift_la)*τ) % τ
 
         if ti_la <= τes_la:
-            dE_pla = (np.pi/τes_la)*np.sin(np.pi*ti_la/τes_la)/2.0
+            dE_pla = (np.pi/τes_la) * np.sin(ti_la / τes_la * np.pi)/ 2.0
         elif ti_la <= τed_la:
             r = (ti_la - τes_la)/(τed_la - τes_la)
-            dE_pla = - (np.pi/(τed_la - τes_la))*np.sin(np.pi*r)/2.0
+            dE_pla = - (np.pi / (τed_la - τes_la)) * np.sin(np.pi * r)/ 2.0
         else:
             dE_pla = 0.0
         return (Emax_la - Emin_la)*dE_pla
