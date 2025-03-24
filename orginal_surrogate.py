@@ -12,16 +12,12 @@ from surrogate import build_pce_surrogates_openturns, evaluate_pce_model_opentur
 # 3) Filter the original data only at plotting time.
 ###################################
 
-# Step 1: Generate simulation data
 p = [0.3, 0.45, 0.06, 0.033, 1.11, 1.13, 11.0, 1.5, 0.03]  # Baseline parameters
 simulation_end_time = 35  # Simulation duration
 
 # Generate full data (0–35s)
 X_train_full, Y_train_list_full, t_values_full = baseline_run_and_plot()
 
-###################################
-# Step 2: Downsample the data to create training data for the surrogate
-###################################
 
 num_samples = 500  # Choose how many samples for training
 
@@ -57,9 +53,9 @@ Y_train_list = [
     Y_train_list_full[2][indices],  # Vlv
 ]
 
-###################################
-# Step 3: Build the PCE surrogate with the training data
-###################################
+
+# Build the PCE surrogate with the training data
+
 
 polynomial_degree = 3  # Adjust as needed
 meta_models, distribution = build_pce_surrogates_openturns(
@@ -67,25 +63,23 @@ meta_models, distribution = build_pce_surrogates_openturns(
     polynomial_degree=polynomial_degree
 )
 
-###################################
-# Step 4: Evaluate surrogate model predictions on new param sets (demo)
-###################################
+# Evaluate surrogate model predictions on new param sets (demo)
 
 X_test = X_train[:100, :]  # Or generate new random param sets
 predictions = evaluate_pce_model_openturns(meta_models, X_test)
 
-###################################
-# Step 5: Filter the ORIGINAL data (not the downsampled) for plotting (33-35s)
-###################################
+
+# Filter the ORIGINAL data (not the downsampled) for plotting (33-35s)
+
 
 time_mask = (t_values_full >= 33) & (t_values_full <= 35)
 filtered_t = t_values_full[time_mask]
 filtered_pLV = Y_train_list_full[0][time_mask]
 filtered_Vlv = Y_train_list_full[2][time_mask]
 
-###################################
-# Step 6: Plot results in the 33–35s range
-###################################
+
+# Plot results in the 33–35s range
+
 
 # a) pLV
 plt.figure(figsize=(10, 5))

@@ -162,7 +162,6 @@ class TwoChamberModel:
         return (Emax_la - Emin_la)*dE_pla
 
 def run_minimal():
-    x = 6.2e-5
     p = [
         5.0,  # v0_lv
         0.1,  # Emin_lv
@@ -178,7 +177,7 @@ def run_minimal():
         400.0,# CQ_MV
         0.08, # Csas
         0.06,# Rsas
-        x,# Lsas
+        6.2e-5,# Lsas
         1.6,  # Csat
         0.05, # Rsat
         0.0017,# Lsat
