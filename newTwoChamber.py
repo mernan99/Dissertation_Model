@@ -1,5 +1,3 @@
-# shi_model.py
-
 import numpy as np
 import matplotlib.pyplot as plt
 from assimulo.problem import Implicit_Problem
@@ -91,7 +89,6 @@ class ShiModel:
         dQsat = ydot[7]
         dPsvn = ydot[8]
         dQsvn = ydot[9]
-        # ydot[10], ydot[11] are for Qav, Qmv → 0 for an index-1 DAE
 
         # Time-varying elastances
         E_LV, dE_LV = elastance_LV(
