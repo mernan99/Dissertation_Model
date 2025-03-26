@@ -19,22 +19,34 @@ simulation_end_time = 35  # Simulation duration
 X_train_full, Y_train_list_full, t_values_full = baseline_run_and_plot()
 
 
-num_samples = 500  # Choose how many samples for training
+num_samples = 10000  # Choose how many samples for training
 
 # Create random parameter sets for X_train
 # (these do NOT depend on t-values, they represent different param variations)
 # If you are only using baseline, replace with a tile of the baseline p.
 
+# bounds_list = [
+#     (0.21, 0.34),  # param_0
+#     (0.15, 0.6),  # param_1
+#     (0.05, 0.1), # param_2
+#     (0.02, 0.05),# param_3
+#     (0.8, 1.5),  # param_4
+#     (0.9, 1.3),  # param_5
+#     (8, 15),     # param_6
+#     (1.0, 2.0),  # param_7
+#     (0.01, 0.05) # param_8
+# ]
+
 bounds_list = [
-    (0.2, 0.5),  # param_0
-    (0.3, 0.6),  # param_1
-    (0.05, 0.1), # param_2
-    (0.02, 0.05),# param_3
-    (0.8, 1.5),  # param_4
-    (0.9, 1.3),  # param_5
-    (8, 15),     # param_6
-    (1.0, 2.0),  # param_7
-    (0.01, 0.05) # param_8
+    (0.21, 0.34),
+    (0.15, 0.205),
+    (0.042, 0.078),
+    (0.0231, 0.0429),
+    (0.777, 1.443),
+    (0.791, 1.469),
+    (7.7, 14.3),
+    (1.05, 1.95),
+    (0.021, 0.039),
 ]
 
 X_train = np.random.uniform(
@@ -57,7 +69,7 @@ Y_train_list = [
 # Build the PCE surrogate with the training data
 
 
-polynomial_degree = 3  # Adjust as needed
+polynomial_degree = 7  # Adjust as needed
 meta_models, distribution = build_pce_surrogates_openturns(
     X_train, Y_train_list, bounds_list,
     polynomial_degree=polynomial_degree
@@ -112,3 +124,6 @@ plt.legend()
 plt.grid(True)
 plt.xlim(33, 35)
 plt.show()
+
+print(ot.__version__)
+print(dir(ot))

@@ -60,7 +60,13 @@ def build_pce_surrogates_openturns(
         )
 
         # limit to 1000 basis terms; or the library chooses adaptively
-        adaptive_strategy = ot.FixedStrategy(total_poly_basis, 1000)
+        adaptive_strategy = ot.FixedStrategy(total_poly_basis, 10000)
+        # Use a selection-based approach (LARS) instead of a fixed strategy
+        # projection_strategy = ot.LeastSquaresStrategy(ot.LARS(), ot.Normal())
+        # adaptive_strategy = ot.SequentialStrategy(total_poly_basis, projection_strategy)
+        # projection_strategy = ot.LeastSquaresStrategy(ot.LARS())  # Just pass LARS
+        # adaptive_strategy = ot.SequentialStrategy(total_poly_basis, projection_strategy)
+
 
         # 4) Create the FunctionalChaosAlgorithm with no custom projection strategy
         chaos_algo = ot.FunctionalChaosAlgorithm(
@@ -71,7 +77,31 @@ def build_pce_surrogates_openturns(
         )
 
         # default approach (no setProjectionStrategy())
+        # chaos_algo.run()
+
+        # # 1) Create the FunctionalChaosAlgorithm the older/manual way:
+        # chaos_algo = ot.FunctionalChaosAlgorithm(input_sample,
+        #                                         output_sample,
+        #                                         distribution)
+
+        # # 2) Manually set the polynomial basis and total polynomial degree:
+        # chaos_algo.setOrthogonalPolynomials(total_poly_basis)
+        # chaos_algo.setMaximumTotalDegree(polynomial_degree)
+
+        # # 3) (Optional) If your version has setUseLARSModelSelection:
+        # #    This toggles LARS-based term selection internally
+        # chaos_algo.setUseLARSModelSelection(True)
+
+        # # 4) Possibly set a model selection criterion (like corrected LOO):
+        # # chaos_algo.setModelSelectionCriterion(ot.CorrectedLeaveOneOut())
+
+        # 5) Now run:
         chaos_algo.run()
+
+        # 6) Extract the result:
+        chaos_result = chaos_algo.getResult()
+        meta_model = chaos_result.getMetaModel()
+
 
         # 5) Extract the resulting metamodel
         chaos_result = chaos_algo.getResult()
