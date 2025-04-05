@@ -550,3 +550,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# # 3) Define input distribution (9 params + time)
+# dist_p1 = ot.Uniform(0.21, 0.34)  # τ_es
+# dist_p2 = ot.Uniform(0.15, 0.205)  # τ_ep
+# dist_p3 = ot.Uniform(0.042, 0.078)  # Rmv
+# dist_p4 = ot.Uniform(0.0231, 0.0429)  # Zao
+# dist_p5 = ot.Uniform(0.777, 1.443)  # Rs
+# dist_p6 = ot.Uniform(0.791, 1.469)  # Csa
+# dist_p7 = ot.Uniform(7.7, 14.3)  # Csv
+# dist_p8 = ot.Uniform(1.05, 1.95)  # E_max
+# dist_p9 = ot.Uniform(0.021, 0.039)  # E_min
+# dist_t  = ot.Uniform(0.0, 1.5)

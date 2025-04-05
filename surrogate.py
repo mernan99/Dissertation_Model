@@ -1,112 +1,211 @@
 # surrogate.py
+
+
+# def build_pce_surrogates_openturns(
+#     X_train, 
+#     Y_train_list,
+#     bounds_list,
+#     polynomial_degree=3
+# ):
+#     """
+#     Build OpenTURNS-based PCE surrogates for multiple outputs (e.g., pLV, psa, Vlv).
+
+#     Parameters
+#     ----------
+#     X_train : np.ndarray, shape (n_samples, n_params)
+#         Training inputs (parameter sets).
+#     Y_train_list : list of np.ndarray, each shape (n_samples,)
+#         A list of output arrays, one for each response variable 
+#         (e.g. [pLV_final, psa_final, Vlv_final]).
+#     bounds_list : list of (low, high) for each parameter
+#         Bounds for each parameter, used to define Uniform distributions.
+#     polynomial_degree : int
+#         Maximum total polynomial degree for the PCE expansions.
+
+#     Returns
+#     -------
+#     meta_models : list of ot.Function
+#         A list of OpenTURNS metamodels, one for each output in Y_train_list.
+#     distribution : ot.ComposedDistribution
+#         The joint input distribution used for PCE.
+#     """
+#     import openturns as ot
+#     n_samples, n_params = X_train.shape
+
+#     # 1) Create input distribution from user-provided bounds (Uniform)
+#     marginals = [ot.Uniform(low, high) for (low, high) in bounds_list]
+#     distribution = ot.ComposedDistribution(marginals)
+
+#     # 2) Convert training data to OpenTURNS format
+#     input_sample = ot.Sample(X_train.tolist())  # shape (n_samples, n_params)
+
+#     meta_models = []
+
+#     # 3) Build a PCE for each output
+#     for Y_train in Y_train_list:
+#         # Convert output to ot.Sample
+#         output_sample = ot.Sample(Y_train.reshape(-1, 1).tolist())
+
+#         # Build polynomial basis factories (Legendre for Uniform)
+#         poly_basis_factory = ot.PolynomialFamilyCollection(n_params)
+#         for j in range(n_params):
+#             poly_basis_factory[j] = ot.LegendreFactory()
+
+#         enumeration_function = ot.LinearEnumerateFunction(n_params)
+#         total_poly_basis = ot.OrthogonalProductPolynomialFactory(
+#             poly_basis_factory, enumeration_function
+#         )
+
+#         # limit to 1000 basis terms; or the library chooses adaptively
+#         # adaptive_strategy = ot.FixedStrategy(total_poly_basis, 4000)
+#         lars_factory = ot.ApproximationAlgorithmImplementationFactory(ot.LARS())
+#         projection_strategy = ot.LeastSquaresStrategy(lars_factory)
+#         adaptive_strategy = ot.SequentialStrategy(total_poly_basis, projection_strategy)
+
+#         # Use a selection-based approach (LARS) instead of a fixed strategy
+#         # projection_strategy = ot.LeastSquaresStrategy(ot.LARS(), ot.Normal())
+#         # adaptive_strategy = ot.SequentialStrategy(total_poly_basis, projection_strategy)
+#         # projection_strategy = ot.LeastSquaresStrategy(ot.LARS())  # Just pass LARS
+#         # adaptive_strategy = ot.SequentialStrategy(total_poly_basis, projection_strategy)
+
+
+#         # 4) Create the FunctionalChaosAlgorithm with no custom projection strategy
+#         # chaos_algo = ot.FunctionalChaosAlgorithm(
+#         #     input_sample, 
+#         #     output_sample, 
+#         #     distribution, 
+#         #     adaptive_strategy
+#         # )
+
+
+#         # chaos_algo.run()
+#         # 1. Instantiate FunctionalChaosAlgorithm without projection strategy
+#         chaos_algo = ot.FunctionalChaosAlgorithm (
+#             input_sample,
+#             output_sample,
+#             distribution
+#         )
+
+#         # 2. Set the polynomial basis + degree
+#         chaos_algo.setOrthogonalPolynomials(total_poly_basis)
+#         chaos_algo.setMaximumTotalDegree(polynomial_degree)
+
+#         # 3. Use internal LARS model selection logic
+#         chaos_algo.setUseLARSModelSelection(True)
+
+#         # Optional: set model selection criterion like Corrected LOO
+#         # chaos_algo.setModelSelectionCriterion(ot.CorrectedLeaveOneOut())
+
+#         # 4. Run the algorithm
+#         chaos_algo.run()
+
+
+
+#         # 6) Extract the result:
+#         chaos_result = chaos_algo.getResult()
+#         meta_model = chaos_result.getMetaModel()
+
+
+#         # 5) Extract the resulting metamodel
+#         chaos_result = chaos_algo.getResult()
+#         meta_model = chaos_result.getMetaModel()
+#         meta_models.append(meta_model)
+
+#     return meta_models, distribution
+
 import numpy as np
-import openturns as ot
 from SALib.analyze import sobol
 from SALib.sample import saltelli
 
+import openturns as ot
+
+
+def comb(n, k):
+    """
+    Return binomial coefficient C(n, k).
+    Equivalent to: n! / (k! * (n-k)!)
+    """
+    if 0 <= k <= n:
+        c = 1
+        for i in range(min(k, n - k)):
+            c = c * (n - i) // (i + 1)
+        return c
+    else:
+        return 0
+    
 def build_pce_surrogates_openturns(
-    X_train, 
+    X_train,
     Y_train_list,
     bounds_list,
     polynomial_degree=3
 ):
     """
-    Build OpenTURNS-based PCE surrogates for multiple outputs (e.g., pLV, psa, Vlv).
-
+    Build PCE surrogates of total degree <= polynomial_degree
+    in OpenTURNS 1.19 using a "FixedStrategy" (no LARS).
+    
     Parameters
     ----------
-    X_train : np.ndarray, shape (n_samples, n_params)
-        Training inputs (parameter sets).
-    Y_train_list : list of np.ndarray, each shape (n_samples,)
-        A list of output arrays, one for each response variable 
-        (e.g. [pLV_final, psa_final, Vlv_final]).
-    bounds_list : list of (low, high) for each parameter
-        Bounds for each parameter, used to define Uniform distributions.
+    X_train : np.ndarray of shape (n_samples, n_params)
+        Input parameter samples
+    Y_train_list : list of np.ndarray, each (n_samples,)
+        One output array per response variable
+    bounds_list : list of (low, high)
+        Uniform bounds for each parameter dimension
     polynomial_degree : int
-        Maximum total polynomial degree for the PCE expansions.
+        Maximum total polynomial degree
 
     Returns
     -------
     meta_models : list of ot.Function
-        A list of OpenTURNS metamodels, one for each output in Y_train_list.
+        One PCE model per output
     distribution : ot.ComposedDistribution
-        The joint input distribution used for PCE.
+        The joint uniform distribution
     """
-    import openturns as ot
-    n_samples, n_params = X_train.shape
-
-    # 1) Create input distribution from user-provided bounds (Uniform)
+    # 1) Distribution from uniform bounds
     marginals = [ot.Uniform(low, high) for (low, high) in bounds_list]
     distribution = ot.ComposedDistribution(marginals)
 
-    # 2) Convert training data to OpenTURNS format
-    input_sample = ot.Sample(X_train.tolist())  # shape (n_samples, n_params)
+    # 2) Convert X to OpenTURNS Sample
+    input_sample = ot.Sample(X_train.tolist())
+    n_params = input_sample.getDimension()
+
+    # 3) Build the polynomial basis factory (Legendre for Uniform):
+    poly_coll = ot.PolynomialFamilyCollection(n_params)
+    for j in range(n_params):
+        poly_coll[j] = ot.LegendreFactory()
+    enumerate_function = ot.LinearEnumerateFunction(n_params)
+    product_factory = ot.OrthogonalProductPolynomialFactory(poly_coll, enumerate_function)
+
+    # 4) Determine how many terms appear up to total degree p
+    #    For dimension d, total degree p => binomial(d+p, d)
+    def n_terms_for_degree(dim, p):
+        return comb(p + dim, dim)
+
+    max_terms = n_terms_for_degree(n_params, polynomial_degree)
+    
+    # 5) Create a "FixedStrategy" with exactly 'max_terms' polynomials
+    adaptive_strategy = ot.FixedStrategy(product_factory, max_terms)
+
+    # 6) Plain least-squares projection strategy
+    projection_strategy = ot.LeastSquaresStrategy()  # Standard OLS
 
     meta_models = []
-
-    # 3) Build a PCE for each output
     for Y_train in Y_train_list:
-        # Convert output to ot.Sample
         output_sample = ot.Sample(Y_train.reshape(-1, 1).tolist())
 
-        # Build polynomial basis factories (Legendre for Uniform)
-        poly_basis_factory = ot.PolynomialFamilyCollection(n_params)
-        for j in range(n_params):
-            poly_basis_factory[j] = ot.LegendreFactory()
-
-        enumeration_function = ot.LinearEnumerateFunction(n_params)
-        total_poly_basis = ot.OrthogonalProductPolynomialFactory(
-            poly_basis_factory, enumeration_function
-        )
-
-        # limit to 1000 basis terms; or the library chooses adaptively
-        adaptive_strategy = ot.FixedStrategy(total_poly_basis, 10000)
-        # Use a selection-based approach (LARS) instead of a fixed strategy
-        # projection_strategy = ot.LeastSquaresStrategy(ot.LARS(), ot.Normal())
-        # adaptive_strategy = ot.SequentialStrategy(total_poly_basis, projection_strategy)
-        # projection_strategy = ot.LeastSquaresStrategy(ot.LARS())  # Just pass LARS
-        # adaptive_strategy = ot.SequentialStrategy(total_poly_basis, projection_strategy)
-
-
-        # 4) Create the FunctionalChaosAlgorithm with no custom projection strategy
+        # 7) Use the 5-argument constructor: (X, Y, dist, adaptiveStrategy, projectionStrategy)
         chaos_algo = ot.FunctionalChaosAlgorithm(
-            input_sample, 
-            output_sample, 
-            distribution, 
-            adaptive_strategy
+            input_sample,
+            output_sample,
+            distribution,
+            adaptive_strategy,
+            projection_strategy
         )
 
-        # default approach (no setProjectionStrategy())
-        # chaos_algo.run()
-
-        # # 1) Create the FunctionalChaosAlgorithm the older/manual way:
-        # chaos_algo = ot.FunctionalChaosAlgorithm(input_sample,
-        #                                         output_sample,
-        #                                         distribution)
-
-        # # 2) Manually set the polynomial basis and total polynomial degree:
-        # chaos_algo.setOrthogonalPolynomials(total_poly_basis)
-        # chaos_algo.setMaximumTotalDegree(polynomial_degree)
-
-        # # 3) (Optional) If your version has setUseLARSModelSelection:
-        # #    This toggles LARS-based term selection internally
-        # chaos_algo.setUseLARSModelSelection(True)
-
-        # # 4) Possibly set a model selection criterion (like corrected LOO):
-        # # chaos_algo.setModelSelectionCriterion(ot.CorrectedLeaveOneOut())
-
-        # 5) Now run:
+        # 8) Run the PCE
         chaos_algo.run()
-
-        # 6) Extract the result:
-        chaos_result = chaos_algo.getResult()
-        meta_model = chaos_result.getMetaModel()
-
-
-        # 5) Extract the resulting metamodel
-        chaos_result = chaos_algo.getResult()
-        meta_model = chaos_result.getMetaModel()
-        meta_models.append(meta_model)
+        result = chaos_algo.getResult()
+        meta_models.append(result.getMetaModel())
 
     return meta_models, distribution
 
