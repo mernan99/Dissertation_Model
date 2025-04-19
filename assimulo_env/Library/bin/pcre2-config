@@ -1,6 +1,6 @@
 #!/bin/sh
 
-prefix=U:/envs/assimulo_env/Library
+prefix=c:/Users/Jeevan/Dissertation_Model/assimulo_env/Library
 exec_prefix=${prefix}
 exec_prefix_set=no
 
@@ -66,7 +66,7 @@ while test $# -gt 0; do
       echo $exec_prefix
       ;;
     --version)
-      echo 10.44
+      echo 10.43
       ;;
     --cflags)
       if test ${prefix}/include != /usr/include ; then

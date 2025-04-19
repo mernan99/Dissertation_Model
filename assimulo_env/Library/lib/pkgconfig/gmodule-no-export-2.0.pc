@@ -1,4 +1,4 @@
-prefix=U:/envs/assimulo_env/Library
+prefix=c:/Users/Jeevan/Dissertation_Model/assimulo_env/Library
 includedir=${prefix}/include
 libdir=${prefix}/lib
 
@@ -6,7 +6,7 @@ gmodule_supported=true
 
 Name: GModule
 Description: Dynamic module loader for GLib
-Version: 2.82.2
+Version: 2.80.2
 Requires: glib-2.0
 Libs: -L${libdir} -lgmodule-2.0
 Libs.private:  -liconv

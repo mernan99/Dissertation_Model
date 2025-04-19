@@ -293,9 +293,9 @@ def main():
 
     # Compare
     plt.figure(figsize=(10,6))
-    plt.plot(t_zoom, Y_test[mask,0], label='True pLV', alpha=0.7)
-    plt.plot(t_zoom, Y_test[mask,1], label='True pSA', alpha=0.7)
-    plt.plot(t_zoom, Y_test[mask,2], label='True pSV', alpha=0.7)
+    # plt.plot(t_zoom, Y_test[mask,0], label='True pLV', alpha=0.7)
+    # plt.plot(t_zoom, Y_test[mask,1], label='True pSA', alpha=0.7)
+    # plt.plot(t_zoom, Y_test[mask,2], label='True pSV', alpha=0.7)
     plt.plot(t_zoom, Y_sur[:,0], '--', label='Surrogate pLV')
     plt.plot(t_zoom, Y_sur[:,1], '--', label='Surrogate pSA')
     plt.plot(t_zoom, Y_sur[:,2], '--', label='Surrogate pSV')
@@ -307,7 +307,7 @@ def main():
     plt.show()
 
     plt.figure(figsize=(10,6))
-    plt.plot(t_zoom, Y_test[mask,3], label='True Vlv', alpha=0.7)
+    # plt.plot(t_zoom, Y_test[mask,3], label='True Vlv', alpha=0.7)
     plt.plot(t_zoom, Y_sur[:,3], '--', label='Surrogate Vlv')
     plt.xlabel('Time (s)')
     plt.ylabel('Volume')

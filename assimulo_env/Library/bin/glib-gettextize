@@ -39,19 +39,19 @@ Usage: glib-gettextize [OPTION]... [package-dir]
   -f, --force          force writing of new files even if old exist
 Report bugs to https://gitlab.gnome.org/GNOME/glib/issues/new."
 package=glib
-version=2.82.2
+version=2.80.2
 try_ln_s=:
 
 # Directory where the sources are stored.
-prefix=U:/envs/assimulo_env/Library
+prefix=c:/Users/Jeevan/Dissertation_Model/assimulo_env/Library
 case `uname` in
 MINGW32*)
     prefix="`dirname $0`/.."
     ;;
 esac
 
-datarootdir=U:/envs/assimulo_env/Library/share
-datadir=U:/envs/assimulo_env/Library/share
+datarootdir=c:/Users/Jeevan/Dissertation_Model/assimulo_env/Library/share
+datadir=c:/Users/Jeevan/Dissertation_Model/assimulo_env/Library/share
 
 gettext_dir=$datadir/glib-2.0/gettext
 

@@ -335,7 +335,7 @@ def main():
     }
 
     # Generate Saltelli param sets
-    N = 512
+    N = 8
     param_values = saltelli.sample(problem, N, calc_second_order=True)
     print("param_values.shape:", param_values.shape)
 

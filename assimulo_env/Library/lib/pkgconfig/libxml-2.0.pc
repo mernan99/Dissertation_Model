@@ -1,11 +1,11 @@
-prefix=U:/envs/assimulo_env/Library 
-exec_prefix=U:/envs/assimulo_env/Library 
-libdir=U:/envs/assimulo_env/Library/lib 
-includedir=U:/envs/assimulo_env/Library/include 
+prefix=c:/Users/Jeevan/Dissertation_Model/assimulo_env/Library 
+exec_prefix=c:/Users/Jeevan/Dissertation_Model/assimulo_env/Library 
+libdir=c:/Users/Jeevan/Dissertation_Model/assimulo_env/Library/lib 
+includedir=c:/Users/Jeevan/Dissertation_Model/assimulo_env/Library/include 
 modules=0 
 Name: libXML 
-Version: 2.13.4 
+Version: 2.12.7 
 Description: libXML library version2. 
 Requires: 
-Libs: -LU:/envs/assimulo_env/Library/lib -lxml2 -liconv -lz 
-Cflags: -IU:/envs/assimulo_env/Library/include/libxml2 -IU:/envs/assimulo_env/Library/include 
+Libs: -Lc:/Users/Jeevan/Dissertation_Model/assimulo_env/Library/lib -lxml2 -liconv -lz 
+Cflags: -Ic:/Users/Jeevan/Dissertation_Model/assimulo_env/Library/include/libxml2 -Ic:/Users/Jeevan/Dissertation_Model/assimulo_env/Library/include 
