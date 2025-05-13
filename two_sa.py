@@ -1,15 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Two‑chamber Shi model with physiologically‑informed parameter bounds
-└─ Polynomial‑Chaos surrogate + Sobol (window‑averaged outputs)
 
- • deterministic cardiac cycle (period = 1 s)
- • three scalar PCE surrogates (Plv, Psas, Vlv) over a 2 s window
- • parity plots & Sobol heat‑maps (full vs surrogate)
- • sample counts and wall‑clock times shown in titles; figs in ./results/
- • parameter bounds reflect normal‑function variability, for personalized UQ
-"""
 # ─────────────────── imports ───────────────────
 import os, time, warnings, math
 import numpy as np, matplotlib.pyplot as plt, openturns as ot
@@ -26,16 +17,15 @@ warnings.filterwarnings("ignore", category=UserWarning)
 # ═════════════ user‑configurable “knobs” ═════════════
 DT          = 0.002              # integrator output step
 WIN         = (33., 35.)         # analyse this 2‑s window
-PCE_DEGREE  = 5                  # polynomial chaos degree
-N_TRAIN     = 25                 # Saltelli base size for training
-N_SOBOL     = 25                 # Saltelli base size for Sobol
+PCE_DEGREE  = 3                  # polynomial chaos degree
+N_TRAIN     = 10                # Saltelli base size for training
+N_SOBOL     = 10                # Saltelli base size for Sobol
 N_CORES     = max(1, cpu_count() - 1)
 
 # where figures will be written
 RESULT_DIR  = 'results'
 os.makedirs(RESULT_DIR, exist_ok=True)
 
-# ═══════════ baseline parameter vector (Shi 2006) ════════════
 param_names = [
     'v0_lv','Emin_lv','Emax_lv','tau_es_lv','tau_ed_lv',
     'v0_la','Emin_la','Emax_la','tau_es_la','tau_ed_la',
@@ -50,43 +40,47 @@ BASE_P = np.array([
     10.0, 0.1,  2.5,  0.30, 0.45,     # LV
     10.0, 0.15, 0.25, 0.045, 0.09,    # LA
     0.033, 0.06,                       # valves
-    0.08, 0.06, 6.2e-5,                # systemic arteries
+    0.08, 0.003, 6.2e-5,                # systemic arteries
     1.6,  0.05, 0.0017,                # systemic veins
     0.5,  0.52,                        # resistances (Rsar, Rscp)
     20.5, 0.075                        # Csvn, Rsvn
 ])
 
+
 # ═══════════ physiologically‑informed parameter bounds ═══════════
 param_bounds = [
-    [  8.0,  12.0],    # v0_lv    unstressed LV volume (±20%)
-    [  0.03,  0.06],   # Emin_lv  LV min elastance
-    [  1.5,   3.5 ],   # Emax_lv  LV max elastance
-    [  0.28,  0.32],   # tau_es_lv LV systolic duration (fraction)
-    [  0.43,  0.47],   # tau_ed_lv LV relaxation duration
+    [  10.0,  10.001],    # v0_lv    unstressed LV volume (±20%)
+    [  0.07,  0.13],   # Emin_lv  LV min elastance
+    [  1.75,   3.25 ],   # Emax_lv  LV max elastance
+    [  0.21,  0.34],   # tau_es_lv LV systolic duration (fraction)
+    [  0.36,  0.585],   # tau_ed_lv LV relaxation duration
 
-    [  8.0,  12.0],    # v0_la    unstressed LA volume
-    [  0.10,  0.20],   # Emin_la  LA min elastance
-    [  0.20,  0.30],   # Emax_la  LA max elastance
-    [  0.04,  0.05],   # tau_es_la LA systolic duration
-    [  0.08,  0.10],   # tau_ed_la LA relaxation duration
+    [  10.0,  10.001],    # v0_la    unstressed LA volume
+    [  0.105,  0.175],   # Emin_la  LA min elastance
+    [  0.175,  0.325],   # Emax_la  LA max elastance
+    [  0.0315,  0.0585],   # tau_es_la LA systolic duration
+    [  0.063,  0.117],   # tau_ed_la LA relaxation duration
 
-    [  0.01,  0.04],   # Zao      aortic valve inertance/resistance
-    [  0.01,  0.06],   # Rmv      mitral valve resistance
+    [  0.0231,  0.042],   # Zao      aortic valve inertance/resistance
+    [  0.042,  0.078],   # Rmv      mitral valve resistance
 
-    [  0.05,  0.10],   # Csas     aortic root compliance
-    [  0.03,  0.09],   # Rsas     aortic root resistance
-    [3e-5,    9e-5 ],  # Lsas     aortic root inertance
+    [  0.056,  0.104],   # Csas     aortic root compliance
+    [  0.0021,  0.0039],   # Rsas     aortic root resistance
+    [4.34e-5,    8.06e-5 ],  # Lsas     aortic root inertance
 
-    [  1.0,   2.5 ],   # Csat     systemic arterial compliance
-    [  0.03,  0.07],   # Rsat     systemic arterial resistance
-    [0.001,  0.0025],  # Lsat     systemic arterial inertance
+    [  1.12,   2.08 ],   # Csat     systemic arterial compliance
+    [  0.035,  0.065],   # Rsat     systemic arterial resistance
+    [0.0019,  0.00221],  # Lsat     systemic arterial inertance
 
-    [  0.4,   0.6 ],   # Rsar     arteriole resistance
-    [  0.4,   0.6 ],   # Rscp     capillary resistance
+    [  0.35,   0.65],   # Rsar     arteriole resistance
+    [  0.364,   0.676 ],   # Rscp     capillary resistance
 
-    [ 15.0,  30.0],    # Csvn     systemic venous compliance
-    [  0.05,  0.10]    # Rsvn     systemic venous resistance
+    [ 14.3,  26.65],    # Csvn     systemic venous compliance
+    [  0.0525,  0.0975]    # Rsvn     systemic venous resistance
 ]
+
+# lb = [5.0, 1.0, 0.07, 1.75, 1.0, 0.21, 0.360, 0.0, 4.0, 1.0, 0.105, 0.175, 1.0, 0.0315, 0.063, 0.92, 0.0231, 0.042, 0.0, 0.056, 0.0021, 4.34e-5, 0.0, 1.12, 0.035, 0.00119, 0.35, 0.364, 0.0525, 0.0, 14.35]
+# ub = [5.0, 1.0, 0.13, 3.25, 1.0, 0.34, 0.585, 0.0, 4.0, 1.0, 0.165, 0.325, 1.0, 0.0585, 0.117, 0.92, 0.0429, 0.078, 0.0, 0.104, 0.0039, 8.06e-5, 0.0, 2.08, 0.065, 0.00221, 0.65, 0.676, 0.0975, 0.0, 26.65]
 
 # ═══════════ outputs fed to the surrogate ═══════════
 OUT_IDX    = [0, 4, 2]         # Plv, Psas, Vlv

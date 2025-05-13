@@ -58,7 +58,6 @@ class ShiModel:
         self.Csat,   self.Rsat,   self.Lsat,   self.Rsar,   self.Rscp, \
         self.Csvn,   self.Rsvn   = params
 
-        # Shift for LA was 0.92 in your snippet
         self.Eshift_la = 0.92
 
     def res(self, t, y, ydot):
@@ -151,15 +150,18 @@ def baseline_run_and_plot():
         2.5,      # Emax_lv
         0.3,      # τes_lv
         0.45,     # τed_lv
+
         10.0,     # v0_la 
         0.15,     # Emin_la
         0.25,     # Emax_la
         0.045,    # τes_la
         0.09,     # τed_la
+
         0.033,    # Zao (aortic valve resistance)
         0.06,     # Rmv (mitral valve resistance)
+        
         0.08,     # Csas
-        0.06,     # Rsas
+        0.003,     # Rsas
         6.2e-5,   # Lsas
         1.6,      # Csat
         0.05,     # Rsat
@@ -183,7 +185,9 @@ def baseline_run_and_plot():
         0.0,     # Qsvn
         0.0,     # Qav
         0.0      # Qmv
-    ])
+    ]
+    
+    )
 
 
     ydot0 = np.zeros_like(y0)
