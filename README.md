@@ -3,10 +3,9 @@
 Research project investigating how imaging and non-imaging cardiac data can be combined with multimodal and generative machine learning to support personalised modelling of heart structure and function.
 
 **Author:** Mernan Jeevaresan  
-**Supervisor:** Dr. Chen Chen  
+**Supervisor:** Dr. Xu Xu  
 **Institution:** University of Sheffield  
-**Project code:** S3.5-COM-CChen2  
-**Status:** Research proposal and early-stage development
+
 
 ## Overview
 
